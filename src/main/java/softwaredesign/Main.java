@@ -1,14 +1,35 @@
 package softwaredesign;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.*;
+
+
+class Panel extends JPanel {
+    Panel(Color color){
+        this.setBackground(color);
+        this.setPreferredSize(new Dimension(100,90));
+    }
+}
+
+class Frame extends JFrame {
+    Frame(String title) {
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setTitle(title);
+        this.setSize(1280,720);
+        this.setResizable(false);
+        this.setLayout(null);
+        this.setVisible(true);
+    }
+}
 
 public class Main {
 
     public static Frame currFrame;
-    public static String appFont = "Arial";
+    public static final Font titleFont = new Font("Arial",Font.BOLD,36);
+    public static final Font h1Font = new Font("Arial",Font.BOLD,18);
+    public static final Font h2Font = new Font("Arial",Font.PLAIN,16);
+
 
     public static void main (String[] args) {
         System.out.println("Welcome to Software Design");
@@ -20,7 +41,7 @@ public class Main {
     static Frame mkHomeScreen() {
 
         JLabel title = new JLabel("HOME");
-        title.setFont(new Font(appFont,Font.BOLD,40));
+        title.setFont(titleFont);
 
         Panel titlePanel = new Panel(Color.red);
         titlePanel.setLayout(new GridBagLayout());
@@ -64,7 +85,7 @@ public class Main {
     static Frame mkCreateRecipeScreen() {
 
         JLabel label = new JLabel("CREATE RECIPE");
-        label.setFont(new Font(appFont,Font.BOLD,40));
+        label.setFont(titleFont);
 
         Panel titlePanel = new Panel(Color.red);
         titlePanel.setLayout(new GridBagLayout());
@@ -74,7 +95,8 @@ public class Main {
         createRecipePanel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
-        CRLabel lblName = new CRLabel("Name");
+        JLabel lblName = new JLabel("Name");
+        lblName.setFont(h1Font);
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -83,6 +105,7 @@ public class Main {
         createRecipePanel.add(lblName, gbc);
 
         JTextField txtName = new JTextField();
+        txtName.setFont(h2Font);
         gbc.gridwidth = 3;
         gbc.gridx = 1;
         gbc.gridy = 0;
@@ -90,7 +113,8 @@ public class Main {
         gbc.weightx = 1;
         createRecipePanel.add(txtName, gbc);
 
-        CRLabel lblDescription = new CRLabel("Description");
+        JLabel lblDescription = new JLabel("Description");
+        lblDescription.setFont(h1Font);
         gbc.gridwidth = 1;
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -99,6 +123,7 @@ public class Main {
         createRecipePanel.add(lblDescription, gbc);
 
         JTextField txtDescription = new JTextField();
+        txtDescription.setFont(h2Font);
         gbc.gridwidth = 3;
         gbc.gridx = 1;
         gbc.gridy = 1;
@@ -106,7 +131,8 @@ public class Main {
         gbc.weightx = 1;
         createRecipePanel.add(txtDescription, gbc);
 
-        CRLabel lblTags = new CRLabel("Tags");
+        JLabel lblTags = new JLabel("Tags");
+        lblTags.setFont(h1Font);
         gbc.gridwidth = 1;
         gbc.gridx = 0;
         gbc.gridy = 2;
@@ -115,6 +141,7 @@ public class Main {
         createRecipePanel.add(lblTags, gbc);
 
         JTextField txtTags = new JTextField();
+        txtTags.setFont(h2Font);
         gbc.gridwidth = 3;
         gbc.gridx = 1;
         gbc.gridy = 2;
@@ -122,7 +149,8 @@ public class Main {
         gbc.insets = new Insets(5, 0, 0, 20);
         createRecipePanel.add(txtTags, gbc);
 
-        CRLabel lblIngredients = new CRLabel("Ingredients");
+        JLabel lblIngredients = new JLabel("Ingredients");
+        lblIngredients.setFont(h1Font);
         gbc.gridwidth = 1;
         gbc.gridx = 0;
         gbc.gridy = 3;
@@ -131,7 +159,8 @@ public class Main {
         createRecipePanel.add(lblIngredients, gbc);
 
         JTextArea txtAreaIngredients = new JTextArea(10, 20);
-        JScrollPane pane = new JScrollPane(txtAreaIngredients);
+        txtAreaIngredients.setFont(h2Font);
+        JScrollPane paneIngredients = new JScrollPane(txtAreaIngredients);
         gbc.anchor = GridBagConstraints.NORTH;
         gbc.fill = GridBagConstraints.BOTH;
         gbc.gridwidth = 3;
@@ -139,9 +168,10 @@ public class Main {
         gbc.gridy = 3;
         gbc.insets = new Insets(5, 0, 0, 20);
         gbc.weightx = 1;
-        createRecipePanel.add(pane, gbc);
+        createRecipePanel.add(paneIngredients, gbc);
 
-        CRLabel lblInstructions = new CRLabel("Instructions");
+        JLabel lblInstructions = new JLabel("Instructions");
+        lblInstructions.setFont(h1Font);
         gbc.gridwidth = 1;
         gbc.gridx = 0;
         gbc.gridy = 4;
@@ -150,7 +180,8 @@ public class Main {
         createRecipePanel.add(lblInstructions, gbc);
 
         JTextArea txtAreaInstructions = new JTextArea(10, 20);
-        pane = new JScrollPane(txtAreaInstructions);
+        txtAreaInstructions.setFont(h2Font);
+        JScrollPane paneInstructions = new JScrollPane(txtAreaInstructions);
         gbc.anchor = GridBagConstraints.NORTH;
         gbc.fill = GridBagConstraints.BOTH;
         gbc.gridwidth = 3;
@@ -158,7 +189,7 @@ public class Main {
         gbc.gridy = 4;
         gbc.insets = new Insets(5, 0, 0, 20);
         gbc.weightx = 1;
-        createRecipePanel.add(pane, gbc);
+        createRecipePanel.add(paneInstructions, gbc);
 
 
         Panel donePanel = new Panel(Color.gray);
@@ -187,7 +218,7 @@ public class Main {
     static Frame mkViewRecipeScreen() {
 
         JLabel label = new JLabel("RECIPE NAME");
-        label.setFont(new Font(appFont,Font.BOLD,40));
+        label.setFont(titleFont);
 
         Panel titlePanel = new Panel(Color.red);
         titlePanel.setLayout(new GridBagLayout());

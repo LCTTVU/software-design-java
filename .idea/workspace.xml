@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="69a40a90-b7a8-40db-a577-88515471d52f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/softwaredesign/Label.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.8.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.8.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.8.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -14,8 +13,9 @@
       <change beforePath="$PROJECT_DIR$/.gradle/6.8.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/BottomButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/BottomButton.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/Button.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/Button.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/CRLabel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/Frame.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/Frame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/Label.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/Main$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/Main$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/Main$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/Main$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/Main$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/Main$3.class" afterDir="false" />
@@ -23,11 +23,12 @@
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/Main$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/Main$5.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/Main$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/Main$6.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/SideButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/SideButton.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/Panel.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/Panel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/source-classes-mapping.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/softwaredesign/Button.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/softwaredesign/Button.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/softwaredesign/Frame.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/softwaredesign/Label.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/softwaredesign/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/softwaredesign/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/softwaredesign/Panel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/softwaredesign/Panel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/softwaredesign/Panel.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
