@@ -1,9 +1,16 @@
-softwaredesign/Button.java
- softwaredesign.Button
-softwaredesign/Frame.java
- softwaredesign.Frame
 softwaredesign/Panel.java
  softwaredesign.Panel
+softwaredesign/Frame.java
+ softwaredesign.Frame
+softwaredesign/Button.java
+ softwaredesign.BottomButton
+ softwaredesign.Button
+ softwaredesign.SideButton
 softwaredesign/Main.java
  softwaredesign.Main
  softwaredesign.Main$1
+ softwaredesign.Main$2
+ softwaredesign.Main$3
+ softwaredesign.Main$4
+ softwaredesign.Main$5
+ softwaredesign.Main$6
