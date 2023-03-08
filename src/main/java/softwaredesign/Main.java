@@ -1,6 +1,7 @@
 package softwaredesign;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -30,6 +31,7 @@ public class Main {
         viewRecipeButton.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                currFrame.setVisible(false);
                 currFrame = mkViewRecipeScreen();
             }
         });
@@ -42,6 +44,7 @@ public class Main {
         createRecipeButton.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                currFrame.setVisible(false);
                 currFrame = mkCreateRecipeScreen();
             }
         });
@@ -67,7 +70,96 @@ public class Main {
         titlePanel.setLayout(new GridBagLayout());
         titlePanel.add(label);
 
-        //Panel crPanel = new
+        Panel createRecipePanel = new Panel(Color.blue);
+        createRecipePanel.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        CRLabel lblName = new CRLabel("Name");
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(0, 20, 0, 0);
+        gbc.weightx = 0.1;
+        createRecipePanel.add(lblName, gbc);
+
+        JTextField txtName = new JTextField();
+        gbc.gridwidth = 3;
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(5, 0, 0, 20);
+        gbc.weightx = 1;
+        createRecipePanel.add(txtName, gbc);
+
+        CRLabel lblDescription = new CRLabel("Description");
+        gbc.gridwidth = 1;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.insets = new Insets(0, 20, 0, 0);
+        gbc.weightx = 0.1;
+        createRecipePanel.add(lblDescription, gbc);
+
+        JTextField txtDescription = new JTextField();
+        gbc.gridwidth = 3;
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.insets = new Insets(5, 0, 0, 20);
+        gbc.weightx = 1;
+        createRecipePanel.add(txtDescription, gbc);
+
+        CRLabel lblTags = new CRLabel("Tags");
+        gbc.gridwidth = 1;
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.insets = new Insets(0, 20, 0, 0);
+        gbc.weightx = 0.1;
+        createRecipePanel.add(lblTags, gbc);
+
+        JTextField txtTags = new JTextField();
+        gbc.gridwidth = 3;
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        gbc.weightx = 1;
+        gbc.insets = new Insets(5, 0, 0, 20);
+        createRecipePanel.add(txtTags, gbc);
+
+        CRLabel lblIngredients = new CRLabel("Ingredients");
+        gbc.gridwidth = 1;
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.insets = new Insets(0, 20, 0, 0);
+        gbc.weightx = 0.1;
+        createRecipePanel.add(lblIngredients, gbc);
+
+        JTextArea txtAreaIngredients = new JTextArea(10, 20);
+        JScrollPane pane = new JScrollPane(txtAreaIngredients);
+        gbc.anchor = GridBagConstraints.NORTH;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.gridwidth = 3;
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        gbc.insets = new Insets(5, 0, 0, 20);
+        gbc.weightx = 1;
+        createRecipePanel.add(pane, gbc);
+
+        CRLabel lblInstructions = new CRLabel("Instructions");
+        gbc.gridwidth = 1;
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        gbc.insets = new Insets(0, 20, 0, 0);
+        gbc.weightx = 0.1;
+        createRecipePanel.add(lblInstructions, gbc);
+
+        JTextArea txtAreaInstructions = new JTextArea(10, 20);
+        pane = new JScrollPane(txtAreaInstructions);
+        gbc.anchor = GridBagConstraints.NORTH;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.gridwidth = 3;
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        gbc.insets = new Insets(5, 0, 0, 20);
+        gbc.weightx = 1;
+        createRecipePanel.add(pane, gbc);
+
 
         Panel donePanel = new Panel(Color.gray);
         donePanel.setLayout(new GridBagLayout());
@@ -76,6 +168,7 @@ public class Main {
         doneButton.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                currFrame.setVisible(false);
                 currFrame = mkHomeScreen();
             }
         });
@@ -85,6 +178,7 @@ public class Main {
         Frame createRecipeScreen = new Frame("Create Recipe");
         createRecipeScreen.setLayout(new BorderLayout());
         createRecipeScreen.add(titlePanel,BorderLayout.NORTH);
+        createRecipeScreen.add(createRecipePanel,BorderLayout.CENTER);
         createRecipeScreen.add(donePanel,BorderLayout.SOUTH);
 
         return createRecipeScreen;
@@ -106,6 +200,7 @@ public class Main {
         executeButton.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                currFrame.setVisible(false);
                 currFrame = mkExecuteScreen();
             }
         });
@@ -114,6 +209,7 @@ public class Main {
         editButton.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                currFrame.setVisible(false);
                 currFrame = mkEditScreen();
             }
         });
@@ -122,6 +218,7 @@ public class Main {
         deleteButton.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                currFrame.setVisible(false);
                 currFrame = mkHomeScreen();
             }
         });
@@ -139,11 +236,13 @@ public class Main {
     }
 
     static Frame mkExecuteScreen() {
+
         Frame executeScreen = new Frame("Execute Recipe");
         return executeScreen;
     }
 
     static Frame mkEditScreen() {
+
         Frame editScreen = new Frame("Edit Recipe");
         return editScreen;
     }

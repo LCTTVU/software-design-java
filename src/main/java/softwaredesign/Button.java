@@ -5,6 +5,7 @@ import java.awt.*;
 
 
 class BottomButton extends Button {
+
     BottomButton(Color color, String text) {
         super(color,text);
         this.setPreferredSize(new Dimension(250,75));
@@ -13,6 +14,7 @@ class BottomButton extends Button {
 }
 
 class SideButton extends Button {
+
     SideButton(Color color, String text) {
         super(color,text);
         this.setPreferredSize(new Dimension(100,75));

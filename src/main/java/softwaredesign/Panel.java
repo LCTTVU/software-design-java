@@ -8,6 +8,6 @@ public class Panel extends JPanel {
 
     Panel(Color color){
         this.setBackground(color);
-        this.setPreferredSize(new Dimension(100,100));
+        this.setPreferredSize(new Dimension(100,90));
     }
 }

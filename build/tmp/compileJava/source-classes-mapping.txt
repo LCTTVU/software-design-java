@@ -6,6 +6,9 @@ softwaredesign/Button.java
  softwaredesign.BottomButton
  softwaredesign.Button
  softwaredesign.SideButton
+softwaredesign/Label.java
+ softwaredesign.CRLabel
+ softwaredesign.Label
 softwaredesign/Main.java
  softwaredesign.Main
  softwaredesign.Main$1
