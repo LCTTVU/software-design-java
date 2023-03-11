@@ -298,16 +298,11 @@ public class GUI {
 
     public Frame mkExecuteScreen() {
 
-
-
-
         Button nextButton = Button.createButton("side",Color.green,"Next");
 
         Panel nextPanel = new Panel(Color.green);
         nextPanel.setLayout(new GridLayout());
         nextPanel.add(nextButton);
-
-
 
         Button prevButton = Button.createButton("side",Color.red,"Prev");
 
