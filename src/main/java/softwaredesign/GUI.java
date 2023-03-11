@@ -5,34 +5,21 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.Objects;
 
-class BottomButton extends Button {
-    BottomButton(Color color, String text) {
-        super(color,text);
-        this.setPreferredSize(new Dimension(250,75));
-        this.setFont(GUI.h1Font);
-    }
-}
-
-class SideButton extends Button {
-    SideButton(Color color, String text) {
-        super(color,text);
-        this.setFont(GUI.h2Font);
-    }
-}
 
 class Button extends JButton {
-    Button(Color color, String text){
+    Button(Color color, String text, Font font){
         this.setText(text);
         this.setBackground(color);
+        this.setFont(font);
         this.setFocusable(false);
     }
 
     static Button createButton(String type, Color color, String text) {
         if (Objects.equals(type, "bottom")) {
-            return new BottomButton(color,text);
+            return new Button(color,text,GUI.h1Font);
         }
         else {
-            return new SideButton(color,text);
+            return new Button(color,text,GUI.h2Font);
         }
     }
 }
@@ -40,7 +27,7 @@ class Button extends JButton {
 class Panel extends JPanel {
     Panel(Color color){
         this.setBackground(color);
-        this.setPreferredSize(new Dimension(90,90));
+        this.setPreferredSize(new Dimension(90,75));
     }
 }
 
@@ -75,6 +62,24 @@ public class GUI {
         return instance;
     }
 
+    public Panel mkDonePanel() {
+        Panel donePanel = new Panel(Color.gray);
+        donePanel.setLayout(new GridLayout());
+
+        Button doneButton = Button.createButton("bottom",Color.gray,"Done");
+        doneButton.setForeground(Color.white);
+        doneButton.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                currFrame.setVisible(false);
+                currFrame = mkHomeScreen();
+            }
+        });
+
+        donePanel.add(doneButton);
+        return donePanel;
+    }
+
     public Frame mkHomeScreen() {
 
         JLabel title = new JLabel("HOME");
@@ -96,9 +101,10 @@ public class GUI {
         recipePanel.add(viewRecipeButton);
 
         Panel createRecipePanel = new Panel(Color.gray);
-        createRecipePanel.setLayout(new GridBagLayout());
+        createRecipePanel.setLayout(new GridLayout());
 
-        Button createRecipeButton = Button.createButton("bottom",Color.green,"Create Recipe");
+        Button createRecipeButton = Button.createButton("bottom",Color.gray,"Create Recipe");
+        createRecipeButton.setForeground(Color.white);
         createRecipeButton.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -131,72 +137,72 @@ public class GUI {
         createRecipePanel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
-        JLabel lblName = new JLabel("Name");
-        lblName.setFont(h1Font);
+        JLabel nameLabel = new JLabel("Name");
+        nameLabel.setFont(h1Font);
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.insets = new Insets(0, 20, 0, 0);
         gbc.weightx = 0.1;
-        createRecipePanel.add(lblName, gbc);
+        createRecipePanel.add(nameLabel, gbc);
 
-        JTextField txtName = new JTextField();
-        txtName.setFont(h2Font);
+        JTextField nameText = new JTextField();
+        nameText.setFont(h2Font);
         gbc.gridwidth = 3;
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.insets = new Insets(5, 0, 0, 20);
         gbc.weightx = 1;
-        createRecipePanel.add(txtName, gbc);
+        createRecipePanel.add(nameText, gbc);
 
-        JLabel lblDescription = new JLabel("Description");
-        lblDescription.setFont(h1Font);
+        JLabel descriptionLabel = new JLabel("Description");
+        descriptionLabel.setFont(h1Font);
         gbc.gridwidth = 1;
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.insets = new Insets(0, 20, 0, 0);
         gbc.weightx = 0.1;
-        createRecipePanel.add(lblDescription, gbc);
+        createRecipePanel.add(descriptionLabel, gbc);
 
-        JTextField txtDescription = new JTextField();
-        txtDescription.setFont(h2Font);
+        JTextField descriptionText = new JTextField();
+        descriptionText.setFont(h2Font);
         gbc.gridwidth = 3;
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.insets = new Insets(5, 0, 0, 20);
         gbc.weightx = 1;
-        createRecipePanel.add(txtDescription, gbc);
+        createRecipePanel.add(descriptionText, gbc);
 
-        JLabel lblTags = new JLabel("Tags");
-        lblTags.setFont(h1Font);
+        JLabel tagsLabel = new JLabel("Tags");
+        tagsLabel.setFont(h1Font);
         gbc.gridwidth = 1;
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.insets = new Insets(0, 20, 0, 0);
         gbc.weightx = 0.1;
-        createRecipePanel.add(lblTags, gbc);
+        createRecipePanel.add(tagsLabel, gbc);
 
-        JTextField txtTags = new JTextField();
-        txtTags.setFont(h2Font);
+        JTextField tagsText = new JTextField();
+        tagsText.setFont(h2Font);
         gbc.gridwidth = 3;
         gbc.gridx = 1;
         gbc.gridy = 2;
         gbc.weightx = 1;
         gbc.insets = new Insets(5, 0, 0, 20);
-        createRecipePanel.add(txtTags, gbc);
+        createRecipePanel.add(tagsText, gbc);
 
-        JLabel lblIngredients = new JLabel("Ingredients");
-        lblIngredients.setFont(h1Font);
+        JLabel ingredientsLabel = new JLabel("Ingredients");
+        ingredientsLabel.setFont(h1Font);
         gbc.gridwidth = 1;
         gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.insets = new Insets(0, 20, 0, 0);
         gbc.weightx = 0.1;
-        createRecipePanel.add(lblIngredients, gbc);
+        createRecipePanel.add(ingredientsLabel, gbc);
 
-        JTextArea txtAreaIngredients = new JTextArea(10, 20);
-        txtAreaIngredients.setFont(h2Font);
-        JScrollPane paneIngredients = new JScrollPane(txtAreaIngredients);
+        JTextArea ingredientsTextArea = new JTextArea(10, 20);
+        ingredientsTextArea.setFont(h2Font);
+        JScrollPane paneIngredients = new JScrollPane(ingredientsTextArea);
         gbc.anchor = GridBagConstraints.NORTH;
         gbc.fill = GridBagConstraints.BOTH;
         gbc.gridwidth = 3;
@@ -206,18 +212,18 @@ public class GUI {
         gbc.weightx = 1;
         createRecipePanel.add(paneIngredients, gbc);
 
-        JLabel lblInstructions = new JLabel("Instructions");
-        lblInstructions.setFont(h1Font);
+        JLabel instructionsLabel = new JLabel("Instructions");
+        instructionsLabel.setFont(h1Font);
         gbc.gridwidth = 1;
         gbc.gridx = 0;
         gbc.gridy = 4;
         gbc.insets = new Insets(0, 20, 0, 0);
         gbc.weightx = 0.1;
-        createRecipePanel.add(lblInstructions, gbc);
+        createRecipePanel.add(instructionsLabel, gbc);
 
-        JTextArea txtAreaInstructions = new JTextArea(10, 20);
-        txtAreaInstructions.setFont(h2Font);
-        JScrollPane paneInstructions = new JScrollPane(txtAreaInstructions);
+        JTextArea instructionsTextArea = new JTextArea(10, 20);
+        instructionsTextArea.setFont(h2Font);
+        JScrollPane paneInstructions = new JScrollPane(instructionsTextArea);
         gbc.anchor = GridBagConstraints.NORTH;
         gbc.fill = GridBagConstraints.BOTH;
         gbc.gridwidth = 3;
@@ -228,19 +234,7 @@ public class GUI {
         createRecipePanel.add(paneInstructions, gbc);
 
 
-        Panel donePanel = new Panel(Color.gray);
-        donePanel.setLayout(new GridBagLayout());
-
-        Button doneButton = Button.createButton("bottom",Color.green,"Done");
-        doneButton.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                currFrame.setVisible(false);
-                currFrame = mkHomeScreen();
-            }
-        });
-
-        donePanel.add(doneButton);
+        Panel donePanel = mkDonePanel();
 
         Frame createRecipeScreen = new Frame("Create Recipe");
         createRecipeScreen.setLayout(new BorderLayout());
@@ -304,7 +298,30 @@ public class GUI {
 
     public Frame mkExecuteScreen() {
 
+
+
+
+        Button nextButton = Button.createButton("side",Color.green,"Next");
+
+        Panel nextPanel = new Panel(Color.green);
+        nextPanel.setLayout(new GridLayout());
+        nextPanel.add(nextButton);
+
+
+
+        Button prevButton = Button.createButton("side",Color.red,"Prev");
+
+        Panel prevPanel = new Panel(Color.red);
+        prevPanel.setLayout(new GridLayout());
+        prevPanel.add(prevButton);
+
+        Panel donePanel = mkDonePanel();
+
         Frame executeScreen = new Frame("Execute Recipe");
+        executeScreen.setLayout(new BorderLayout());
+        executeScreen.add(nextPanel,BorderLayout.EAST);
+        executeScreen.add(prevPanel,BorderLayout.WEST);
+        executeScreen.add(donePanel,BorderLayout.SOUTH);
         return executeScreen;
     }
 

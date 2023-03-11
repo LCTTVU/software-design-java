@@ -3,7 +3,6 @@ softwaredesign/Recipe.java
 softwaredesign/RecipeList.java
  softwaredesign.RecipeList
 softwaredesign/GUI.java
- softwaredesign.BottomButton
  softwaredesign.Button
  softwaredesign.Frame
  softwaredesign.GUI
@@ -14,6 +13,5 @@ softwaredesign/GUI.java
  softwaredesign.GUI$5
  softwaredesign.GUI$6
  softwaredesign.Panel
- softwaredesign.SideButton
 softwaredesign/Main.java
  softwaredesign.Main
