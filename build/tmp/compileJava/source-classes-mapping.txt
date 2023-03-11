@@ -1,3 +1,7 @@
+softwaredesign/Recipe.java
+ softwaredesign.Recipe
+softwaredesign/RecipeList.java
+ softwaredesign.RecipeList
 softwaredesign/GUI.java
  softwaredesign.BottomButton
  softwaredesign.Button

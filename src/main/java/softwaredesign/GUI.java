@@ -9,14 +9,14 @@ class BottomButton extends Button {
     BottomButton(Color color, String text) {
         super(color,text);
         this.setPreferredSize(new Dimension(250,75));
-        this.setFont(new Font("Arial",Font.PLAIN,25));
+        this.setFont(GUI.h1Font);
     }
 }
 
 class SideButton extends Button {
     SideButton(Color color, String text) {
         super(color,text);
-        this.setFont(new Font("Arial",Font.PLAIN,16));
+        this.setFont(GUI.h2Font);
     }
 }
 
@@ -60,7 +60,7 @@ public class GUI {
     public Frame currFrame;
 
     public static final Font titleFont = new Font("Arial",Font.BOLD,36);
-    public static final Font h1Font = new Font("Arial",Font.BOLD,18);
+    public static final Font h1Font = new Font("Arial",Font.BOLD,25);
     public static final Font h2Font = new Font("Arial",Font.PLAIN,16);
 
     private static GUI instance;
