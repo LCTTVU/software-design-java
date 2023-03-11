@@ -1,7 +1,12 @@
 package softwaredesign;
 
 public class Ingredient {
-    Ingredient(String name, Integer quantity, String unit) {
-
+    String name;
+    int quantity;
+    String unit;
+    Ingredient(String name, int quantity, String unit) {
+        this.name = name;
+        this.quantity = quantity;
+        this.unit = unit;
     }
 }

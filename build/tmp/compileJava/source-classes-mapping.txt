@@ -15,3 +15,7 @@ softwaredesign/GUI.java
  softwaredesign.Panel
 softwaredesign/Main.java
  softwaredesign.Main
+softwaredesign/Ingredient.java
+ softwaredesign.Ingredient
+softwaredesign/Instruction.java
+ softwaredesign.Instruction
