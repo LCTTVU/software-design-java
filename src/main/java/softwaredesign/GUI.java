@@ -12,6 +12,8 @@ class Button extends JButton {
         this.setBackground(color);
         this.setFont(font);
         this.setFocusable(false);
+        this.setOpaque(true);
+        this.setBorderPainted(false);
     }
 
     static Button createButton(String type, Color color, String text) {
@@ -47,7 +49,7 @@ public class GUI {
 
     public static final Font titleFont = new Font("Arial",Font.BOLD,36);
     public static final Font h1Font = new Font("Arial",Font.BOLD,25);
-    public static final Font h2Font = new Font("Arial",Font.PLAIN,16);
+    public static final Font h2Font = new Font("Arial",Font.PLAIN,12);
 
     private static GUI instance;
     private GUI(){
@@ -102,6 +104,7 @@ public class GUI {
         createRecipePanel.setLayout(new GridLayout());
 
         Button createRecipeButton = Button.createButton("bottom",Color.gray,"Create Recipe");
+        createRecipeButton.setBackground(Color.gray);
         createRecipeButton.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
