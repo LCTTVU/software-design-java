@@ -38,7 +38,6 @@ class Frame extends JFrame {
         this.setSize(1280,720);
         this.setResizable(false);
         this.setLayout(null);
-        this.setVisible(true);
     }
 }
 
@@ -67,7 +66,6 @@ public class GUI {
         donePanel.setLayout(new GridLayout());
 
         Button doneButton = Button.createButton("bottom",Color.gray,"Done");
-        doneButton.setForeground(Color.white);
         doneButton.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -104,7 +102,6 @@ public class GUI {
         createRecipePanel.setLayout(new GridLayout());
 
         Button createRecipeButton = Button.createButton("bottom",Color.gray,"Create Recipe");
-        createRecipeButton.setForeground(Color.white);
         createRecipeButton.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -120,7 +117,7 @@ public class GUI {
         homeScreen.add(titlePanel,BorderLayout.NORTH);
         homeScreen.add(recipePanel,BorderLayout.CENTER);
         homeScreen.add(createRecipePanel,BorderLayout.SOUTH);
-
+        homeScreen.setVisible(true);
         return homeScreen;
     }
 
@@ -241,7 +238,7 @@ public class GUI {
         createRecipeScreen.add(titlePanel,BorderLayout.NORTH);
         createRecipeScreen.add(createRecipePanel,BorderLayout.CENTER);
         createRecipeScreen.add(donePanel,BorderLayout.SOUTH);
-
+        createRecipeScreen.setVisible(true);
         return createRecipeScreen;
     }
 
@@ -292,7 +289,7 @@ public class GUI {
         viewRecipeScreen.setLayout(new BorderLayout());
         viewRecipeScreen.add(titlePanel,BorderLayout.NORTH);
         viewRecipeScreen.add(actionsPanel,BorderLayout.EAST);
-
+        viewRecipeScreen.setVisible(true);
         return viewRecipeScreen;
     }
 
@@ -317,6 +314,7 @@ public class GUI {
         executeScreen.add(nextPanel,BorderLayout.EAST);
         executeScreen.add(prevPanel,BorderLayout.WEST);
         executeScreen.add(donePanel,BorderLayout.SOUTH);
+        executeScreen.setVisible(true);
         return executeScreen;
     }
 

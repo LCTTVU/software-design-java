@@ -2,6 +2,10 @@ softwaredesign/Recipe.java
  softwaredesign.Recipe
 softwaredesign/RecipeList.java
  softwaredesign.RecipeList
+softwaredesign/Ingredient.java
+ softwaredesign.Ingredient
+softwaredesign/Instruction.java
+ softwaredesign.Instruction
 softwaredesign/GUI.java
  softwaredesign.Button
  softwaredesign.Frame
@@ -15,7 +19,3 @@ softwaredesign/GUI.java
  softwaredesign.Panel
 softwaredesign/Main.java
  softwaredesign.Main
-softwaredesign/Ingredient.java
- softwaredesign.Ingredient
-softwaredesign/Instruction.java
- softwaredesign.Instruction
