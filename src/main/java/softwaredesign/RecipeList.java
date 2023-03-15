@@ -50,7 +50,7 @@ public class RecipeList {
                     recipeArrayList.add(recipe);
                     myReader.close();
                 } catch (FileNotFoundException e) {
-                    System.out.println("An error occurred.");
+                    System.out.println("File " + file.getName() + "not found.");
                     e.printStackTrace();
                 }
             }
