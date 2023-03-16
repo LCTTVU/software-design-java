@@ -4,8 +4,8 @@ softwaredesign/Recipe.java
  softwaredesign.Recipe
 softwaredesign/IngredientList.java
  softwaredesign.IngredientList
-softwaredesign/RecipeList.java
- softwaredesign.RecipeList
+softwaredesign/CreateRecipeController.java
+ softwaredesign.CreateRecipeController
 softwaredesign/GUI.java
  softwaredesign.Button
  softwaredesign.Frame
@@ -24,9 +24,9 @@ softwaredesign/GUI_new.java
  softwaredesign.GUI_new
 softwaredesign/Ingredient.java
  softwaredesign.Ingredient
-softwaredesign/CreateRecipeController.java
- softwaredesign.CreateRecipeController
 softwaredesign/HomeController.java
  softwaredesign.HomeController
+softwaredesign/RecipeList.java
+ softwaredesign.RecipeList
 softwaredesign/Main.java
  softwaredesign.Main

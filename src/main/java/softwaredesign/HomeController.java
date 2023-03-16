@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class HomeController implements Initializable {
@@ -41,12 +42,7 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ArrayList<Recipe> recipes = RecipeList.getInstance().getRecipes();
-        ArrayList<String> recipeNames = new ArrayList<>();
-        for (Recipe recipe : recipes) {
-            recipeNames.add(recipe.name);
-        }
-        recipeList.getItems().addAll(recipeNames);
+        recipeList.getItems().addAll(RecipeList.getInstance().getRecipeNames());
     }
 
     public void openCreateRecipeScreen() {

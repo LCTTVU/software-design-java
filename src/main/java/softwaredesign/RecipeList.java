@@ -6,28 +6,23 @@ import com.google.gson.Gson;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 
 
 public class RecipeList {
-
-    ArrayList<Recipe> recipes;
-
     private static RecipeList instance;
-    private RecipeList() {
-        this.recipes = getRecipes();
-    }
+    private RecipeList() {}
 
     public static RecipeList getInstance() {
         if (instance == null) {
             instance = new RecipeList();
         }
-
         return instance;
     }
 
-    public ArrayList<Recipe> getRecipes() {
+    public List<Recipe> getRecipes() {
 
         ArrayList<Recipe> recipeArrayList = new ArrayList<>();
 
@@ -55,7 +50,15 @@ public class RecipeList {
                 }
             }
         }
-        recipes = recipeArrayList;
         return recipeArrayList;
+    }
+
+    public List<String> getRecipeNames() {
+        List<Recipe> recipeList = getRecipes();
+        ArrayList<String> recipeNames = new ArrayList<>();
+        for (Recipe recipe : recipeList) {
+            recipeNames.add(recipe.name);
+        }
+        return recipeNames;
     }
 }
