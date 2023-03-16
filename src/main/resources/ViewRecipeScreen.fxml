@@ -5,14 +5,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="softwaredesign.SceneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label styleClass="title" stylesheets="@application.css" text="Recipe Name" />
       <Button fx:id="editButton" layoutX="1160.0" mnemonicParsing="false" style="-fx-background-color: yellow;" styleClass="sideButton" stylesheets="@application.css" text="Edit">
          </Button>
       <Button fx:id="executeButton" layoutX="1160.0" layoutY="240.0" mnemonicParsing="false" style="-fx-background-color: #40f777;" styleClass="sideButton" stylesheets="@application.css" text="Execute">
          </Button>
-      <Button fx:id="deleteButton" layoutX="1160.0" layoutY="480.0" mnemonicParsing="false" onAction="#switchToHomeScreen" style="-fx-background-color: red;" styleClass="sideButton" stylesheets="@application.css" text="Delete">
+      <Button fx:id="deleteButton" layoutX="1160.0" layoutY="480.0" mnemonicParsing="false" style="-fx-background-color: red;" styleClass="sideButton" stylesheets="@application.css" text="Delete">
          </Button>
    </children>
 </AnchorPane>

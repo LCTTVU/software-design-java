@@ -13,7 +13,8 @@ import java.util.ArrayList;
 
 public class Main extends Application {
 
-    public static Frame currFrame;
+
+
 
     public static void main (String[] args) {
         System.out.println("Welcome to Software Design");
@@ -33,11 +34,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("HomeScreen.fxml"));
-        stage.setTitle("Application");
-        stage.setResizable(false);
-        stage.setScene(new Scene(root));
-        stage.show();
+        HomeController homeController = new HomeController();
+        homeController.showStage();
 
     }
 
