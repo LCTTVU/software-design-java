@@ -5,25 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="69a40a90-b7a8-40db-a577-88515471d52f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/1/9147ac3b6211ddd06c982714c793edfd7877ae63" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/1/b14f6b19d5c7602b8201a3eb3e852c89fc1e4a65" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/softwaredesign/GUI_new.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/softwaredesign/HomeScreenController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/softwaredesign/SceneController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/ViewRecipeScreen.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.8.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.8.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.8.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.8.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.8.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.1/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.8.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.8.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/fastjson_2_0_25.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/GUI_new.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/GUI_new.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/source-classes-mapping.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/HomeScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/CreateRecipeScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/softwaredesign/GUI_new.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/softwaredesign/GUI_new.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/softwaredesign/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/softwaredesign/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -57,6 +56,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="JavaFXApplication" />
         <option value="Class" />
       </list>
     </option>
@@ -92,11 +92,17 @@
     "settings.editor.selected.configurable": "preferences.JavaFX"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\PROGRAMMING\software-design-2023-grp99\src\main" />
+      <recent name="C:\PROGRAMMING\software-design-2023-grp99\src\main\java\softwaredesign" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="softwaredesign.Main" />
       <module name="software-design-vu-2020.main" />
-      <option name="VM_PARAMETERS" value="--module-path javafx-sdk-19.0.2.1/lib --add-modules=javafx.controls " />
+      <option name="VM_PARAMETERS" value="--module-path javafx-sdk-19.0.2.1/lib --add-modules=javafx.controls,javafx.base,javafx.fxml" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="softwaredesign.*" />

@@ -1,0 +1,13 @@
+.sideButton {
+    -fx-font-size: 24;
+    -fx-pref-width: 120;
+    -fx-pref-height: 240;
+}
+
+.title {
+    -fx-font-size: 48;
+    -fx-pref-width: 1280;
+    -fx-pref-height: 120;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+}
