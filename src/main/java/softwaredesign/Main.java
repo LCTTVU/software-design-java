@@ -1,6 +1,7 @@
 package softwaredesign;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
 
@@ -16,4 +17,5 @@ public class Main {
             System.out.println(recipe);
         }
     }
+
 }
