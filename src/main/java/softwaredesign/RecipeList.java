@@ -5,10 +5,8 @@ import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
+import java.lang.reflect.Array;
+import java.util.*;
 
 
 public class RecipeList {
@@ -61,4 +59,37 @@ public class RecipeList {
         }
         return recipeNames;
     }
+
+    private List<String> tokenize(String input, String regex) {
+        String[] tokens = input.strip().split(regex);
+        ArrayList<String> res = new ArrayList<>();
+        for (String token : tokens) {
+            if (!token.strip().isBlank()) {
+                res.add(token.strip());
+            }
+        }
+        return res;
+    }
+
+    public void createRecipe(String name, String desc, String ingStr, String insStr, String time, String tagStr) {
+
+
+
+
+        // Convert instructions string to instructions arraylist
+        List<String> insTokens = tokenize(insStr,"\n");
+        System.out.println(insTokens);
+        ArrayList<Instruction> instructions = new ArrayList<>();
+
+        for (String token: insTokens) {
+            instructions.add(new Instruction(token,null));
+        }
+
+
+
+
+        List<String> tags = tokenize(tagStr,",");
+        System.out.println(tags);
+    }
+
 }

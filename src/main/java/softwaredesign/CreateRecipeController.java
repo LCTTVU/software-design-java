@@ -56,6 +56,15 @@ public class CreateRecipeController implements Initializable {
     }
 
     public void createRecipe() {
+        String name = nameField.getText().strip();
+        String desc = descField.getText().strip();
+        String ingStr = ingArea.getText().strip();
+        String insStr = insArea.getText().strip();
+        String time = timeField.getText().strip();
+        String tagStr = tagField.getText().strip();
+
+        RecipeList.getInstance().createRecipe(name,desc,ingStr,insStr,time,tagStr);
+
         HomeController homeController = new HomeController();
         homeController.showStage();
         stage.close();

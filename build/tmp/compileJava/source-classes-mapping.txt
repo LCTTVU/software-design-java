@@ -13,20 +13,20 @@ softwaredesign/Recipe.java
  softwaredesign.Recipe
 softwaredesign/IngredientList.java
  softwaredesign.IngredientList
-softwaredesign/Instruction.java
- softwaredesign.Instruction
-softwaredesign/RecipeList.java
- softwaredesign.RecipeList
+softwaredesign/Ingredient.java
+ softwaredesign.Ingredient
+softwaredesign/SceneController.java
+ softwaredesign.SceneController
 softwaredesign/GUI.java
  softwaredesign.AppButton
  softwaredesign.GUI
-softwaredesign/SceneController.java
- softwaredesign.SceneController
-softwaredesign/Ingredient.java
- softwaredesign.Ingredient
 softwaredesign/Main.java
  softwaredesign.Main
+softwaredesign/Instruction.java
+ softwaredesign.Instruction
 softwaredesign/CreateRecipeController.java
  softwaredesign.CreateRecipeController
 softwaredesign/HomeController.java
  softwaredesign.HomeController
+softwaredesign/RecipeList.java
+ softwaredesign.RecipeList
