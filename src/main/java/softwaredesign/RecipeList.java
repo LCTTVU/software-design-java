@@ -78,9 +78,7 @@ public class RecipeList {
         String[] tokens = input.strip().split(regex);
         ArrayList<String> res = new ArrayList<>();
         for (String token : tokens) {
-            if (!token.strip().isBlank()) {
-                res.add(token.strip());
-            }
+            if (!token.strip().isBlank()) res.add(token.strip());
         }
         return res;
     }
