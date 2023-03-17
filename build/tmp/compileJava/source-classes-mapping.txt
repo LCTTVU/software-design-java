@@ -1,32 +1,32 @@
-softwaredesign/Instruction.java
- softwaredesign.Instruction
+softwaredesign/GUI_old.java
+ softwaredesign.Button
+ softwaredesign.Frame
+ softwaredesign.GUI_old
+ softwaredesign.GUI_old$1
+ softwaredesign.GUI_old$2
+ softwaredesign.GUI_old$3
+ softwaredesign.GUI_old$4
+ softwaredesign.GUI_old$5
+ softwaredesign.GUI_old$6
+ softwaredesign.Panel
 softwaredesign/Recipe.java
  softwaredesign.Recipe
 softwaredesign/IngredientList.java
  softwaredesign.IngredientList
-softwaredesign/CreateRecipeController.java
- softwaredesign.CreateRecipeController
-softwaredesign/GUI.java
- softwaredesign.Button
- softwaredesign.Frame
- softwaredesign.GUI
- softwaredesign.GUI$1
- softwaredesign.GUI$2
- softwaredesign.GUI$3
- softwaredesign.GUI$4
- softwaredesign.GUI$5
- softwaredesign.GUI$6
- softwaredesign.Panel
-softwaredesign/SceneController.java
- softwaredesign.SceneController
-softwaredesign/GUI_new.java
- softwaredesign.AppButton
- softwaredesign.GUI_new
-softwaredesign/Ingredient.java
- softwaredesign.Ingredient
-softwaredesign/HomeController.java
- softwaredesign.HomeController
+softwaredesign/Instruction.java
+ softwaredesign.Instruction
 softwaredesign/RecipeList.java
  softwaredesign.RecipeList
+softwaredesign/GUI.java
+ softwaredesign.AppButton
+ softwaredesign.GUI
+softwaredesign/SceneController.java
+ softwaredesign.SceneController
+softwaredesign/Ingredient.java
+ softwaredesign.Ingredient
 softwaredesign/Main.java
  softwaredesign.Main
+softwaredesign/CreateRecipeController.java
+ softwaredesign.CreateRecipeController
+softwaredesign/HomeController.java
+ softwaredesign.HomeController

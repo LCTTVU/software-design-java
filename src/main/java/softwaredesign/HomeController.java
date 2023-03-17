@@ -41,6 +41,7 @@ public class HomeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         recipeList.getItems().addAll(RecipeList.getInstance().getRecipeNames());
+        createRecipeButton.setOnAction(event -> openCreateRecipeScreen());
     }
 
     public void openCreateRecipeScreen() {

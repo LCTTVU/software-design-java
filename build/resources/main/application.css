@@ -1,13 +1,31 @@
+.title {
+    -fx-font-size: 48;
+    -fx-pref-width: 1280;
+    -fx-pref-height: 80;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+}
+
+.crLabel {
+    -fx-font-size: 24;
+}
+
+.crField, .crArea {
+    -fx-border-color: gray;
+    -fx-font-size: 16;
+}
+
+
 .sideButton {
     -fx-font-size: 24;
     -fx-pref-width: 120;
     -fx-pref-height: 240;
 }
 
-.title {
-    -fx-font-size: 48;
-    -fx-pref-width: 1280;
-    -fx-pref-height: 120;
+.bottomButton {
+    -fx-font-size: 40;
+    -fx-pref-width: 400;
+    -fx-pref-height: 80;
     -fx-alignment: center;
     -fx-text-alignment: center;
 }
