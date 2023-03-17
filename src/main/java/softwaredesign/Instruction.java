@@ -1,21 +1,17 @@
 package softwaredesign;
 
 public class Instruction {
-    String instruction;
+    String text;
     String note;
 
-    public Instruction(String instruction) {
-        this.instruction = instruction;
-    }
-
-    Instruction(String instruction, String note) {
-        this.instruction = instruction;
+    Instruction(String text, String note) {
+        this.text = text;
         this.note = note;
     }
 
 
     @Override
     public String toString() {
-        return "{" + this.instruction + "," + this.note + "}";
+        return "{" + this.text + "," + this.note + "}";
     }
 }

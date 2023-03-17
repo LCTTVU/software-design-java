@@ -7,33 +7,22 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
-
+import java.lang.reflect.Array;
+import java.util.*;
 
 
 public class RecipeList {
-
-    ArrayList<Recipe> recipes;
-    IngredientList ingredientList;
-
     private static RecipeList instance;
-    private RecipeList() {
-        this.recipes = getRecipes();
-        this.ingredientList = new IngredientList();
-    }
+    private RecipeList() {}
 
     public static RecipeList getInstance() {
         if (instance == null) {
             instance = new RecipeList();
         }
-
         return instance;
     }
 
-    public ArrayList<Recipe> getRecipes() {
+    public List<Recipe> getRecipes() {
 
         ArrayList<Recipe> recipeArrayList = new ArrayList<>();
 
@@ -61,11 +50,19 @@ public class RecipeList {
                 }
             }
         }
-        recipes = recipeArrayList;
         return recipeArrayList;
     }
 
-    private List<String> tokenize(String input, String regex) {
+    public List<String> getRecipeNames() {
+        List<Recipe> recipeList = getRecipes();
+        ArrayList<String> recipeNames = new ArrayList<>();
+        for (Recipe recipe : recipeList) {
+            recipeNames.add(recipe.name);
+        }
+        return recipeNames;
+    }
+
+    private List<String> tokenize(String input, String regex){
         String[] tokens = input.strip().split(regex);
         ArrayList<String> res = new ArrayList<>();
         for (String token : tokens) {
@@ -76,45 +73,71 @@ public class RecipeList {
         return res;
     }
 
-    public Recipe createRecipe() {
-        ArrayList<Instruction> instructions = new ArrayList<>();
-        ArrayList<String> tags = new ArrayList<>();
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Please enter the recipe");
-        String name = scanner.nextLine();
-        System.out.println("Please enter the description");
-        String description = scanner.nextLine();
-        System.out.println("How many ingredients would you like to add?");
-        int count = scanner.nextInt();
-        for(int i = 0; i < count; i++) {
-            System.out.println("Enter Ingredient Name");
-            String ingName = scanner.next();
-            System.out.println("Enter quantity (without units)");
-            int quantity = scanner.nextInt();
-            System.out.println("Enter the units");
-            String unit = scanner.next();
-            ingredientList.addIngredient(new Ingredient(ingName,quantity,unit));
-        }
-        System.out.println("How many steps would you like to add?");
-        int count1 = scanner.nextInt();
-        System.out.println("Enter Instruction");
-        for(int i = 0; i < count1; i++) {
-            scanner.next();
-            String instruction = scanner.nextLine();
-            instructions.add(new Instruction(instruction));
-        }
-        System.out.println("Enter the amount of time needed with units please");
-        String time = scanner.nextLine();
-        System.out.println("Enter how many tags you need?");
-        int count3 = scanner.nextInt();
-        System.out.println("Enter tag");
-        for(int i = 0; i < count3; i++) {
-            String tag = scanner.next();
-            tags.add(tag);
-        }
-        Recipe newRecipe = new Recipe(name, description,ingredientList.getIngredients(),instructions,time, tags);
-        return newRecipe;
+    private void errorAt(String type) throws IllegalArgumentException {
+        throw new IllegalArgumentException("Please input " + type);
     }
 
+    public void createRecipe(String nameStr, String descStr, String ingStr, String insStr, String timeStr, String tagStr) throws IllegalArgumentException, IndexOutOfBoundsException {
+        if (nameStr.isBlank()) {
+            errorAt("Name");
+        }
+
+        if (descStr.isBlank()) {
+            errorAt("Description");
+        }
+
+        //Convert ingredients input to ingredients arraylist
+        if (ingStr.isBlank()) {
+            errorAt("Ingredients");
+        }
+        List<String> ingTokens = tokenize(ingStr, "\n");
+        ArrayList<Ingredient> ingredients = new ArrayList<>();
+        for (String token : ingTokens) {
+            List<String> properties = tokenize(token, ",");
+
+
+            String name = properties.get(0);
+            String quantity = properties.get(1);
+            String unit;
+            if (properties.size() < 3) {
+                unit = null;
+            }
+            else {
+                unit = properties.get(2);
+            }
+            ingredients.add(new Ingredient(name,quantity,unit));
+        }
+
+        // Convert instructions input to instructions arraylist
+        if (insStr.isBlank()) {
+            errorAt("Instructions");
+        }
+        List<String> insTokens = tokenize(insStr,"\n");
+        System.out.println(insTokens);
+        ArrayList<Instruction> instructions = new ArrayList<>();
+        for (String token: insTokens) {
+            instructions.add(new Instruction(token,null));
+        }
+        
+        if (timeStr.isBlank()) {
+            errorAt("Time");
+        }
+
+        if (tagStr.isBlank()) {
+            errorAt("Tags");
+        }
+        ArrayList<String> tags = new ArrayList<>(tokenize(tagStr,","));
+
+        Recipe newRecipe = new Recipe(nameStr,descStr,ingredients,instructions,timeStr,tags);
+
+        //write to file
+        File location = new File("./recipes/" + nameStr + ".json");
+        Gson gson = new Gson();
+        try (FileWriter writer = new FileWriter(location)) {
+            gson.toJson(newRecipe, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
