@@ -7,13 +7,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
+
 import java.util.*;
 
 
 public class RecipeList {
 
-    private final String RECIPE_PATH = "./recipes";
+    private static final String RECIPE_PATH = "./recipes";
 
     private static RecipeList instance;
     private RecipeList() {}
@@ -90,54 +90,33 @@ public class RecipeList {
     }
 
     public void createRecipe(String nameStr, String descStr, String ingStr, String insStr, String timeStr, String tagStr) throws IllegalArgumentException, IndexOutOfBoundsException {
-        if (nameStr.isBlank()) {
-            errorAt("Name");
-        }
 
-        if (descStr.isBlank()) {
-            errorAt("Description");
-        }
+        if (nameStr.isBlank()) errorAt("Name");
+        if (descStr.isBlank()) errorAt("Description");
 
         //Convert ingredients input to ingredients arraylist
-        if (ingStr.isBlank()) {
-            errorAt("Ingredients");
-        }
+        if (ingStr.isBlank()) errorAt("Ingredients");
         List<String> ingTokens = tokenize(ingStr, "\n");
         ArrayList<Ingredient> ingredients = new ArrayList<>();
         for (String token : ingTokens) {
             List<String> properties = tokenize(token, ",");
-
-
             String name = properties.get(0);
             String quantity = properties.get(1);
             String unit;
-            if (properties.size() < 3) {
-                unit = null;
-            }
-            else {
-                unit = properties.get(2);
-            }
+            if (properties.size() < 3) unit = null;
+            else unit = properties.get(2);
             ingredients.add(new Ingredient(name,quantity,unit));
         }
 
         // Convert instructions input to instructions arraylist
-        if (insStr.isBlank()) {
-            errorAt("Instructions");
-        }
+        if (insStr.isBlank()) errorAt("Instructions");
         List<String> insTokens = tokenize(insStr,"\n");
-        System.out.println(insTokens);
         ArrayList<Instruction> instructions = new ArrayList<>();
-        for (String token: insTokens) {
-            instructions.add(new Instruction(token,""));
-        }
+        for (String token: insTokens) instructions.add(new Instruction(token,""));
         
-        if (timeStr.isBlank()) {
-            errorAt("Time");
-        }
+        if (timeStr.isBlank()) errorAt("Time");
 
-        if (tagStr.isBlank()) {
-            errorAt("Tags");
-        }
+        if (tagStr.isBlank()) errorAt("Tags");
         ArrayList<String> tags = new ArrayList<>(tokenize(tagStr,","));
 
         Recipe newRecipe = new Recipe(nameStr,descStr,ingredients,instructions,timeStr,tags);
@@ -154,10 +133,7 @@ public class RecipeList {
 
     public void deleteRecipe(String name) {
         File file = new File(RECIPE_PATH, name + ".json");
-        if (file.delete()) {
-            System.out.println("Deleted the file " + file.getName());
-        } else {
-            System.out.println("Failed to delete the file " + file.getName());
-        }
+        if (file.delete()) System.out.println("Deleted the file " + file.getName());
+        else System.out.println("Failed to delete the file " + file.getName());
     }
 }

@@ -10,12 +10,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class CreateRecipeController implements Initializable {
-    private Stage stage;
+    private final Stage stage;
 
     @FXML
     private Label crTitle;
@@ -44,7 +43,7 @@ public class CreateRecipeController implements Initializable {
 
             stage.setScene(new Scene(loader.load()));
             stage.setTitle("Create Recipe");
-        } catch (Throwable e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
