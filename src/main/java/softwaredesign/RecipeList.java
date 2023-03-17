@@ -110,7 +110,9 @@ public class RecipeList {
         if (insStr.isBlank()) errorAt("Instructions");
         List<String> insTokens = tokenize(insStr,"\n");
         ArrayList<Instruction> instructions = new ArrayList<>();
-        for (String token: insTokens) instructions.add(new Instruction(token,""));
+        for (String token: insTokens) {
+            instructions.add(new Instruction(token, ""));
+        }
         
         if (timeStr.isBlank()) errorAt("Time");
 
