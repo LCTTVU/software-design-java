@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="84561f49-6063-4dba-bd5f-c0a8ae9dcb0c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/softwaredesign/CreateRecipeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/softwaredesign/CreateRecipeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/softwaredesign/RecipeList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/softwaredesign/RecipeList.java" afterDir="false" />
-    </list>
+    <list default="true" id="84561f49-6063-4dba-bd5f-c0a8ae9dcb0c" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
