@@ -11,19 +11,19 @@ softwaredesign/GUI_old.java
  softwaredesign.Panel
 softwaredesign/Recipe.java
  softwaredesign.Recipe
-softwaredesign/IngredientList.java
- softwaredesign.IngredientList
-softwaredesign/Ingredient.java
- softwaredesign.Ingredient
+softwaredesign/Instruction.java
+ softwaredesign.Instruction
+softwaredesign/Main.java
+ softwaredesign.Main
 softwaredesign/SceneController.java
  softwaredesign.SceneController
 softwaredesign/GUI.java
  softwaredesign.AppButton
  softwaredesign.GUI
-softwaredesign/Main.java
- softwaredesign.Main
-softwaredesign/Instruction.java
- softwaredesign.Instruction
+softwaredesign/Ingredient.java
+ softwaredesign.Ingredient
+softwaredesign/IngredientList.java
+ softwaredesign.IngredientList
 softwaredesign/CreateRecipeController.java
  softwaredesign.CreateRecipeController
 softwaredesign/HomeController.java

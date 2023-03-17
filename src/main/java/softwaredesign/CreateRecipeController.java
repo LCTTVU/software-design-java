@@ -5,16 +5,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class CreateRecipeController implements Initializable {
     private Stage stage;
 
+    @FXML
+    private Label crTitle;
     @FXML
     private Button doneButton;
     @FXML
@@ -62,12 +66,18 @@ public class CreateRecipeController implements Initializable {
         String insStr = insArea.getText().strip();
         String time = timeField.getText().strip();
         String tagStr = tagField.getText().strip();
+        try {
+            RecipeList.getInstance().createRecipe(name,desc,ingStr,insStr,time,tagStr);
+            HomeController homeController = new HomeController();
+            homeController.showStage();
+            stage.close();
+        } catch (IllegalArgumentException e) {
+            crTitle.setText(e.getMessage());
+        } catch (IndexOutOfBoundsException e) {
+            crTitle.setText("Invalid Ingredient Format");
+        }
 
-        RecipeList.getInstance().createRecipe(name,desc,ingStr,insStr,time,tagStr);
 
-        HomeController homeController = new HomeController();
-        homeController.showStage();
-        stage.close();
 
     }
 }

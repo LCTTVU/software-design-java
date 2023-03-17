@@ -11,7 +11,7 @@
 <?import javafx.scene.control.TextField?>
 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label styleClass="title" stylesheets="@application.css" text="Create Recipe" />
+        <Label fx:id="crTitle" styleClass="title" stylesheets="@application.css" text="Create Recipe" />
         <Button fx:id="doneButton" layoutX="440.0" layoutY="640.0" mnemonicParsing="false" styleClass="bottomButton" stylesheets="@application.css" text="Done" />
         <GridPane layoutX="50.0" layoutY="80.0" prefHeight="540.0" prefWidth="1180.0">
             <columnConstraints>
