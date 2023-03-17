@@ -12,6 +12,9 @@ import java.util.*;
 
 
 public class RecipeList {
+
+    private final String RECIPE_PATH = "./recipes";
+
     private static RecipeList instance;
     private RecipeList() {}
 
@@ -43,12 +46,11 @@ public class RecipeList {
         return recipe;
     }
 
-
     public List<Recipe> getRecipes() {
 
         ArrayList<Recipe> recipeArrayList = new ArrayList<>();
 
-        File folder = new File("./recipes");
+        File folder = new File(RECIPE_PATH);
         File[] listOfFiles = folder.listFiles();
 
         assert listOfFiles != null;
@@ -59,7 +61,7 @@ public class RecipeList {
     }
 
     public Recipe getRecipe(String name) {
-        File file = new File("./recipes/" + name + ".json");
+        File file = new File(RECIPE_PATH,name + ".json");
         return jsonToRecipe(file);
     }
 
@@ -151,7 +153,7 @@ public class RecipeList {
     }
 
     public void deleteRecipe(String name) {
-        File file = new File("./recipes/" + name + ".json");
+        File file = new File(RECIPE_PATH, name + ".json");
         if (file.delete()) {
             System.out.println("Deleted the file " + file.getName());
         } else {
