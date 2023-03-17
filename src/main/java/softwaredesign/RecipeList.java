@@ -22,6 +22,28 @@ public class RecipeList {
         return instance;
     }
 
+    private Recipe jsonToRecipe(File file) {
+        Recipe recipe = null;
+        if (file.isFile()) {
+            try {
+                Gson gson = new Gson();
+                Scanner myReader = new Scanner(file);
+                StringBuilder data = new StringBuilder();
+                while (myReader.hasNextLine()) {
+                    String line = myReader.nextLine();
+                    data.append(line.strip());
+                }
+                recipe = gson.fromJson(data.toString(),Recipe.class);
+                myReader.close();
+            } catch (FileNotFoundException e) {
+                System.out.println("File " + file.getName() + "not found.");
+                e.printStackTrace();
+            }
+        }
+        return recipe;
+    }
+
+
     public List<Recipe> getRecipes() {
 
         ArrayList<Recipe> recipeArrayList = new ArrayList<>();
@@ -29,28 +51,16 @@ public class RecipeList {
         File folder = new File("./recipes");
         File[] listOfFiles = folder.listFiles();
 
-        Gson gson = new Gson();
-
         assert listOfFiles != null;
         for (File file : listOfFiles) {
-            if (file.isFile()) {
-                try {
-                    Scanner myReader = new Scanner(file);
-                    StringBuilder data = new StringBuilder();
-                    while (myReader.hasNextLine()) {
-                        String line = myReader.nextLine();
-                        data.append(line.strip());
-                    }
-                    Recipe recipe = gson.fromJson(data.toString(),Recipe.class);
-                    recipeArrayList.add(recipe);
-                    myReader.close();
-                } catch (FileNotFoundException e) {
-                    System.out.println("File " + file.getName() + "not found.");
-                    e.printStackTrace();
-                }
-            }
+            recipeArrayList.add(jsonToRecipe(file));
         }
         return recipeArrayList;
+    }
+
+    public Recipe getRecipe(String name) {
+        File file = new File("./recipes/" + name + ".json");
+        return jsonToRecipe(file);
     }
 
     public List<String> getRecipeNames() {
@@ -116,7 +126,7 @@ public class RecipeList {
         System.out.println(insTokens);
         ArrayList<Instruction> instructions = new ArrayList<>();
         for (String token: insTokens) {
-            instructions.add(new Instruction(token,null));
+            instructions.add(new Instruction(token,""));
         }
         
         if (timeStr.isBlank()) {
@@ -140,4 +150,12 @@ public class RecipeList {
         }
     }
 
+    public void deleteRecipe(String name) {
+        File file = new File("./recipes/" + name + ".json");
+        if (file.delete()) {
+            System.out.println("Deleted the file " + file.getName());
+        } else {
+            System.out.println("Failed to delete the file " + file.getName());
+        }
+    }
 }

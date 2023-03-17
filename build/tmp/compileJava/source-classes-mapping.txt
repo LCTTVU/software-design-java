@@ -13,8 +13,8 @@ softwaredesign/Recipe.java
  softwaredesign.Recipe
 softwaredesign/Instruction.java
  softwaredesign.Instruction
-softwaredesign/Main.java
- softwaredesign.Main
+softwaredesign/IngredientList.java
+ softwaredesign.IngredientList
 softwaredesign/SceneController.java
  softwaredesign.SceneController
 softwaredesign/GUI.java
@@ -22,11 +22,11 @@ softwaredesign/GUI.java
  softwaredesign.GUI
 softwaredesign/Ingredient.java
  softwaredesign.Ingredient
-softwaredesign/IngredientList.java
- softwaredesign.IngredientList
 softwaredesign/CreateRecipeController.java
  softwaredesign.CreateRecipeController
 softwaredesign/HomeController.java
  softwaredesign.HomeController
 softwaredesign/RecipeList.java
  softwaredesign.RecipeList
+softwaredesign/Main.java
+ softwaredesign.Main
