@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -62,6 +63,17 @@ public class RecipeList {
         }
         recipes = recipeArrayList;
         return recipeArrayList;
+    }
+
+    private List<String> tokenize(String input, String regex) {
+        String[] tokens = input.strip().split(regex);
+        ArrayList<String> res = new ArrayList<>();
+        for (String token : tokens) {
+            if (!token.strip().isBlank()) {
+                res.add(token.strip());
+            }
+        }
+        return res;
     }
 
     public Recipe createRecipe() {
