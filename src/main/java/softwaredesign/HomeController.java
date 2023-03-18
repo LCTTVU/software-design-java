@@ -16,7 +16,6 @@ public class HomeController implements Initializable {
 
     @FXML
     private Button createRecipeButton;
-
     @FXML
     private ListView<String> recipeList;
 
@@ -40,8 +39,18 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        recipeList.getItems().addAll(RecipeList.getInstance().getRecipeNames());
         createRecipeButton.setOnAction(event -> openCreateRecipeScreen());
+        recipeList.getItems().addAll(RecipeList.getInstance().getRecipeNames());
+        recipeList.getSelectionModel().selectedItemProperty().addListener((observableValue, s, t1) -> {
+            String recipeName = recipeList.getSelectionModel().getSelectedItem();
+            openViewRecipeScreen(recipeName);
+        });
+    }
+
+    public void openViewRecipeScreen(String name) {
+        ViewRecipeController vrController = new ViewRecipeController(name);
+        vrController.showStage();
+        stage.close();
     }
 
     public void openCreateRecipeScreen() {

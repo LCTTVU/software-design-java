@@ -12,6 +12,6 @@ public class Instruction {
 
     @Override
     public String toString() {
-        return "{" + this.text + "," + this.note + "}";
+        return this.text + "\n";
     }
 }

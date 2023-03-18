@@ -11,6 +11,6 @@ public class Ingredient {
     }
     @Override
     public String toString() {
-        return "{" + this.name + "," + this.quantity + "," + this.unit + "}";
+        return this.name + "," + this.quantity + "," + this.unit + "\n";
     }
 }

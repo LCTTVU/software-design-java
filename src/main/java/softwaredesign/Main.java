@@ -15,6 +15,7 @@ public class Main extends Application {
         HomeController homeController = new HomeController();
         homeController.showStage();
 
+
     }
 
 }

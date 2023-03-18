@@ -26,19 +26,19 @@
   ],
   "instructions": [
     {
-      "instruction": "Acquire equipment: Scissors, 3 small glass bottles, glass eyedropper, measuring equipment, coffee filters, rubber gloves, glass jar, pyrex dish",
+      "text": "Acquire equipment: Scissors, 3 small glass bottles, glass eyedropper, measuring equipment, coffee filters, rubber gloves, glass jar, pyrex dish",
       "note": "3oz bottles marked at 1.5oz"
     },
     {
-      "instruction": "Take one small bottle and fill halfway with starting fluid,fill the rest with water. Close bottle, shake for 5 minutes, let rest for 1 minute. Collect clear upper layer with eyedropper",
+      "text": "Take one small bottle and fill halfway with starting fluid,fill the rest with water. Close bottle, shake for 5 minutes, let rest for 1 minute. Collect clear upper layer with eyedropper",
       "note": "kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"
     },
     {
-      "instruction": "Continue with previous step until you have 1.5oz of ether. Close the bottle and place it in a freezer. Rinse out the original bottle and let it stand",
+      "text": "Continue with previous step until you have 1.5oz of ether. Close the bottle and place it in a freezer. Rinse out the original bottle and let it stand",
       "note": "what it says"
     },
     {
-      "instruction": "Pour 1/8 teaspoon of lye crystals into the bottle of ephedrine and agitate. Repeat until mixture remains cloudy",
+      "text": "Pour 1/8 teaspoon of lye crystals into the bottle of ephedrine and agitate. Repeat until mixture remains cloudy",
       "note": "Hot and flammable gas"
     }
   ],

@@ -1,21 +1,21 @@
 package softwaredesign;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Recipe {
     String name;
     String description;
-    ArrayList<Ingredient> ingredients;
-    ArrayList<Instruction> instructions;
+    List<Ingredient> ingredients;
+    List<Instruction> instructions;
     String time;
-    ArrayList<String> tags;
+    List<String> tags;
 
     public Recipe(String name,
            String description,
-           ArrayList<Ingredient> ingredients,
-           ArrayList<Instruction> instructions,
+           List<Ingredient> ingredients,
+           List<Instruction> instructions,
            String time,
-           ArrayList<String> tags) {
+           List<String> tags) {
         this.name = name;
         this.description = description;
         this.ingredients = ingredients;

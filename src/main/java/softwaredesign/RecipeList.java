@@ -53,6 +53,7 @@ public class RecipeList {
         File folder = new File(RECIPE_PATH);
         File[] listOfFiles = folder.listFiles();
 
+
         assert listOfFiles != null;
         for (File file : listOfFiles) {
             recipeArrayList.add(jsonToRecipe(file));
