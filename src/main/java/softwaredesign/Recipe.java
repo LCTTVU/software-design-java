@@ -7,14 +7,14 @@ public class Recipe {
     String description;
     List<Ingredient> ingredients;
     List<Instruction> instructions;
-    String time;
+    Long time;
     List<String> tags;
 
     public Recipe(String name,
            String description,
            List<Ingredient> ingredients,
            List<Instruction> instructions,
-           String time,
+           Long time,
            List<String> tags) {
         this.name = name;
         this.description = description;

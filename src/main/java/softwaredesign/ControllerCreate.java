@@ -14,28 +14,31 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ControllerCreate implements Initializable {
-    private final Stage stage;
+    protected final Stage stage;
+    protected final String recipeName;
+    protected Recipe recipe;
 
     @FXML
-    private Label title;
+    protected Label title;
     @FXML
-    private Button doneButton;
+    protected Button doneButton;
     @FXML
-    private TextField nameField;
+    protected TextField nameField;
     @FXML
-    private TextField descField;
+    protected TextField descField;
     @FXML
-    private TextArea ingArea;
+    protected TextArea ingArea;
     @FXML
-    private TextArea insArea;
+    protected TextArea insArea;
     @FXML
-    private TextField timeField;
+    protected TextField timeField;
     @FXML
-    private TextField tagField;
+    protected TextField tagField;
 
 
-    public ControllerCreate() {
+    public ControllerCreate(String name) {
         stage = new Stage();
+        recipeName = name;
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("CreateRecipeScreen.fxml"));
@@ -52,13 +55,49 @@ public class ControllerCreate implements Initializable {
         stage.show();
     }
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        doneButton.setOnAction(event -> createRecipe());
+        doneButton.setOnAction(event -> saveRecipe());
+
+        if (recipeName == null) {
+            title.setText("Create Recipe");
+            return;
+        } //stop if creating recipe
+
+        //continue if editing recipe
+        title.setText("Edit Recipe");
+        recipe = RecipeList.getInstance().getRecipe(recipeName);
+
+        String nameTxt = recipe.name;
+        nameField.setText(nameTxt);
+
+        String descTxt = recipe.description;
+        descField.setText(descTxt);
+
+        StringBuilder ingTxt = new StringBuilder();
+        for (Ingredient ingredient : recipe.ingredients) {
+            ingTxt.append(ingredient.toString());
+        }
+        ingArea.setText(ingTxt.toString());
+
+        StringBuilder insTxt = new StringBuilder();
+        for (Instruction instruction : recipe.instructions) {
+            insTxt.append(instruction.toString());
+        }
+        insArea.setText(insTxt.toString());
+
+
+        timeField.setText(recipe.time.toString());
+        String tagTxt = recipe.tags.toString();
+        tagTxt = tagTxt.substring(1,tagTxt.length() - 1);
+        tagField.setText(tagTxt);
     }
 
-    private void createRecipe() {
+    protected void saveRecipe() {
+        create();
+    }
+
+    protected void create() {
         String name = nameField.getText().strip();
         String desc = descField.getText().strip();
         String ingStr = ingArea.getText().strip();
@@ -70,10 +109,12 @@ public class ControllerCreate implements Initializable {
             ControllerHome homeController = new ControllerHome();
             homeController.showStage();
             stage.close();
-        } catch (IllegalArgumentException e) {
+        } catch (NullPointerException e) {
             title.setText(e.getMessage());
         } catch (IndexOutOfBoundsException e) {
             title.setText("Invalid Ingredient Format");
+        } catch (NumberFormatException e) {
+            title.setText("Please input a valid number for time");
         }
     }
 }

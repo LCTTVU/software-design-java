@@ -5,50 +5,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="84561f49-6063-4dba-bd5f-c0a8ae9dcb0c" name="Changes" comment="delete ingredientlist">
-      <change afterPath="$PROJECT_DIR$/src/main/java/softwaredesign/ViewRecipeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.8.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.8.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.8.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.8.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.8.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.1/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.8.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.8.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/AppButton.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/Button.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/CreateRecipeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/CreateRecipeController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/Frame.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/GUI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/GUI_old$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/GUI_old$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/GUI_old$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/GUI_old$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/GUI_old$5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/GUI_old$6.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/GUI_old.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/HomeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/HomeController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/ControllerCE.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/ControllerCreate.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/ControllerCreate.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/ControllerEdit.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/ControllerEdit.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/ControllerHome.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/ControllerHome.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/CreateRecipeController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/EditRecipeController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/HomeController.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/Panel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/Recipe.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/Recipe.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/RecipeList.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/RecipeList.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/ViewRecipeScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/ViewRecipeScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/SceneController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/ViewRecipeController.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/source-classes-mapping.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes/adasd.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes/asdasda.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes/ggggggg.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes/test1.json" beforeDir="false" afterPath="$PROJECT_DIR$/recipes/Test Recipe.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes/test2.json" beforeDir="false" afterPath="$PROJECT_DIR$/recipes/Test Recipe 2.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/softwaredesign/CreateRecipeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/softwaredesign/CreateRecipeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/softwaredesign/GUI.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/softwaredesign/GUI_old.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/softwaredesign/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/softwaredesign/HomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/softwaredesign/Ingredient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/softwaredesign/Ingredient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/softwaredesign/Instruction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/softwaredesign/Instruction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/softwaredesign/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/softwaredesign/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes/Test Recipe 2.json" beforeDir="false" afterPath="$PROJECT_DIR$/recipes/Test Recipe 2.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes/Test Recipe 3.json" beforeDir="false" afterPath="$PROJECT_DIR$/recipes/Test Recipe 3.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes/Test Recipe.json" beforeDir="false" afterPath="$PROJECT_DIR$/recipes/Test Recipe.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes/hhhhh.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/softwaredesign/ControllerCreate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/softwaredesign/ControllerCreate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/softwaredesign/ControllerEdit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/softwaredesign/ControllerEdit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/softwaredesign/ControllerHome.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/softwaredesign/ControllerHome.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/softwaredesign/Recipe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/softwaredesign/Recipe.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/softwaredesign/RecipeList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/softwaredesign/RecipeList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ViewRecipeScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ViewRecipeScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/CreateRecipeScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/CreateRecipeScreen.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

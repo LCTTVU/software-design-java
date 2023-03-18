@@ -84,11 +84,11 @@ public class RecipeList {
         return res;
     }
 
-    private void errorAt(String type) throws IllegalArgumentException {
-        throw new IllegalArgumentException("Please input " + type);
+    private void errorAt(String type) throws NullPointerException {
+        throw new NullPointerException("Please input " + type);
     }
 
-    public void createRecipe(String nameStr, String descStr, String ingStr, String insStr, String timeStr, String tagStr) throws IllegalArgumentException, IndexOutOfBoundsException {
+    public void createRecipe(String nameStr, String descStr, String ingStr, String insStr, String timeStr, String tagStr) throws NullPointerException, IndexOutOfBoundsException, NumberFormatException {
 
         if (nameStr.isBlank()) errorAt("Name");
         if (descStr.isBlank()) errorAt("Description");
@@ -102,7 +102,7 @@ public class RecipeList {
             String name = properties.get(0);
             String quantity = properties.get(1);
             String unit;
-            if (properties.size() < 3) unit = null;
+            if (properties.size() < 3) unit = "No unit";
             else unit = properties.get(2);
             ingredients.add(new Ingredient(name,quantity,unit));
         }
@@ -116,11 +116,12 @@ public class RecipeList {
         }
         
         if (timeStr.isBlank()) errorAt("Time");
+        Long time = Long.parseLong(timeStr.strip());
 
         if (tagStr.isBlank()) errorAt("Tags");
         ArrayList<String> tags = new ArrayList<>(tokenize(tagStr,","));
 
-        Recipe newRecipe = new Recipe(nameStr,descStr,ingredients,instructions,timeStr,tags);
+        Recipe newRecipe = new Recipe(nameStr,descStr,ingredients,instructions,time,tags);
 
         //write to file
         File location = new File("./recipes/" + nameStr + ".json");

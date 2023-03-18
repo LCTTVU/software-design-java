@@ -1,20 +1,18 @@
-softwaredesign/Recipe.java
- softwaredesign.Recipe
 softwaredesign/Main.java
  softwaredesign.Main
-softwaredesign/CreateRecipeController.java
- softwaredesign.CreateRecipeController
-softwaredesign/SceneController.java
- softwaredesign.SceneController
-softwaredesign/HomeController.java
- softwaredesign.HomeController
-softwaredesign/ViewRecipeController.java
- softwaredesign.ViewRecipeController
-softwaredesign/RecipeList.java
- softwaredesign.RecipeList
 softwaredesign/Ingredient.java
  softwaredesign.Ingredient
-softwaredesign/EditRecipeController.java
- softwaredesign.EditRecipeController
 softwaredesign/Instruction.java
  softwaredesign.Instruction
+softwaredesign/ControllerHome.java
+ softwaredesign.ControllerHome
+softwaredesign/Recipe.java
+ softwaredesign.Recipe
+softwaredesign/ControllerEdit.java
+ softwaredesign.ControllerEdit
+softwaredesign/RecipeList.java
+ softwaredesign.RecipeList
+softwaredesign/ControllerCreate.java
+ softwaredesign.ControllerCreate
+softwaredesign/ControllerView.java
+ softwaredesign.ControllerView
