@@ -109,12 +109,10 @@ public class ControllerCreate implements Initializable {
             ControllerHome homeController = new ControllerHome();
             homeController.showStage();
             stage.close();
-        } catch (NullPointerException e) {
-            title.setText(e.getMessage());
         } catch (IndexOutOfBoundsException e) {
             title.setText("Invalid Ingredient Format");
-        } catch (NumberFormatException e) {
-            title.setText("Please input a valid number for time");
+        } catch (Exception e) {
+            title.setText(e.getMessage());
         }
     }
 }

@@ -84,44 +84,56 @@ public class RecipeList {
         return res;
     }
 
-    private void errorAt(String type) throws NullPointerException {
+    private void errorEmptyStringAt(String type) throws NullPointerException {
         throw new NullPointerException("Please input " + type);
     }
 
+    private Long tryParse(String input, String type) throws NumberFormatException {
+        for (char c : input.toCharArray()) {
+            if (!Character.isDigit(c)) {
+                throw new NumberFormatException("Please input a valid number for " + type);
+            }
+        }
+        return Long.parseLong(input);
+    }
+
+
     public void createRecipe(String nameStr, String descStr, String ingStr, String insStr, String timeStr, String tagStr) throws NullPointerException, IndexOutOfBoundsException, NumberFormatException {
 
-        if (nameStr.isBlank()) errorAt("Name");
-        if (descStr.isBlank()) errorAt("Description");
+        if (nameStr.isBlank()) errorEmptyStringAt("Name");
+        String name = nameStr.strip();
+        if (descStr.isBlank()) errorEmptyStringAt("Description");
+        String desc = descStr.strip();
 
         //Convert ingredients input to ingredients arraylist
-        if (ingStr.isBlank()) errorAt("Ingredients");
+        if (ingStr.isBlank()) errorEmptyStringAt("Ingredients");
         List<String> ingTokens = tokenize(ingStr, "\n");
         ArrayList<Ingredient> ingredients = new ArrayList<>();
         for (String token : ingTokens) {
             List<String> properties = tokenize(token, ",");
-            String name = properties.get(0);
-            String quantity = properties.get(1);
-            String unit;
-            if (properties.size() < 3) unit = "No unit";
-            else unit = properties.get(2);
-            ingredients.add(new Ingredient(name,quantity,unit));
+            String ingName = properties.get(0);
+            Long ingQuantity = tryParse(properties.get(1),"Ingredient quantity");
+            String ingUnit;
+            if (properties.size() < 3) ingUnit = "No unit";
+            else ingUnit = properties.get(2);
+            ingredients.add(new Ingredient(ingName,ingQuantity,ingUnit));
         }
 
         // Convert instructions input to instructions arraylist
-        if (insStr.isBlank()) errorAt("Instructions");
+        if (insStr.isBlank()) errorEmptyStringAt("Instructions");
         List<String> insTokens = tokenize(insStr,"\n");
         ArrayList<Instruction> instructions = new ArrayList<>();
         for (String token: insTokens) {
             instructions.add(new Instruction(token, ""));
         }
         
-        if (timeStr.isBlank()) errorAt("Time");
-        Long time = Long.parseLong(timeStr.strip());
+        if (timeStr.isBlank()) errorEmptyStringAt("Time");
+        Long time = tryParse(timeStr.strip(),"Time");
 
-        if (tagStr.isBlank()) errorAt("Tags");
-        ArrayList<String> tags = new ArrayList<>(tokenize(tagStr,","));
+        if (tagStr.isBlank()) errorEmptyStringAt("Tags");
+        List<String> tags = tokenize(tagStr,",");
 
-        Recipe newRecipe = new Recipe(nameStr,descStr,ingredients,instructions,time,tags);
+        Recipe newRecipe = new Recipe(name,desc,ingredients,instructions,time,tags);
 
         //write to file
         File location = new File("./recipes/" + nameStr + ".json");

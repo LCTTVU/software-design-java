@@ -2,15 +2,15 @@ package softwaredesign;
 
 public class Ingredient {
     String name;
-    String quantity;
+    Long quantity;
     String unit;
-    Ingredient(String name, String quantity, String unit) {
+    Ingredient(String name, Long quantity, String unit) {
         this.name = name;
         this.quantity = quantity;
         this.unit = unit;
     }
     @Override
     public String toString() {
-        return this.name + "," + this.quantity + "," + this.unit + "\n";
+        return this.name + "," + this.quantity.toString() + "," + this.unit + "\n";
     }
 }
