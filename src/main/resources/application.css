@@ -28,4 +28,11 @@
     -fx-pref-height: 80;
     -fx-alignment: center;
     -fx-text-alignment: center;
+    -fx-background-color: lightgreen;
+}
+
+.backButton {
+    -fx-font-size: 20;
+    -fx-pref-width: 100;
+    -fx-pref-height: 40;
 }

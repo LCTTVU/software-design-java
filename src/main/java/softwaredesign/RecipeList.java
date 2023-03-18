@@ -14,6 +14,7 @@ import java.util.*;
 public class RecipeList {
 
     private static final String RECIPE_PATH = "./recipes";
+    private static final String RECIPE_FILE_FORMAT = ".json";
 
     private static RecipeList instance;
     private RecipeList() {}
@@ -39,7 +40,7 @@ public class RecipeList {
                 recipe = gson.fromJson(data.toString(),Recipe.class);
                 myReader.close();
             } catch (FileNotFoundException e) {
-                System.out.println("File " + file.getName() + "not found.");
+
                 e.printStackTrace();
             }
         }
@@ -62,7 +63,7 @@ public class RecipeList {
     }
 
     public Recipe getRecipe(String name) {
-        File file = new File(RECIPE_PATH,name + ".json");
+        File file = new File(RECIPE_PATH,name + RECIPE_FILE_FORMAT);
         return jsonToRecipe(file);
     }
 
@@ -136,7 +137,7 @@ public class RecipeList {
         Recipe newRecipe = new Recipe(name,desc,ingredients,instructions,time,tags);
 
         //write to file
-        File location = new File("./recipes/" + nameStr + ".json");
+        File location = new File(RECIPE_PATH ,name + RECIPE_FILE_FORMAT);
         Gson gson = new Gson();
         try (FileWriter writer = new FileWriter(location)) {
             gson.toJson(newRecipe, writer);
@@ -145,9 +146,8 @@ public class RecipeList {
         }
     }
 
-    public void deleteRecipe(String name) {
-        File file = new File(RECIPE_PATH, name + ".json");
-        if (file.delete()) System.out.println("Deleted the file " + file.getName());
-        else System.out.println("Failed to delete the file " + file.getName());
+    public void deleteRecipe(String name) throws IOException {
+        File file = new File(RECIPE_PATH, name + RECIPE_FILE_FORMAT);
+        if (!file.delete()) throw new IOException("Unable to delete recipe");
     }
 }

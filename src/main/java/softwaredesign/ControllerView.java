@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -63,10 +64,15 @@ public class ControllerView implements Initializable {
     }
 
     private void deleteRecipe() {
-        RecipeList.getInstance().deleteRecipe(recipeName);
-        ControllerHome homeController = new ControllerHome();
-        homeController.showStage();
-        stage.close();
+        try {
+            RecipeList.getInstance().deleteRecipe(recipeName);
+            ControllerHome homeController = new ControllerHome();
+            homeController.showStage();
+            stage.close();
+        } catch (IOException e) {
+            title.setText(e.getMessage());
+        }
+
     }
 
 }

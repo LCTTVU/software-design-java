@@ -1,5 +1,7 @@
 package softwaredesign;
 
+import java.io.IOException;
+
 public class ControllerEdit extends ControllerCreate {
 
     public ControllerEdit(String name) {
@@ -8,7 +10,11 @@ public class ControllerEdit extends ControllerCreate {
     }
 
     public void delete() {
-        RecipeList.getInstance().deleteRecipe(recipeName);
+        try {
+            RecipeList.getInstance().deleteRecipe(recipeName);
+        } catch (IOException e) {
+            title.setText(e.getMessage());
+        }
     }
 
     @Override
@@ -17,5 +23,10 @@ public class ControllerEdit extends ControllerCreate {
         create();
     }
 
-
+    @Override
+    protected void prevScreen() {
+        ControllerView viewController = new ControllerView(recipeName);
+        viewController.showStage();
+        stage.close();
+    }
 }

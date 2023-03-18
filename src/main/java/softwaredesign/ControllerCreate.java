@@ -21,6 +21,8 @@ public class ControllerCreate implements Initializable {
     @FXML
     protected Label title;
     @FXML
+    protected Button backButton;
+    @FXML
     protected Button doneButton;
     @FXML
     protected TextField nameField;
@@ -58,6 +60,7 @@ public class ControllerCreate implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         doneButton.setOnAction(event -> saveRecipe());
+        backButton.setOnAction(event -> prevScreen());
 
         if (recipeName == null) {
             title.setText("Create Recipe");
@@ -114,5 +117,11 @@ public class ControllerCreate implements Initializable {
         } catch (Exception e) {
             title.setText(e.getMessage());
         }
+    }
+
+    protected void prevScreen() {
+        ControllerHome homeController = new ControllerHome();
+        homeController.showStage();
+        stage.close();
     }
 }

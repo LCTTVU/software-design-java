@@ -12,7 +12,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ControllerHome implements Initializable {
-    private Stage stage;
+    private final Stage stage;
 
     @FXML
     private Button createRecipeButton;
@@ -28,7 +28,7 @@ public class ControllerHome implements Initializable {
             stage.setScene(new Scene(loader.load()));
             stage.setTitle("Home");
 
-        } catch (Throwable e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -48,14 +48,14 @@ public class ControllerHome implements Initializable {
     }
 
     public void openViewRecipeScreen(String name) {
-        ControllerView vrController = new ControllerView(name);
-        vrController.showStage();
+        ControllerView viewController = new ControllerView(name);
+        viewController.showStage();
         stage.close();
     }
 
     public void openCreateRecipeScreen() {
-        ControllerCreate crController = new ControllerCreate(null);
-        crController.showStage();
+        ControllerCreate createController = new ControllerCreate(null);
+        createController.showStage();
         stage.close();
 
     }

@@ -9,10 +9,12 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="720" prefWidth="1280" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="title" styleClass="title" stylesheets="@application.css" />
-        <Button fx:id="doneButton" layoutX="440.0" layoutY="640.0" mnemonicParsing="false" styleClass="bottomButton" stylesheets="@application.css" text="Done" />
+        <Label fx:id="title" styleClass="title" stylesheets="@application.css" text="Create Recipe"/>
+        <Button fx:id="backButton" text="Back" layoutX="50" layoutY="30" styleClass="backButton" stylesheets="@application.css"/>
+        <Button fx:id="doneButton" text="Done" layoutX="440" layoutY="640" styleClass="bottomButton" stylesheets="@application.css">
+        </Button>
         <GridPane layoutX="50.0" layoutY="80.0" prefHeight="540.0" prefWidth="1180.0">
             <columnConstraints>
                 <ColumnConstraints prefWidth="200.0" />
