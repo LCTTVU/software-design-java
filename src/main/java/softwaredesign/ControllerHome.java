@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class HomeController implements Initializable {
+public class ControllerHome implements Initializable {
     private Stage stage;
 
     @FXML
@@ -19,7 +19,7 @@ public class HomeController implements Initializable {
     @FXML
     private ListView<String> recipeList;
 
-    public HomeController() {
+    public ControllerHome() {
         stage = new Stage();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("HomeScreen.fxml"));
@@ -48,13 +48,13 @@ public class HomeController implements Initializable {
     }
 
     public void openViewRecipeScreen(String name) {
-        ViewRecipeController vrController = new ViewRecipeController(name);
+        ControllerView vrController = new ControllerView(name);
         vrController.showStage();
         stage.close();
     }
 
     public void openCreateRecipeScreen() {
-        CreateRecipeController crController = new CreateRecipeController();
+        ControllerCreate crController = new ControllerCreate();
         crController.showStage();
         stage.close();
 

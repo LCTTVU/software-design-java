@@ -13,12 +13,8 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class EditRecipeController implements Initializable {
+public class ControllerCreate implements Initializable {
     private final Stage stage;
-    private final String recipeName;
-
-    private Recipe recipe;
-
 
     @FXML
     private Label title;
@@ -38,9 +34,9 @@ public class EditRecipeController implements Initializable {
     private TextField tagField;
 
 
-    public EditRecipeController(String name) {
+    public ControllerCreate() {
         stage = new Stage();
-        recipeName = name;
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("CreateRecipeScreen.fxml"));
             loader.setController(this);
@@ -59,45 +55,10 @@ public class EditRecipeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        doneButton.setOnAction(event -> editRecipe());
-
-        recipe = RecipeList.getInstance().getRecipe(recipeName);
-
-        String nameTxt = recipe.name;
-        nameField.setText(nameTxt);
-
-        String descTxt = recipe.description;
-        descField.setText(descTxt);
-
-        StringBuilder ingTxt = new StringBuilder();
-        for (Ingredient ingredient : recipe.ingredients) {
-            ingTxt.append(ingredient.toString());
-        }
-        ingArea.setText(ingTxt.toString());
-
-        StringBuilder insTxt = new StringBuilder();
-        for (Instruction instruction : recipe.instructions) {
-           insTxt.append(instruction.toString());
-        }
-        insArea.setText(insTxt.toString());
-
-
-
-
-        String timeTxt = recipe.time;
-        timeField.setText(timeTxt);
-        String tagTxt = recipe.tags.toString();
-        tagTxt = tagTxt.substring(1,tagTxt.length() - 1);
-        tagField.setText(tagTxt);
-
+        doneButton.setOnAction(event -> createRecipe());
     }
 
-    public void delete() {
-        RecipeList.getInstance().deleteRecipe(recipeName);
-    }
-
-    public void create() {
+    private void createRecipe() {
         String name = nameField.getText().strip();
         String desc = descField.getText().strip();
         String ingStr = ingArea.getText().strip();
@@ -106,7 +67,7 @@ public class EditRecipeController implements Initializable {
         String tagStr = tagField.getText().strip();
         try {
             RecipeList.getInstance().createRecipe(name,desc,ingStr,insStr,time,tagStr);
-            HomeController homeController = new HomeController();
+            ControllerHome homeController = new ControllerHome();
             homeController.showStage();
             stage.close();
         } catch (IllegalArgumentException e) {
@@ -115,11 +76,4 @@ public class EditRecipeController implements Initializable {
             title.setText("Invalid Ingredient Format");
         }
     }
-
-    public void editRecipe() {
-        delete();
-        create();
-    }
-
-
 }

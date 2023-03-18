@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ViewRecipeController implements Initializable {
+public class ControllerView implements Initializable {
 
     private final Stage stage;
     private final String recipeName;
@@ -25,7 +25,7 @@ public class ViewRecipeController implements Initializable {
     @FXML
     private Button deleteButton;
 
-    public ViewRecipeController(String name) {
+    public ControllerView(String name) {
         stage = new Stage();
         recipeName = name;
         try {
@@ -53,7 +53,7 @@ public class ViewRecipeController implements Initializable {
     }
 
     private void editRecipe() {
-        EditRecipeController erController = new EditRecipeController(recipeName);
+        ControllerEdit erController = new ControllerEdit(recipeName);
         erController.showStage();
         stage.close();
     }
@@ -64,7 +64,7 @@ public class ViewRecipeController implements Initializable {
 
     private void deleteRecipe() {
         RecipeList.getInstance().deleteRecipe(recipeName);
-        HomeController homeController = new HomeController();
+        ControllerHome homeController = new ControllerHome();
         homeController.showStage();
         stage.close();
     }
