@@ -253,7 +253,8 @@ public class Controller implements Initializable {
         String time = timeField.getText().strip();
         String tagStr = tagField.getText().strip();
         try {
-            RecipeList.createRecipe(recipePath,name,desc,ingStr,insStr,time,tagStr);
+            Recipe newRecipe = RecipeList.createRecipe(name,desc,ingStr,insStr,time,tagStr);
+            RecipeList.writeToFile(recipePath,newRecipe);
             HomeController homeController = new HomeController();
             homeController.showStage();
             stage.close();

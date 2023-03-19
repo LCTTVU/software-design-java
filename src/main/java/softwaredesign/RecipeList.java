@@ -52,6 +52,7 @@ public abstract class RecipeList {
 
         return recipes;
     }
+
     public static List<String> getRecipeNames(Map<String,Recipe> recipes) {
         ArrayList<String> names = new ArrayList<>();
         for (Recipe recipe : recipes.values()) {
@@ -96,7 +97,7 @@ public abstract class RecipeList {
     }
 
 
-    public static void createRecipe(String path,String nameStr, String descStr, String ingStr, String insStr, String timeStr, String tagStr) throws NullPointerException, IndexOutOfBoundsException, NumberFormatException {
+    public static Recipe createRecipe(String nameStr, String descStr, String ingStr, String insStr, String timeStr, String tagStr) throws NullPointerException, IndexOutOfBoundsException, NumberFormatException {
 
         if (nameStr.isBlank()) errorEmptyStringAt("Name");
         String name = nameStr.strip();
@@ -136,18 +137,21 @@ public abstract class RecipeList {
         if (tagStr.isBlank()) errorEmptyStringAt("Tags");
         List<String> tags = tokenize(tagStr,",");
 
-        Recipe newRecipe = new Recipe(name,desc,ingredients,instructions,time,tags);
+        return new Recipe(name,desc,ingredients,instructions,time,tags);
+    }
 
+    public static void writeToFile(String path, Recipe recipe) {
         File location;
         if (path == null) {
-            location = new File(RECIPE_PATH ,name + RECIPE_FILE_FORMAT); //standard write to file stuff
+            location = new File(RECIPE_PATH ,recipe.name + RECIPE_FILE_FORMAT); //new recipe file if creating
         }
         else {
-            location = new File(path);
+            location = new File(path);  //overwrite old recipe if editing
         }
         Gson gson = new Gson();
-        try (FileWriter writer = new FileWriter(location)) {
-            gson.toJson(newRecipe, writer);
+        try  {
+            FileWriter writer = new FileWriter(location);
+            gson.toJson(recipe, writer);
         } catch (IOException e) {
             e.printStackTrace();
         }
