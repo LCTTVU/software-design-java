@@ -23,9 +23,11 @@ public class ControllerExecute implements Initializable {
     @FXML
     private TextArea noteArea;
     @FXML
-    private Button next;
+    private Button backButton;
     @FXML
-    private Button prev;
+    private Button nextButton;
+    @FXML
+    private Button prevButton;
 
     ControllerExecute(String name) {
         stage = new Stage();
@@ -41,10 +43,16 @@ public class ControllerExecute implements Initializable {
         }
     }
 
+    public void showStage() {
+        stage.show();
+    }
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        next.setOnAction(event -> next());
-        prev.setOnAction(event -> prev());
+        backButton.setOnAction(event -> prevScreen());
+        nextButton.setOnAction(event -> next());
+        prevButton.setOnAction(event -> prev());
     }
 
     private void next() {
@@ -53,5 +61,11 @@ public class ControllerExecute implements Initializable {
 
     private void prev() {
 
+    }
+
+    private void prevScreen() {
+        ControllerView viewController = new ControllerView(recipeName);
+        viewController.showStage();
+        stage.close();
     }
 }
