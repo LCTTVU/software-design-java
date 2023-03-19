@@ -5,7 +5,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Cell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.skin.VirtualFlow;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -41,6 +44,7 @@ public class ControllerHome implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         createRecipeButton.setOnAction(event -> openCreateRecipeScreen());
         recipeList.getItems().addAll(RecipeList.getInstance().getRecipeNames());
+
         recipeList.getSelectionModel().selectedItemProperty().addListener((observableValue, s, t1) -> {
             String recipeName = recipeList.getSelectionModel().getSelectedItem();
             openViewRecipeScreen(recipeName);

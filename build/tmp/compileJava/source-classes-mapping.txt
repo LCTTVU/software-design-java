@@ -6,11 +6,11 @@ softwaredesign/Instruction.java
  softwaredesign.Instruction
 softwaredesign/RecipeList.java
  softwaredesign.RecipeList
+softwaredesign/Main.java
+ softwaredesign.Main
 softwaredesign/ControllerHome.java
  softwaredesign.ControllerHome
 softwaredesign/ControllerCreateAndEdit.java
  softwaredesign.ControllerCreateAndEdit
-softwaredesign/Main.java
- softwaredesign.Main
 softwaredesign/ControllerView.java
  softwaredesign.ControllerView

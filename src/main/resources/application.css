@@ -6,6 +6,10 @@
     -fx-text-alignment: center;
 }
 
+.list-cell {
+    -fx-font-size: 24;
+}
+
 .crLabel {
     -fx-font-size: 24;
 }
@@ -20,6 +24,18 @@
     -fx-font-size: 24;
     -fx-pref-width: 120;
     -fx-pref-height: 240;
+}
+
+#editButton {
+    -fx-background-color: yellow;
+}
+
+#executeButton {
+    -fx-background-color: lightgreen;
+}
+
+#deleteButton {
+    -fx-background-color: red;
 }
 
 .bottomButton {

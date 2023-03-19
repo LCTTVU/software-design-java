@@ -14,28 +14,27 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ControllerCreateAndEdit implements Initializable {
-    protected final Stage stage;
-    protected final String recipeName;
-    protected Recipe recipe;
+    private final Stage stage;
+    private final String recipeName;
 
     @FXML
-    protected Label title;
+    private Label title;
     @FXML
-    protected Button backButton;
+    private Button backButton;
     @FXML
-    protected Button doneButton;
+    private Button doneButton;
     @FXML
-    protected TextField nameField;
+    private TextField nameField;
     @FXML
-    protected TextField descField;
+    private TextField descField;
     @FXML
-    protected TextArea ingArea;
+    private TextArea ingArea;
     @FXML
-    protected TextArea insArea;
+    private TextArea insArea;
     @FXML
-    protected TextField timeField;
+    private TextField timeField;
     @FXML
-    protected TextField tagField;
+    private TextField tagField;
 
 
     public ControllerCreateAndEdit(String name) {
@@ -57,7 +56,7 @@ public class ControllerCreateAndEdit implements Initializable {
         stage.show();
     }
 
-    public boolean isCreate() {
+    private boolean isCreate() {
         return recipeName == null;
     }
 
@@ -73,7 +72,7 @@ public class ControllerCreateAndEdit implements Initializable {
 
         //continue if editing recipe
         title.setText("Edit Recipe");
-        recipe = RecipeList.getInstance().getRecipe(recipeName);
+        Recipe recipe = RecipeList.getInstance().getRecipe(recipeName);
 
         String nameTxt = recipe.name;
         nameField.setText(nameTxt);
@@ -100,11 +99,11 @@ public class ControllerCreateAndEdit implements Initializable {
         tagField.setText(tagTxt);
     }
 
-    protected void saveRecipe() {
+    private void saveRecipe() {
         create();
     }
 
-    protected void create() {
+    private void create() {
         String name = nameField.getText().strip();
         String desc = descField.getText().strip();
         String ingStr = ingArea.getText().strip();
@@ -123,7 +122,7 @@ public class ControllerCreateAndEdit implements Initializable {
         }
     }
 
-    protected void prevScreen() {
+    private void prevScreen() {
         if (isCreate()) {
             ControllerHome homeController = new ControllerHome();
             homeController.showStage();

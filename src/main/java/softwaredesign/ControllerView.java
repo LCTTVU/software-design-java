@@ -20,6 +20,8 @@ public class ControllerView implements Initializable {
     @FXML
     private Label title;
     @FXML
+    private Button backButton;
+    @FXML
     private Button editButton;
     @FXML
     private Button executeButton;
@@ -47,6 +49,7 @@ public class ControllerView implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         title.setText(recipeName);
+        backButton.setOnAction(event -> prevScreen());
         editButton.setOnAction(event -> editRecipe());
         executeButton.setOnAction(event -> executeRecipe());
         deleteButton.setOnAction(event -> deleteRecipe());
@@ -72,7 +75,14 @@ public class ControllerView implements Initializable {
         } catch (IOException e) {
             title.setText(e.getMessage());
         }
-
     }
+
+    private void prevScreen() {
+        ControllerHome homeController = new ControllerHome();
+        homeController.showStage();
+        stage.close();
+    }
+
+
 
 }
