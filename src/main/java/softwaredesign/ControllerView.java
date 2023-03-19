@@ -54,8 +54,8 @@ public class ControllerView implements Initializable {
     }
 
     private void editRecipe() {
-        ControllerCreateAndEdit erController = new ControllerCreateAndEdit(recipeName);
-        erController.showStage();
+        ControllerCreateAndEdit ceController = new ControllerCreateAndEdit(recipeName);
+        ceController.showStage();
         stage.close();
     }
 

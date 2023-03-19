@@ -54,8 +54,8 @@ public class ControllerHome implements Initializable {
     }
 
     public void openCreateRecipeScreen() {
-        ControllerCreateAndEdit createController = new ControllerCreateAndEdit(null);
-        createController.showStage();
+        ControllerCreateAndEdit ceController = new ControllerCreateAndEdit(null);
+        ceController.showStage();
         stage.close();
 
     }

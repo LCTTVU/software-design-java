@@ -124,8 +124,14 @@ public class ControllerCreateAndEdit implements Initializable {
     }
 
     protected void prevScreen() {
-        ControllerHome homeController = new ControllerHome();
-        homeController.showStage();
+        if (isCreate()) {
+            ControllerHome homeController = new ControllerHome();
+            homeController.showStage();
+        }
+        else {
+            ControllerView viewController = new ControllerView(recipeName);
+            viewController.showStage();
+        }
         stage.close();
     }
 }
