@@ -55,8 +55,8 @@ public abstract class RecipeList {
 
     /*
     This method calls getRecipes() again and searches the list for the correct name,
-    instead of getting the File directly from the name.
-    If recipe.name (recipeName) =/= .json file name, trying to get the File will cause NullPointerException
+    instead of getting the File from the name.
+    If recipe.name (recipeName) =/= .json file name, trying to get the File directly will cause NullPointerException
 
     For example:
     example.json
