@@ -63,7 +63,9 @@ public class ControllerView implements Initializable {
     }
 
     private void executeRecipe() {
-
+        ControllerExecute executeController = new ControllerExecute(recipeName);
+        executeController.showStage();
+        stage.close();
     }
 
     private void deleteRecipe() {

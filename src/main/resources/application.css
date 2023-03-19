@@ -26,6 +26,15 @@
     -fx-pref-height: 240;
 }
 
+.bottomButton {
+    -fx-font-size: 40;
+    -fx-pref-width: 640;
+    -fx-pref-height: 80;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-background-color: lightgreen;
+}
+
 #editButton {
     -fx-background-color: yellow;
 }
@@ -38,14 +47,11 @@
     -fx-background-color: red;
 }
 
-.bottomButton {
-    -fx-font-size: 40;
-    -fx-pref-width: 400;
-    -fx-pref-height: 80;
-    -fx-alignment: center;
-    -fx-text-alignment: center;
-    -fx-background-color: lightgreen;
+#prevButton {
+    -fx-background-color: red;
 }
+
+
 
 .backButton {
     -fx-font-size: 20;
