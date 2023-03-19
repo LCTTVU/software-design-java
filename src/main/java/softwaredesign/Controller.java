@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.*;
 
 
 class HomeController extends Controller {
@@ -51,8 +51,11 @@ public class Controller implements Initializable {
     protected static final String EDIT_RECIPE = "Edit Recipe";
     protected static final String EXECUTE_RECIPE = "Execute Recipe";
 
+    protected Map<String,Recipe> recipes;
+    protected Recipe recipe;
+
     protected final Stage stage;
-    protected String recipeName;
+    protected String recipePath;
     protected String screenName;
     protected String resourceName;
 
@@ -90,8 +93,6 @@ public class Controller implements Initializable {
     protected Button deleteButton;
     //Execute screen components
     @FXML
-    protected Label step;
-    @FXML
     protected Label instructionLabel;
     @FXML
     protected TextArea noteArea;
@@ -99,12 +100,16 @@ public class Controller implements Initializable {
     protected Button nextButton;
     @FXML
     protected Button prevButton;
+    protected List<Instruction> instructionList;
+    protected ListIterator<Instruction> instructionIterator;
 
     //common functions
-    public Controller(String screen, String resource,String recipe) {
+    public Controller(String screen, String resource,String path) {
         screenName = screen;
         resourceName = resource;
-        recipeName = recipe;
+        recipePath = path;
+        recipes = RecipeList.getRecipes();
+        recipe = recipes.get(recipePath);
         stage = new Stage();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(resourceName));
@@ -123,20 +128,21 @@ public class Controller implements Initializable {
         switch (screenName) {
             case HOME:
                 createRecipeButton.setOnAction(event -> mkNextScreen(CREATE_RECIPE));
-                recipeList.getItems().addAll(RecipeList.getRecipeNames());
+                recipeList.getItems().addAll(RecipeList.getRecipeNames(recipes));
 
                 /*
                 Add individual event listeners for viewing recipe to each row of recipeList
                 (this code was corrected by intellij)
                  */
                 recipeList.getSelectionModel().selectedItemProperty().addListener((observableValue, s, t1) -> {
-                    recipeName = recipeList.getSelectionModel().getSelectedItem();
+                    String clickedOnName = recipeList.getSelectionModel().getSelectedItem();
+                    recipePath = RecipeList.getFilenameFromRecipeName(recipes,clickedOnName);
                     mkNextScreen(VIEW_RECIPE);
                 });
                 break;
 
             case VIEW_RECIPE:
-                title.setText(recipeName);
+                title.setText(recipe.name);
                 editButton.setOnAction(event -> mkNextScreen(EDIT_RECIPE));
                 executeButton.setOnAction(event -> mkNextScreen(EXECUTE_RECIPE));
                 deleteButton.setOnAction(event -> deleteRecipe());
@@ -150,13 +156,10 @@ public class Controller implements Initializable {
             case EDIT_RECIPE:
                 title.setText(EDIT_RECIPE);
                 doneButton.setOnAction(event -> createRecipe());
-
-                Recipe recipe = RecipeList.getRecipe(recipeName);
                 //populate text fields with recipe information for the user to edit
-                nameField.setText(recipeName);
+                nameField.setText(recipe.name);
 
-                String descTxt = recipe.description;
-                descField.setText(descTxt);
+                descField.setText(recipe.description);
 
                 StringBuilder ingTxt = new StringBuilder();
                 for (Ingredient ingredient : recipe.ingredients) {
@@ -178,7 +181,7 @@ public class Controller implements Initializable {
                 break;
 
             case EXECUTE_RECIPE:
-                title.setText(recipeName);
+                title.setText(recipe.name);
                 nextButton.setOnAction(event -> nextInstruction());
                 prevButton.setOnAction(event -> prevInstruction());
                 break;
@@ -198,7 +201,7 @@ public class Controller implements Initializable {
                 break;
             case EDIT_RECIPE:
             case EXECUTE_RECIPE:
-                prevController = new ViewController(recipeName); //same reason as above
+                prevController = new ViewController(recipePath); //same reason as above
                 break;
             default:
                 throw new IllegalArgumentException("Invalid Screen at prevScreen");
@@ -214,16 +217,16 @@ public class Controller implements Initializable {
                 nextController = new HomeController();
                 break;
             case VIEW_RECIPE:
-                nextController = new ViewController(recipeName);
+                nextController = new ViewController(recipePath);
                 break;
             case CREATE_RECIPE:
                 nextController = new CreateController();
                 break;
             case EDIT_RECIPE:
-                nextController = new EditController(recipeName);
+                nextController = new EditController(recipePath);
                 break;
             case EXECUTE_RECIPE:
-                nextController = new ExecuteController(recipeName);
+                nextController = new ExecuteController(recipePath);
                 break;
             default:
                 throw new IllegalArgumentException("Invalid Screen at prevScreen");
@@ -245,7 +248,7 @@ public class Controller implements Initializable {
         String time = timeField.getText().strip();
         String tagStr = tagField.getText().strip();
         try {
-            RecipeList.createRecipe(name,desc,ingStr,insStr,time,tagStr);
+            RecipeList.createRecipe(recipePath,name,desc,ingStr,insStr,time,tagStr);
             HomeController homeController = new HomeController();
             homeController.showStage();
             stage.close();
@@ -256,9 +259,14 @@ public class Controller implements Initializable {
         }
     }
 
+    private void editRecipe() {
+        deleteRecipe();
+        createRecipe();
+    }
+
     private void deleteRecipe() {
         try {
-            RecipeList.deleteRecipe(recipeName);
+            RecipeList.deleteRecipe(recipePath);
             HomeController homeController = new HomeController();
             homeController.showStage();
             stage.close();
@@ -267,12 +275,39 @@ public class Controller implements Initializable {
         }
     }
 
+    private void updateNote() {
+        String currNote = noteArea.getText().strip();
+        for (Instruction instruction : instructionList) {
+            String currText = instruction.text;
+            if (Objects.equals(currText, instructionLabel.getText())) {
+                instruction.text = currText;
+            }
+        }
+        noteArea.clear();
+    }
+
     //Executing recipe functions
     private void nextInstruction() {
-
+        if (instructionIterator.hasNext()) {
+            updateNote();
+            Instruction next = instructionIterator.next();
+            instructionLabel.setText(next.text);
+            noteArea.setText(next.note);
+            if (!instructionIterator.hasNext()) nextButton.setText("Finish"); //final step
+        }
+        else {
+            mkNextScreen(VIEW_RECIPE);
+        }
     }
 
     private void prevInstruction() {
-
+        if (instructionIterator.hasPrevious()) {
+            Instruction prev = instructionIterator.previous();
+            instructionLabel.setText(prev.text);
+            noteArea.setText(prev.note);
+        }
+        else {
+            mkNextScreen(VIEW_RECIPE);
+        }
     }
 }

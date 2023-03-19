@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
+
 import java.util.*;
 
 
@@ -15,6 +16,7 @@ public abstract class RecipeList {
 
     private static final String RECIPE_PATH = "./recipes";
     private static final String RECIPE_FILE_FORMAT = ".json";
+
 
     private static Recipe jsonToRecipe(File file) {
         Recipe recipe = null;
@@ -37,56 +39,36 @@ public abstract class RecipeList {
         return recipe;
     }
 
-    public static List<Recipe> getRecipes() {
-
-        ArrayList<Recipe> recipeArrayList = new ArrayList<>();
+    public static Map<String,Recipe> getRecipes() {
+        HashMap<String,Recipe> recipes = new HashMap<>();
 
         File folder = new File(RECIPE_PATH);
         File[] listOfFiles = folder.listFiles();
 
-
         assert listOfFiles != null;
         for (File file : listOfFiles) {
-            recipeArrayList.add(jsonToRecipe(file));
+            recipes.put(file.toString(),jsonToRecipe(file));
         }
-        return recipeArrayList;
+
+        return recipes;
+    }
+    public static List<String> getRecipeNames(Map<String,Recipe> recipes) {
+        ArrayList<String> names = new ArrayList<>();
+        for (Recipe recipe : recipes.values()) {
+            names.add(recipe.name);
+        }
+        return names;
     }
 
-
-    /*
-    This method calls getRecipes() again and searches the list for the correct name,
-    instead of getting the File from the name.
-    If recipe.name (recipeName) =/= .json file name, trying to get the File directly will cause NullPointerException
-
-    For example:
-    example.json
-        {"name": "diffNameFromFile",...}
-
-    trying to get diffNameFromFile.json will cause NullPointerException because it does not exist
-
-    The system will display recipe name instead of file name, making the two independent
-     */
-    public static Recipe getRecipe(String recipeName) {
-        Recipe recipe = null;
-        List<Recipe> recipeList = getRecipes();
-        for (Recipe r : recipeList) {
-            if (Objects.equals(recipeName,r.name)) {
-               recipe = r;
-            }
+    public static String getFilenameFromRecipeName(Map<String,Recipe> recipes, String name) {
+        String res = null;
+        for (String filename : recipes.keySet()) {
+            res = filename;
+            String recipeName = recipes.get(filename).name;
+            if (Objects.equals(recipeName,name)) break;
         }
-        return recipe;
+        return res;
     }
-
-
-    public static List<String> getRecipeNames() {
-        List<Recipe> recipeList = getRecipes(); //same reasons as getRecipe()
-        ArrayList<String> recipeNames = new ArrayList<>();
-        for (Recipe recipe : recipeList) {
-            recipeNames.add(recipe.name);
-        }
-        return recipeNames;
-    }
-
     /*
     This function removes all irrelevant information (whitespace, extra delimiters) from input string
      */
@@ -98,7 +80,6 @@ public abstract class RecipeList {
         }
         return res;
     }
-
 
     //input validation
     private static void errorEmptyStringAt(String type) throws NullPointerException {
@@ -115,7 +96,7 @@ public abstract class RecipeList {
     }
 
 
-    public static void createRecipe(String nameStr, String descStr, String ingStr, String insStr, String timeStr, String tagStr) throws NullPointerException, IndexOutOfBoundsException, NumberFormatException {
+    public static void createRecipe(String path,String nameStr, String descStr, String ingStr, String insStr, String timeStr, String tagStr) throws NullPointerException, IndexOutOfBoundsException, NumberFormatException {
 
         if (nameStr.isBlank()) errorEmptyStringAt("Name");
         String name = nameStr.strip();
@@ -144,7 +125,7 @@ public abstract class RecipeList {
         // Convert instructions input to instructions arraylist
         if (insStr.isBlank()) errorEmptyStringAt("Instructions");
         List<String> insTokens = tokenize(insStr,"\n");
-        ArrayList<Instruction> instructions = new ArrayList<>();
+        LinkedList<Instruction> instructions = new LinkedList<>();
         for (String token: insTokens) {
             instructions.add(new Instruction(token, ""));
         }
@@ -157,8 +138,13 @@ public abstract class RecipeList {
 
         Recipe newRecipe = new Recipe(name,desc,ingredients,instructions,time,tags);
 
-
-        File location = new File(RECIPE_PATH ,name + RECIPE_FILE_FORMAT); //standard write to file stuff
+        File location;
+        if (path == null) {
+            location = new File(RECIPE_PATH ,name + RECIPE_FILE_FORMAT); //standard write to file stuff
+        }
+        else {
+            location = new File(path);
+        }
         Gson gson = new Gson();
         try (FileWriter writer = new FileWriter(location)) {
             gson.toJson(newRecipe, writer);
@@ -168,7 +154,7 @@ public abstract class RecipeList {
     }
 
     public static void deleteRecipe(String name) throws IOException {
-        File file = new File(RECIPE_PATH, name + RECIPE_FILE_FORMAT);
-        if (!file.delete()) throw new IOException("Unable to delete recipe");
+        File file = new File(name);
+        if (!file.delete()) throw new IOException("Unable to delete");
     }
 }

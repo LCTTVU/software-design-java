@@ -6,11 +6,7 @@
     -fx-text-alignment: center;
 }
 
-.list-cell {
-    -fx-font-size: 24;
-}
-
-.crLabel {
+.crLabel, .list-cell {
     -fx-font-size: 24;
 }
 
