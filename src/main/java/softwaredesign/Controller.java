@@ -144,12 +144,12 @@ public class Controller implements Initializable {
 
             case CREATE_RECIPE:
                 title.setText(CREATE_RECIPE);
-                doneButton.setOnAction(event -> saveRecipe());
+                doneButton.setOnAction(event -> createRecipe());
                 break;
 
             case EDIT_RECIPE:
                 title.setText(EDIT_RECIPE);
-                doneButton.setOnAction(event -> saveRecipe());
+                doneButton.setOnAction(event -> createRecipe());
 
                 Recipe recipe = RecipeList.getRecipe(recipeName);
 
@@ -237,7 +237,7 @@ public class Controller implements Initializable {
     }
 
     //this function is used for both creating and editing (editing overwrites the existing recipe)
-    private void saveRecipe() {
+    private void createRecipe() {
         String name = nameField.getText().strip();
         String desc = descField.getText().strip();
         String ingStr = ingArea.getText().strip();
