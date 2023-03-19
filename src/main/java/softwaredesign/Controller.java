@@ -125,6 +125,10 @@ public class Controller implements Initializable {
                 createRecipeButton.setOnAction(event -> mkNextScreen(CREATE_RECIPE));
                 recipeList.getItems().addAll(RecipeList.getRecipeNames());
 
+                /*
+                Add individual event listeners for viewing recipe to each row of recipeList
+                (this code was corrected by intellij)
+                 */
                 recipeList.getSelectionModel().selectedItemProperty().addListener((observableValue, s, t1) -> {
                     recipeName = recipeList.getSelectionModel().getSelectedItem();
                     mkNextScreen(VIEW_RECIPE);
@@ -146,8 +150,8 @@ public class Controller implements Initializable {
             case EDIT_RECIPE:
                 title.setText(EDIT_RECIPE);
                 doneButton.setOnAction(event -> saveRecipe());
-                Recipe recipe = RecipeList.getRecipe(recipeName);
 
+                Recipe recipe = RecipeList.getRecipe(recipeName);
 
                 nameField.setText(recipeName);
 
@@ -168,6 +172,7 @@ public class Controller implements Initializable {
 
                 timeField.setText(recipe.time.toString());
                 String tagTxt = recipe.tags.toString();
+
                 tagTxt = tagTxt.substring(1,tagTxt.length() - 1);
                 tagField.setText(tagTxt);
                 break;
@@ -189,11 +194,11 @@ public class Controller implements Initializable {
             case HOME:
             case VIEW_RECIPE:
             case CREATE_RECIPE:
-                prevController = new HomeController();
+                prevController = new HomeController();  //3 of these screens have home as a common prev
                 break;
             case EDIT_RECIPE:
             case EXECUTE_RECIPE:
-                prevController = new ViewController(recipeName);
+                prevController = new ViewController(recipeName); //same reason as above
                 break;
             default:
                 throw new IllegalArgumentException("Invalid Screen at prevScreen");

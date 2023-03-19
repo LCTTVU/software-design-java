@@ -14,8 +14,6 @@ public class Main extends Application {
     public void start(Stage stage) {
         HomeController homeController = new HomeController();
         homeController.showStage();
-
-
     }
 
 }

@@ -21,7 +21,7 @@ public abstract class RecipeList {
         if (file.isFile()) {
             try {
                 Gson gson = new Gson();
-                Scanner myReader = new Scanner(file);
+                Scanner myReader = new Scanner(file);       //standard file reader stuff
                 StringBuilder data = new StringBuilder();
                 while (myReader.hasNextLine()) {
                     String line = myReader.nextLine();
@@ -52,6 +52,12 @@ public abstract class RecipeList {
         return recipeArrayList;
     }
 
+
+    /*
+    This method calls getRecipes() again instead of getting the File directly from the name
+    If .json file name =/= recipe.name, directly getting the File will cause NullPointerException in Edit recipe
+    This is to make file name independent of recipe name
+     */
     public static Recipe getRecipe(String name) {
         Recipe recipe = null;
         List<Recipe> recipeList = getRecipes();
@@ -63,8 +69,9 @@ public abstract class RecipeList {
         return recipe;
     }
 
+
     public static List<String> getRecipeNames() {
-        List<Recipe> recipeList = getRecipes();
+        List<Recipe> recipeList = getRecipes(); //same reasons as getRecipe()
         ArrayList<String> recipeNames = new ArrayList<>();
         for (Recipe recipe : recipeList) {
             recipeNames.add(recipe.name);
@@ -72,6 +79,9 @@ public abstract class RecipeList {
         return recipeNames;
     }
 
+    /*
+    This function removes all irrelevant information (whitespace, extra delimiters) from input string
+     */
     private static List<String> tokenize(String input, String regex){
         String[] tokens = input.strip().split(regex);
         ArrayList<String> res = new ArrayList<>();
@@ -81,6 +91,8 @@ public abstract class RecipeList {
         return res;
     }
 
+
+    //input validation
     private static void errorEmptyStringAt(String type) throws NullPointerException {
         throw new NullPointerException("Please input " + type);
     }
@@ -99,6 +111,7 @@ public abstract class RecipeList {
 
         if (nameStr.isBlank()) errorEmptyStringAt("Name");
         String name = nameStr.strip();
+
         if (descStr.isBlank()) errorEmptyStringAt("Description");
         String desc = descStr.strip();
 
@@ -108,11 +121,15 @@ public abstract class RecipeList {
         ArrayList<Ingredient> ingredients = new ArrayList<>();
         for (String token : ingTokens) {
             List<String> properties = tokenize(token, ",");
+
             String ingName = properties.get(0);
-            Long ingQuantity = tryParse(properties.get(1),"Ingredient quantity");
+
+            Long ingQuantity = tryParse(properties.get(1),"Ingredient quantity");  //this line will throw IndexOutOfBoundsException if the user does not specify the quantity
+
             String ingUnit;
             if (properties.size() < 3) ingUnit = "No unit";
             else ingUnit = properties.get(2);
+
             ingredients.add(new Ingredient(ingName,ingQuantity,ingUnit));
         }
 
@@ -132,8 +149,8 @@ public abstract class RecipeList {
 
         Recipe newRecipe = new Recipe(name,desc,ingredients,instructions,time,tags);
 
-        //write to file
-        File location = new File(RECIPE_PATH ,name + RECIPE_FILE_FORMAT);
+
+        File location = new File(RECIPE_PATH ,name + RECIPE_FILE_FORMAT); //standard write to file stuff
         Gson gson = new Gson();
         try (FileWriter writer = new FileWriter(location)) {
             gson.toJson(newRecipe, writer);
