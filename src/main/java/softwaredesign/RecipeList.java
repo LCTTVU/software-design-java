@@ -17,6 +17,10 @@ public abstract class RecipeList {
     private static final String RECIPE_PATH = "./recipes";
     private static final String RECIPE_FILE_FORMAT = ".json";
 
+    private RecipeList() {
+        throw new IllegalStateException("Utility class");
+    }
+
 
     private static Recipe jsonToRecipe(File file) {
         Recipe recipe = null;
@@ -63,9 +67,9 @@ public abstract class RecipeList {
 
     public static String getFilenameFromRecipeName(Map<String,Recipe> recipes, String name) {
         String res = null;
-        for (String filename : recipes.keySet()) {
-            res = filename;
-            String recipeName = recipes.get(filename).name;
+        for (Map.Entry<String,Recipe> entry : recipes.entrySet()) {
+            res = entry.getKey();
+            String recipeName = entry.getValue().name;
             if (Objects.equals(recipeName,name)) break;
         }
         return res;

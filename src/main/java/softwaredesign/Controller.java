@@ -52,10 +52,10 @@ public class Controller implements Initializable {
     protected static final String EXECUTE_RECIPE = "Execute Recipe";
 
     protected Map<String,Recipe> recipes;
+    protected String recipePath;
     protected Recipe recipe;
 
     protected final Stage stage;
-    protected String recipePath;
     protected String screenName;
     protected String resourceName;
 
@@ -68,7 +68,7 @@ public class Controller implements Initializable {
     @FXML
     protected Button createRecipeButton;
     @FXML
-    protected ListView<String> recipeList;
+    protected ListView<String> recipeListView;
     //Create screen and Edit screen components
     @FXML
     protected Button doneButton;
@@ -128,14 +128,14 @@ public class Controller implements Initializable {
         switch (screenName) {
             case HOME:
                 createRecipeButton.setOnAction(event -> mkNextScreen(CREATE_RECIPE));
-                recipeList.getItems().addAll(RecipeList.getRecipeNames(recipes));
+                recipeListView.getItems().addAll(RecipeList.getRecipeNames(recipes));
 
                 /*
                 Add individual event listeners for viewing recipe to each row of recipeList
                 (this code was corrected by intellij)
                  */
-                recipeList.getSelectionModel().selectedItemProperty().addListener((observableValue, s, t1) -> {
-                    String clickedOnName = recipeList.getSelectionModel().getSelectedItem();
+                recipeListView.getSelectionModel().selectedItemProperty().addListener((observableValue, s, t1) -> {
+                    String clickedOnName = recipeListView.getSelectionModel().getSelectedItem();
                     recipePath = RecipeList.getFilenameFromRecipeName(recipes,clickedOnName);
                     mkNextScreen(VIEW_RECIPE);
                 });
@@ -186,7 +186,7 @@ public class Controller implements Initializable {
                 instructionIterator = instructionList.listIterator();
                 Instruction first = instructionIterator.next();
                 instructionLabel.setText(first.text);
-
+                noteArea.setText(first.note);
                 nextButton.setOnAction(event -> nextInstruction());
                 prevButton.setOnAction(event -> prevInstruction());
                 break;
@@ -281,7 +281,7 @@ public class Controller implements Initializable {
         for (Instruction instruction : instructionList) {
             String currText = instruction.text;
             if (Objects.equals(currText, instructionLabel.getText())) {
-                instruction.text = currText;
+                instruction.note = currNote;
             }
         }
         noteArea.clear();
@@ -290,7 +290,7 @@ public class Controller implements Initializable {
     //Executing recipe functions
     private void nextInstruction() {
         if (instructionIterator.hasNext()) {
-            //updateNote();
+            updateNote();
             Instruction next = instructionIterator.next();
             instructionLabel.setText(next.text);
             noteArea.setText(next.note);
