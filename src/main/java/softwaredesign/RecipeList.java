@@ -54,15 +54,23 @@ public abstract class RecipeList {
 
 
     /*
-    This method calls getRecipes() again instead of getting the File directly from the name
-    If .json file name =/= recipe.name, directly getting the File will cause NullPointerException in Edit recipe
-    This is to make file name independent of recipe name
+    This method calls getRecipes() again and searches the list for the correct name,
+    instead of getting the File directly from the name.
+    If recipe.name (recipeName) =/= .json file name, trying to get the File will cause NullPointerException
+
+    For example:
+    example.json
+        {"name": "diffNameFromFile",...}
+
+    trying to get diffNameFromFile.json will cause NullPointerException because it does not exist
+
+    The system will display recipe name instead of file name, making the two independent
      */
-    public static Recipe getRecipe(String name) {
+    public static Recipe getRecipe(String recipeName) {
         Recipe recipe = null;
         List<Recipe> recipeList = getRecipes();
         for (Recipe r : recipeList) {
-            if (Objects.equals(name,r.name)) {
+            if (Objects.equals(recipeName,r.name)) {
                recipe = r;
             }
         }
