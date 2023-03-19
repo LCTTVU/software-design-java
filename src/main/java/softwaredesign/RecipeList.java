@@ -11,22 +11,12 @@ import java.io.IOException;
 import java.util.*;
 
 
-public class RecipeList {
+public abstract class RecipeList {
 
     private static final String RECIPE_PATH = "./recipes";
     private static final String RECIPE_FILE_FORMAT = ".json";
 
-    private static RecipeList instance;
-    private RecipeList() {}
-
-    public static RecipeList getInstance() {
-        if (instance == null) {
-            instance = new RecipeList();
-        }
-        return instance;
-    }
-
-    private Recipe jsonToRecipe(File file) {
+    private static Recipe jsonToRecipe(File file) {
         Recipe recipe = null;
         if (file.isFile()) {
             try {
@@ -47,7 +37,7 @@ public class RecipeList {
         return recipe;
     }
 
-    public List<Recipe> getRecipes() {
+    public static List<Recipe> getRecipes() {
 
         ArrayList<Recipe> recipeArrayList = new ArrayList<>();
 
@@ -62,12 +52,18 @@ public class RecipeList {
         return recipeArrayList;
     }
 
-    public Recipe getRecipe(String name) {
-        File file = new File(RECIPE_PATH,name + RECIPE_FILE_FORMAT);
-        return jsonToRecipe(file);
+    public static Recipe getRecipe(String name) {
+        Recipe recipe = null;
+        List<Recipe> recipeList = getRecipes();
+        for (Recipe r : recipeList) {
+            if (Objects.equals(name,r.name)) {
+               recipe = r;
+            }
+        }
+        return recipe;
     }
 
-    public List<String> getRecipeNames() {
+    public static List<String> getRecipeNames() {
         List<Recipe> recipeList = getRecipes();
         ArrayList<String> recipeNames = new ArrayList<>();
         for (Recipe recipe : recipeList) {
@@ -76,7 +72,7 @@ public class RecipeList {
         return recipeNames;
     }
 
-    private List<String> tokenize(String input, String regex){
+    private static List<String> tokenize(String input, String regex){
         String[] tokens = input.strip().split(regex);
         ArrayList<String> res = new ArrayList<>();
         for (String token : tokens) {
@@ -85,11 +81,11 @@ public class RecipeList {
         return res;
     }
 
-    private void errorEmptyStringAt(String type) throws NullPointerException {
+    private static void errorEmptyStringAt(String type) throws NullPointerException {
         throw new NullPointerException("Please input " + type);
     }
 
-    private Long tryParse(String input, String type) throws NumberFormatException {
+    private static Long tryParse(String input, String type) throws NumberFormatException {
         for (char c : input.toCharArray()) {
             if (!Character.isDigit(c)) {
                 throw new NumberFormatException("Please input a valid number for " + type);
@@ -99,7 +95,7 @@ public class RecipeList {
     }
 
 
-    public void createRecipe(String nameStr, String descStr, String ingStr, String insStr, String timeStr, String tagStr) throws NullPointerException, IndexOutOfBoundsException, NumberFormatException {
+    public static void createRecipe(String nameStr, String descStr, String ingStr, String insStr, String timeStr, String tagStr) throws NullPointerException, IndexOutOfBoundsException, NumberFormatException {
 
         if (nameStr.isBlank()) errorEmptyStringAt("Name");
         String name = nameStr.strip();
@@ -146,7 +142,7 @@ public class RecipeList {
         }
     }
 
-    public void deleteRecipe(String name) throws IOException {
+    public static void deleteRecipe(String name) throws IOException {
         File file = new File(RECIPE_PATH, name + RECIPE_FILE_FORMAT);
         if (!file.delete()) throw new IOException("Unable to delete recipe");
     }

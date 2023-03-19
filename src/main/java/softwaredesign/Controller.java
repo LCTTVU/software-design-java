@@ -123,7 +123,7 @@ public class Controller implements Initializable {
         switch (screenName) {
             case HOME:
                 createRecipeButton.setOnAction(event -> mkNextScreen(CREATE_RECIPE));
-                recipeList.getItems().addAll(RecipeList.getInstance().getRecipeNames());
+                recipeList.getItems().addAll(RecipeList.getRecipeNames());
 
                 recipeList.getSelectionModel().selectedItemProperty().addListener((observableValue, s, t1) -> {
                     recipeName = recipeList.getSelectionModel().getSelectedItem();
@@ -146,10 +146,10 @@ public class Controller implements Initializable {
             case EDIT_RECIPE:
                 title.setText(EDIT_RECIPE);
                 doneButton.setOnAction(event -> saveRecipe());
-                Recipe recipe = RecipeList.getInstance().getRecipe(recipeName);
+                Recipe recipe = RecipeList.getRecipe(recipeName);
 
-                String nameTxt = recipe.name;
-                nameField.setText(nameTxt);
+
+                nameField.setText(recipeName);
 
                 String descTxt = recipe.description;
                 descField.setText(descTxt);
@@ -240,7 +240,7 @@ public class Controller implements Initializable {
         String time = timeField.getText().strip();
         String tagStr = tagField.getText().strip();
         try {
-            RecipeList.getInstance().createRecipe(name,desc,ingStr,insStr,time,tagStr);
+            RecipeList.createRecipe(name,desc,ingStr,insStr,time,tagStr);
             HomeController homeController = new HomeController();
             homeController.showStage();
             stage.close();
@@ -253,7 +253,7 @@ public class Controller implements Initializable {
 
     private void deleteRecipe() {
         try {
-            RecipeList.getInstance().deleteRecipe(recipeName);
+            RecipeList.deleteRecipe(recipeName);
             HomeController homeController = new HomeController();
             homeController.showStage();
             stage.close();
