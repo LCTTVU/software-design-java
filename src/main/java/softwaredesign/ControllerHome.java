@@ -22,7 +22,7 @@ public class ControllerHome implements Initializable {
     public ControllerHome() {
         stage = new Stage();
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("HomeScreen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("ScreenHome.fxml"));
             loader.setController(this);
 
             stage.setScene(new Scene(loader.load()));
@@ -54,7 +54,7 @@ public class ControllerHome implements Initializable {
     }
 
     public void openCreateRecipeScreen() {
-        ControllerCreate createController = new ControllerCreate(null);
+        ControllerCreateAndEdit createController = new ControllerCreateAndEdit(null);
         createController.showStage();
         stage.close();
 

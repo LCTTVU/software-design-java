@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ControllerCreate implements Initializable {
+public class ControllerCreateAndEdit implements Initializable {
     protected final Stage stage;
     protected final String recipeName;
     protected Recipe recipe;
@@ -38,12 +38,12 @@ public class ControllerCreate implements Initializable {
     protected TextField tagField;
 
 
-    public ControllerCreate(String name) {
+    public ControllerCreateAndEdit(String name) {
         stage = new Stage();
         recipeName = name;
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("CreateRecipeScreen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("ScreenCreateAndEdit.fxml"));
             loader.setController(this);
 
             stage.setScene(new Scene(loader.load()));
@@ -57,12 +57,16 @@ public class ControllerCreate implements Initializable {
         stage.show();
     }
 
+    public boolean isCreate() {
+        return recipeName == null;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         doneButton.setOnAction(event -> saveRecipe());
         backButton.setOnAction(event -> prevScreen());
 
-        if (recipeName == null) {
+        if (isCreate()) {
             title.setText("Create Recipe");
             return;
         } //stop if creating recipe

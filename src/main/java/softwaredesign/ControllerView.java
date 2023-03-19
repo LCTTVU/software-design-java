@@ -30,7 +30,7 @@ public class ControllerView implements Initializable {
         stage = new Stage();
         recipeName = name;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("ViewRecipeScreen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("ScreenView.fxml"));
             loader.setController(this);
 
             stage.setScene(new Scene(loader.load()));
@@ -54,7 +54,7 @@ public class ControllerView implements Initializable {
     }
 
     private void editRecipe() {
-        ControllerEdit erController = new ControllerEdit(recipeName);
+        ControllerCreateAndEdit erController = new ControllerCreateAndEdit(recipeName);
         erController.showStage();
         stage.close();
     }
