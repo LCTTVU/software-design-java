@@ -182,6 +182,11 @@ public class Controller implements Initializable {
 
             case EXECUTE_RECIPE:
                 title.setText(recipe.name);
+                instructionList = recipe.instructions;
+                instructionIterator = instructionList.listIterator();
+                Instruction first = instructionIterator.next();
+                instructionLabel.setText(first.text);
+
                 nextButton.setOnAction(event -> nextInstruction());
                 prevButton.setOnAction(event -> prevInstruction());
                 break;
@@ -259,11 +264,6 @@ public class Controller implements Initializable {
         }
     }
 
-    private void editRecipe() {
-        deleteRecipe();
-        createRecipe();
-    }
-
     private void deleteRecipe() {
         try {
             RecipeList.deleteRecipe(recipePath);
@@ -289,7 +289,7 @@ public class Controller implements Initializable {
     //Executing recipe functions
     private void nextInstruction() {
         if (instructionIterator.hasNext()) {
-            updateNote();
+            //updateNote();
             Instruction next = instructionIterator.next();
             instructionLabel.setText(next.text);
             noteArea.setText(next.note);
