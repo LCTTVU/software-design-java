@@ -152,7 +152,7 @@ public class Controller implements Initializable {
                 doneButton.setOnAction(event -> createRecipe());
 
                 Recipe recipe = RecipeList.getRecipe(recipeName);
-
+                //populate text fields with recipe information for the user to edit
                 nameField.setText(recipeName);
 
                 String descTxt = recipe.description;
