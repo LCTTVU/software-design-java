@@ -49,11 +49,21 @@ public abstract class RecipeList {
         File[] listOfFiles = folder.listFiles();
 
         assert listOfFiles != null;
+
+        int unnamedCount = 1; //this is to create a generic name for any recipe.json that does not have "name" attribute
         for (File file : listOfFiles) {
             Recipe recipe = jsonToRecipe(file);
-            if (recipe != null && !recipe.hasEmptyFields()) {
-                recipes.put(file.toString(),recipe);
+            if (recipe == null) continue; //skip if not found
+
+            if (recipe.isUnnamed()) {
+                recipe.name = "Unnamed Recipe " + unnamedCount;
+                unnamedCount++;
             }
+            //fill any empty attributes and write back to json file
+            recipe.fillEmptyFields();
+            recipe.writeToFile(file.toString());
+
+            recipes.put(file.toString(),recipe);
         }
         return recipes;
     }
@@ -63,6 +73,7 @@ public abstract class RecipeList {
         for (Recipe recipe : recipes.values()) {
             names.add(recipe.name);
         }
+        Collections.sort(names);
         return names;
     }
 
@@ -101,21 +112,26 @@ public abstract class RecipeList {
     }
 
 
-    public static void saveRecipe(String path, String inputName, String inputDesc, String inputIngr, String inputInst, String inputTime, String inputTags) throws NullPointerException, IndexOutOfBoundsException, NumberFormatException {
+    public static void saveRecipe(String path, String inputName, String inputDesc, String inputTime, String inputTags, String inputIngr, String inputInst) throws NullPointerException, IndexOutOfBoundsException, NumberFormatException {
 
         String name =           inputName.strip();
         String desc =           inputDesc.strip();
-        String ingredientStr =  inputIngr.strip();
-        String instructionStr = inputInst.strip();
         String timeStr =        inputTime.strip();
         String tagsStr =        inputTags.strip();
+        String ingredientStr =  inputIngr.strip();
+        String instructionStr = inputInst.strip();
+
 
         if (name.isBlank())             errorEmptyStringAt("Name");
         if (desc.isBlank())             errorEmptyStringAt("Description");
-        if (ingredientStr.isBlank())    errorEmptyStringAt("Ingredients");
-        if (instructionStr.isBlank())   errorEmptyStringAt("Instructions");
         if (timeStr.isBlank())          errorEmptyStringAt("Time");
         if (tagsStr.isBlank())          errorEmptyStringAt("Tags");
+        if (ingredientStr.isBlank())    errorEmptyStringAt("Ingredients");
+        if (instructionStr.isBlank())   errorEmptyStringAt("Instructions");
+
+        Long time = tryParse(timeStr,"Time");
+
+        List<String> tags = tokenize(tagsStr,",");
 
         //Convert ingredients input to ingredients arraylist
         List<String> ingTokens = tokenize(ingredientStr, "\n");
@@ -140,27 +156,8 @@ public abstract class RecipeList {
             instructions.add(new Instruction(token, ""));
         }
 
-        Long time = tryParse(timeStr,"Time");
-
-        List<String> tags = tokenize(tagsStr,",");
-
-        writeToFile(path, new Recipe(name,desc,ingredients,instructions,time,tags));
-    }
-
-    public static void writeToFile(String path, Recipe recipe) {
-        File location;
-        if (path == null) {
-            location = new File(RECIPE_PATH ,recipe.name + RECIPE_FILE_FORMAT); //new recipe file if creating
-        }
-        else {
-            location = new File(path);  //overwrite old recipe if editing
-        }
-        Gson gson = new Gson();
-        try (FileWriter writer = new FileWriter(location)) {
-            gson.toJson(recipe, writer);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Recipe newRecipe = new Recipe(name,desc,ingredients,instructions,time,tags);
+        newRecipe.writeToFile(path);
     }
 
     public static void deleteRecipe(String recipePath) throws IOException {

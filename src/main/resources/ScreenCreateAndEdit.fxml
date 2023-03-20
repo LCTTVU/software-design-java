@@ -23,33 +23,35 @@
         <rowConstraints>
             <RowConstraints prefHeight="50.0"/>
             <RowConstraints prefHeight="50.0"/>
-            <RowConstraints prefHeight="170.0"/>
-            <RowConstraints prefHeight="170.0"/>
             <RowConstraints prefHeight="50.0"/>
             <RowConstraints prefHeight="50.0"/>
+            <RowConstraints prefHeight="170.0"/>
+            <RowConstraints prefHeight="170.0"/>
         </rowConstraints>
             <Label id="nameLabel" styleClass="crLabel" stylesheets="@application.css" text="Name"/>
             <Label id="descLabel" styleClass="crLabel" stylesheets="@application.css" text="Description"
                    GridPane.rowIndex="1"/>
-            <Label id="ingLabel" styleClass="crLabel" stylesheets="@application.css" text="Ingredients"
-                   GridPane.rowIndex="2"/>
-            <Label id="insLabel" styleClass="crLabel" stylesheets="@application.css" text="Instructions"
-                   GridPane.rowIndex="3"/>
             <Label id="timeLabel" styleClass="crLabel" stylesheets="@application.css" text="Time (in minutes)"
-                   GridPane.rowIndex="4"/>
+                   GridPane.rowIndex="2"/>
             <Label id="tagLabel" styleClass="crLabel" stylesheets="@application.css" text="Tags"
+                   GridPane.rowIndex="3"/>
+            <Label id="ingLabel" styleClass="crLabel" stylesheets="@application.css" text="Ingredients"
+                   GridPane.rowIndex="4"/>
+            <Label id="insLabel" styleClass="crLabel" stylesheets="@application.css" text="Instructions"
                    GridPane.rowIndex="5"/>
+
             <TextField fx:id="nameField" styleClass="crField" stylesheets="@application.css"
                        GridPane.columnIndex="1"/>
             <TextField fx:id="descField" styleClass="crField" stylesheets="@application.css"
                        GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-            <TextArea fx:id="ingArea" styleClass="crArea" stylesheets="@application.css"
-                      GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-            <TextArea fx:id="insArea" styleClass="crArea" stylesheets="@application.css"
-                      GridPane.columnIndex="1" GridPane.rowIndex="3"/>
             <TextField fx:id="timeField" styleClass="crField" stylesheets="@application.css"
-                       GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                       GridPane.columnIndex="1" GridPane.rowIndex="2"/>
             <TextField fx:id="tagField" styleClass="crField" stylesheets="@application.css"
-                       GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                       GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+            <TextArea fx:id="ingArea" styleClass="crArea" stylesheets="@application.css"
+                      GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+            <TextArea fx:id="insArea" styleClass="crArea" stylesheets="@application.css"
+                      GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+
     </GridPane>
 </AnchorPane>

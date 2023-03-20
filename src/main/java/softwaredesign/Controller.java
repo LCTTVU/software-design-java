@@ -77,13 +77,13 @@ public class Controller implements Initializable {
     @FXML
     protected TextField descField;
     @FXML
-    protected TextArea ingArea;
-    @FXML
-    protected TextArea insArea;
-    @FXML
     protected TextField timeField;
     @FXML
     protected TextField tagField;
+    @FXML
+    protected TextArea ingArea;
+    @FXML
+    protected TextArea insArea;
     //View screen components
     @FXML
     protected Button editButton;
@@ -134,7 +134,7 @@ public class Controller implements Initializable {
                 Add individual event listeners for viewing recipe to each row of recipeList
                 (this code was corrected by intellij)
                  */
-                recipeListView.getSelectionModel().selectedItemProperty().addListener((observableValue, s, t1) -> {
+                recipeListView.getSelectionModel().selectedItemProperty().addListener((observableValue, arg1, arg2) -> {
                     String listItem = recipeListView.getSelectionModel().getSelectedItem();
                     recipePath = RecipeList.getFilenameFromRecipeName(recipes,listItem);
                     mkNextScreen(VIEW_RECIPE);
@@ -244,12 +244,12 @@ public class Controller implements Initializable {
     private void saveRecipe() {
         String name = nameField.getText();
         String desc = descField.getText();
-        String ingStr = ingArea.getText();
-        String insStr = insArea.getText();
         String time = timeField.getText();
         String tagStr = tagField.getText();
+        String ingStr = ingArea.getText();
+        String insStr = insArea.getText();
         try {
-            RecipeList.saveRecipe(recipePath,name,desc,ingStr,insStr,time,tagStr);
+            RecipeList.saveRecipe(recipePath,name,desc,time,tagStr,ingStr,insStr);
             mkNextScreen(HOME);
         } catch (IndexOutOfBoundsException e) {
             title.setText("Invalid Ingredient Format");
@@ -291,7 +291,8 @@ public class Controller implements Initializable {
             if (isLast()) nextButton.setText("Finish");
         }
         else {
-            recipe.updateInstructions(recipePath, newInstructions);
+            recipe.updateInstructions(newInstructions);
+            recipe.writeToFile(recipePath);
             mkNextScreen(VIEW_RECIPE);
         }
     }
@@ -307,7 +308,8 @@ public class Controller implements Initializable {
             if (!isLast()) nextButton.setText("Next");
         }
         else {
-            recipe.updateInstructions(recipePath, newInstructions);
+            recipe.updateInstructions(newInstructions);
+            recipe.writeToFile(recipePath);
             mkNextScreen(VIEW_RECIPE);
         }
     }
