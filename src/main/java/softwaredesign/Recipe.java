@@ -48,16 +48,12 @@ public class Recipe {
         this.instructions = newInstructions;
     }
 
-    public void writeToFile(String path) {
-        File location;
+    public void writeToFile(File path) {
         if (path == null) {
-            location = new File(RecipeList.RECIPE_PATH ,this.name + RECIPE_FILE_FORMAT); //new recipe file if creating
-        }
-        else {
-            location = new File(path);  //overwrite old recipe if editing
+            path = new File(RecipeList.RECIPE_PATH ,this.name + RECIPE_FILE_FORMAT); //new recipe file if creating
         }
         Gson gson = new Gson();
-        try (FileWriter writer = new FileWriter(location)) {
+        try (FileWriter writer = new FileWriter(path)) {
             gson.toJson(this, writer);
         } catch (IOException e) {
             e.printStackTrace();

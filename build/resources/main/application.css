@@ -6,6 +6,14 @@
     -fx-text-alignment: center;
 }
 
+.h2title {
+    -fx-font-size: 24;
+    -fx-pref-width: 1280;
+    -fx-pref-height: 80;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+}
+
 .crLabel, .list-cell {
     -fx-font-size: 24;
 }

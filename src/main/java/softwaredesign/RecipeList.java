@@ -6,14 +6,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.*;
 
 public class RecipeList {
 
     public static final String RECIPE_PATH = "./recipes";
-    private Map<String,Recipe> recipes;
+    private Map<File,Recipe> recipes;
 
     private static RecipeList instance;
 
@@ -29,7 +27,7 @@ public class RecipeList {
     }
 
     public void updateRecipes() {
-        HashMap<String,Recipe> recipesMap = new HashMap<>();
+        HashMap<File,Recipe> recipesMap = new HashMap<>();
 
         File folder = new File(RECIPE_PATH);
         File[] listOfFiles = folder.listFiles();
@@ -47,9 +45,9 @@ public class RecipeList {
             }
             //fill any empty attributes and write back to json file
             recipe.fillEmptyFields();
-            recipe.writeToFile(file.toString());
+            recipe.writeToFile(file);
 
-            recipesMap.put(file.toString(),recipe);
+            recipesMap.put(file,recipe);
         }
         this.recipes = recipesMap;
     }
@@ -74,7 +72,8 @@ public class RecipeList {
         return recipe;
     }
 
-    public Map<String,Recipe> getRecipes() {
+    public Map<File,Recipe> getRecipes() {
+        updateRecipes();
         return recipes;
     }
 
@@ -87,9 +86,9 @@ public class RecipeList {
         return names;
     }
 
-    public String getFilename(String name) {
-        String res = null;
-        for (Map.Entry<String,Recipe> entry : recipes.entrySet()) {
+    public File getFilename(String name) {
+        File res = null;
+        for (Map.Entry<File,Recipe> entry : recipes.entrySet()) {
             res = entry.getKey();
             String recipeName = entry.getValue().name;
             if (Objects.equals(recipeName,name)) break;
@@ -97,17 +96,11 @@ public class RecipeList {
         return res;
     }
 
-    private static List<String> tokenize(String input, String regex){
-        String[] tokens = input.strip().split(regex);
-        ArrayList<String> res = new ArrayList<>();
-        for (String token : tokens) {
-            if (!token.strip().isBlank()) res.add(token.strip());
-        }
+    //input validation methods
+    private static String inputCheck(String input) throws NullPointerException {
+        String res = input.strip();
+        if (res.isBlank()) throw new NullPointerException("Please fill all fields");
         return res;
-    }
-
-    private static void errorEmptyStringAt(String type) throws NullPointerException {
-        throw new NullPointerException("Please input " + type);
     }
 
     private static Long tryParse(String input, String type) throws NumberFormatException {
@@ -119,55 +112,64 @@ public class RecipeList {
         return Long.parseLong(input);
     }
 
-    public static void saveRecipe(String path, String inputName, String inputDesc, String inputTime, String inputTags, String inputIngr, String inputInst) throws NullPointerException, IndexOutOfBoundsException, NumberFormatException {
+    private static boolean unitSpecified(List<String> input) {
+        return input.size() > 2;
+    }
 
-        String name =           inputName.strip();
-        String desc =           inputDesc.strip();
-        String timeStr =        inputTime.strip();
-        String tagsStr =        inputTags.strip();
-        String ingredientStr =  inputIngr.strip();
-        String instructionStr = inputInst.strip();
+    /*
+    This method removes all irrelevant information (whitespace, extra delimiters, empty tokens) from input string
+    */
+    private static List<String> tokenize(String input, String regex){
+        String[] tokens = input.strip().split(regex);
+        ArrayList<String> res = new ArrayList<>();
+        for (String token : tokens) {
+            if (!token.strip().isBlank()) res.add(token.strip());
+        }
+        return res;
+    }
 
+    public static void saveRecipe(File path, String inputName, String inputDesc, String inputTime, String inputTags, String inputIngr, String inputInst) throws NullPointerException, IndexOutOfBoundsException, NumberFormatException {
 
-        if (name.isBlank())             errorEmptyStringAt("Name");
-        if (desc.isBlank())             errorEmptyStringAt("Description");
-        if (timeStr.isBlank())          errorEmptyStringAt("Time");
-        if (tagsStr.isBlank())          errorEmptyStringAt("Tags");
-        if (ingredientStr.isBlank())    errorEmptyStringAt("Ingredients");
-        if (instructionStr.isBlank())   errorEmptyStringAt("Instructions");
+        String name =           inputCheck(inputName);
+        String desc =           inputCheck(inputDesc);
+        String timeStr =        inputCheck(inputTime);
+        String tagsStr =        inputCheck(inputTags);
+        String ingredientStr =  inputCheck(inputIngr);
+        String instructionStr = inputCheck(inputInst);
 
         Long time = tryParse(timeStr,"Time");
 
         List<String> tags = tokenize(tagsStr,",");
 
-        //Convert ingredients input to ingredients arraylist
-        List<String> ingTokens = tokenize(ingredientStr, "\n");
         ArrayList<Ingredient> ingredients = new ArrayList<>();
-        for (String token : ingTokens) {
-            List<String> properties = tokenize(token, ",");
+        //Convert ingredients input to ingredients arraylist
+        for (String ingredient : tokenize(ingredientStr, "\n")) {
+            List<String> properties = tokenize(ingredient, ",");
             String ingName = properties.get(0);
             //this line will throw IndexOutOfBoundsException if the user does not specify the quantity
             Long ingQuantity = tryParse(properties.get(1),"Ingredient quantity");
 
             String ingUnit;
-            if (properties.size() < 3)  ingUnit = "No unit";
-            else                        ingUnit = properties.get(2);
+            if (unitSpecified(properties)) ingUnit = properties.get(2);
+            else ingUnit = "No Unit";
 
             ingredients.add(new Ingredient(ingName,ingQuantity,ingUnit));
         }
 
-        // Convert instructions input to instructions arraylist
-        List<String> insTokens = tokenize(instructionStr,"\n");
         LinkedList<Instruction> instructions = new LinkedList<>();
-        for (String token: insTokens) {
-            instructions.add(new Instruction(token, ""));
+        // Convert instructions input to instructions arraylist
+        for (String instruction : tokenize(instructionStr,"\n")) {
+            instructions.add(new Instruction(instruction, ""));
         }
 
         Recipe newRecipe = new Recipe(name,desc,ingredients,instructions,time,tags);
         newRecipe.writeToFile(path);
+
     }
 
-    public static void deleteRecipe(String recipePath) throws IOException {
-        Files.delete(Path.of(recipePath));
+    public static void deleteRecipe(File recipePath) throws IOException {
+        if (!recipePath.delete()) {
+            throw new IOException("Unable to delete recipe");
+        }
     }
 }

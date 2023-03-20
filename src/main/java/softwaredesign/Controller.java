@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -19,7 +20,7 @@ class HomeController extends Controller {
 }
 
 class ViewController extends Controller {
-    public ViewController(String recipePath) {
+    public ViewController(File recipePath) {
         super(VIEW_RECIPE,"ScreenView.fxml",recipePath);
     }
 }
@@ -31,13 +32,13 @@ class CreateController extends Controller {
 }
 
 class EditController extends Controller {
-    public EditController(String recipePath) {
+    public EditController(File recipePath) {
         super(EDIT_RECIPE,"ScreenCreateAndEdit.fxml",recipePath);
     }
 }
 
 class ExecuteController extends Controller {
-    public ExecuteController(String recipePath) {
+    public ExecuteController(File recipePath) {
         super(EXECUTE_RECIPE,"ScreenExecute.fxml",recipePath);
     }
 }
@@ -51,12 +52,11 @@ public class Controller implements Initializable {
     protected static final String EDIT_RECIPE = "Edit Recipe";
     protected static final String EXECUTE_RECIPE = "Execute Recipe";
 
-    protected String recipePath;
+    protected File recipePath;
     protected Recipe recipe;
 
     protected final Stage stage;
     protected String screenName;
-    protected String resourceName;
 
     //Common components
     @FXML
@@ -85,6 +85,12 @@ public class Controller implements Initializable {
     protected TextArea insArea;
     //View screen components
     @FXML
+    protected Label descLabel;
+    @FXML
+    protected Label timeLabel;
+    @FXML
+    protected Label tagsLabel;
+    @FXML
     protected Button editButton;
     @FXML
     protected Button executeButton;
@@ -103,16 +109,14 @@ public class Controller implements Initializable {
     protected int index;
 
     //common functions
-    public Controller(String screen, String resource,String path) {
+    public Controller(String screen, String resource,File path) {
         screenName = screen;
-        resourceName = resource;
         recipePath = path;
         recipe = RecipeList.getInstance().getRecipes().get(recipePath);
         stage = new Stage();
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(resourceName));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(resource));
             loader.setController(this);
-
             stage.setScene(new Scene(loader.load()));
             stage.setTitle(screen);
         } catch (Exception e) {
@@ -142,6 +146,7 @@ public class Controller implements Initializable {
 
             case VIEW_RECIPE:
                 title.setText(recipe.name);
+                descLabel.setText(recipe.description);
                 editButton.setOnAction(event -> mkNextScreen(EDIT_RECIPE));
                 executeButton.setOnAction(event -> mkNextScreen(EXECUTE_RECIPE));
                 deleteButton.setOnAction(event -> deleteRecipe());
@@ -249,9 +254,8 @@ public class Controller implements Initializable {
         String insStr = insArea.getText();
         try {
             RecipeList.saveRecipe(recipePath,name,desc,time,tagStr,ingStr,insStr);
-            RecipeList.getInstance().updateRecipes();
-            //RecipeList.saveRecipe(recipePath,name,desc,time,tagStr,ingStr,insStr);
-            mkNextScreen(HOME);
+            if (Objects.equals(screenName,CREATE_RECIPE)) mkNextScreen(HOME); //home screen if creating
+            else mkNextScreen(VIEW_RECIPE); //back to view screen if editing
         } catch (IndexOutOfBoundsException e) {
             title.setText("Invalid Ingredient Format");
         } catch (Exception e) {
@@ -262,16 +266,13 @@ public class Controller implements Initializable {
     private void deleteRecipe() {
         try {
             RecipeList.deleteRecipe(recipePath);
-            RecipeList.getInstance().updateRecipes();
-
-            //RecipeList.deleteRecipe(recipePath);
             mkNextScreen(HOME);
         } catch (IOException e) {
             title.setText(e.getMessage());
         }
     }
 
-    //Executing recipe functions
+    //Execute recipe functions
     private void updateNote() {
         newInstructions.get(index).note = noteArea.getText().strip();
     }

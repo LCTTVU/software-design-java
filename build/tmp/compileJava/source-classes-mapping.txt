@@ -1,5 +1,3 @@
-softwaredesign/NewRecipeList.java
- softwaredesign.NewRecipeList
 softwaredesign/Recipe.java
  softwaredesign.Recipe
 softwaredesign/Controller.java
