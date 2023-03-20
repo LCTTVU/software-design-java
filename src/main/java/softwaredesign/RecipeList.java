@@ -13,7 +13,7 @@ import java.util.*;
 
 public abstract class RecipeList {
 
-    private static final String RECIPE_PATH = "./recipes";
+    public static final String RECIPE_PATH = "./recipes";
 
     private RecipeList() {
         throw new IllegalStateException("Utility class");

@@ -16,8 +16,6 @@ public class Recipe {
     List<Ingredient> ingredients;
     List<Instruction> instructions;
 
-
-    private static final String RECIPE_PATH = "./recipes";
     private static final String RECIPE_FILE_FORMAT = ".json";
 
     public Recipe(String name,
@@ -32,7 +30,6 @@ public class Recipe {
         this.tags = tags;
         this.ingredients = ingredients;
         this.instructions = instructions;
-
     }
 
     public boolean isUnnamed() {
@@ -54,7 +51,7 @@ public class Recipe {
     public void writeToFile(String path) {
         File location;
         if (path == null) {
-            location = new File(RECIPE_PATH ,this.name + RECIPE_FILE_FORMAT); //new recipe file if creating
+            location = new File(RecipeList.RECIPE_PATH ,this.name + RECIPE_FILE_FORMAT); //new recipe file if creating
         }
         else {
             location = new File(path);  //overwrite old recipe if editing
