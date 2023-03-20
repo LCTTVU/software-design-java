@@ -13,7 +13,6 @@ public class Ingredient {
     }
     @Override
     public String toString() {
-        System.out.println(this.unit);
         String res = this.name + "," + this.quantity.toString();
         if (!Objects.equals(this.unit,"") && !Objects.equals(this.unit,"No Unit")) {
             res += "," + this.unit + "\n";
