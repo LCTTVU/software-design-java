@@ -147,6 +147,7 @@ public class Controller implements Initializable {
             case VIEW_RECIPE:
                 title.setText(recipe.name);
                 descLabel.setText(recipe.description);
+                timeLabel.setText(recipe.time + " minutes");
                 editButton.setOnAction(event -> mkNextScreen(EDIT_RECIPE));
                 executeButton.setOnAction(event -> mkNextScreen(EXECUTE_RECIPE));
                 deleteButton.setOnAction(event -> deleteRecipe());

@@ -1,4 +1,4 @@
-.title {
+.title, .h2title, .h3title {
     -fx-font-size: 48;
     -fx-pref-width: 1280;
     -fx-pref-height: 80;
@@ -7,15 +7,17 @@
 }
 
 .h2title {
-    -fx-font-size: 24;
-    -fx-pref-width: 1280;
-    -fx-pref-height: 80;
-    -fx-alignment: center;
-    -fx-text-alignment: center;
+    -fx-font-size: 28;
+}
+
+.h3title {
+    -fx-font-size: 20;
 }
 
 .crLabel, .list-cell {
     -fx-font-size: 24;
+    -fx-pref-height: 50;
+    -fx-pref-width: 200;
 }
 
 .crField, .crArea {
@@ -54,8 +56,6 @@
 #prevButton {
     -fx-background-color: red;
 }
-
-
 
 .backButton {
     -fx-font-size: 20;

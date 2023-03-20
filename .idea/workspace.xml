@@ -14,17 +14,8 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/Recipe.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/Recipe.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/RecipeList.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/RecipeList.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes/aaaaaaaa.json" beforeDir="false" afterPath="$PROJECT_DIR$/recipes/aaaaaaaa.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes/abc.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes/completelyemptyrecipe.json" beforeDir="false" afterPath="$PROJECT_DIR$/recipes/completelyemptyrecipe.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes/filler2 - Copy (2).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes/filler2.json" beforeDir="false" afterPath="$PROJECT_DIR$/recipes/filler2.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes/kamskdamkdmakmdasd.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/softwaredesign/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/softwaredesign/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/softwaredesign/Recipe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/softwaredesign/Recipe.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/softwaredesign/RecipeList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/softwaredesign/RecipeList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/ScreenView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ScreenView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.css" afterDir="false" />
     </list>
