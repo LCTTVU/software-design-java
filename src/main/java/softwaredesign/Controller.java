@@ -51,7 +51,6 @@ public class Controller implements Initializable {
     protected static final String EDIT_RECIPE = "Edit Recipe";
     protected static final String EXECUTE_RECIPE = "Execute Recipe";
 
-    protected Map<String,Recipe> recipes;
     protected String recipePath;
     protected Recipe recipe;
 
@@ -108,8 +107,7 @@ public class Controller implements Initializable {
         screenName = screen;
         resourceName = resource;
         recipePath = path;
-        recipes = RecipeList.getRecipes();
-        recipe = recipes.get(recipePath);
+        recipe = RecipeList.getInstance().getRecipes().get(recipePath);
         stage = new Stage();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(resourceName));
@@ -128,7 +126,7 @@ public class Controller implements Initializable {
         switch (screenName) {
             case HOME:
                 createRecipeButton.setOnAction(event -> mkNextScreen(CREATE_RECIPE));
-                recipeListView.getItems().addAll(RecipeList.getRecipeNames(recipes));
+                recipeListView.getItems().addAll(RecipeList.getInstance().getRecipeNameList());
                 /*
                 Add individual event listeners for viewing recipe to each row of recipeList
                 (this code was corrected by intellij)
@@ -136,7 +134,7 @@ public class Controller implements Initializable {
                 recipeListView.getSelectionModel().selectedItemProperty().addListener(
                     (observableValue, arg1, arg2) -> {
                         String listItem = recipeListView.getSelectionModel().getSelectedItem();
-                        recipePath = RecipeList.getFilenameFromRecipeName(recipes,listItem);
+                        recipePath = RecipeList.getInstance().getFilename(listItem);
                         mkNextScreen(VIEW_RECIPE);
                     }
                 );
@@ -251,6 +249,8 @@ public class Controller implements Initializable {
         String insStr = insArea.getText();
         try {
             RecipeList.saveRecipe(recipePath,name,desc,time,tagStr,ingStr,insStr);
+            RecipeList.getInstance().updateRecipes();
+            //RecipeList.saveRecipe(recipePath,name,desc,time,tagStr,ingStr,insStr);
             mkNextScreen(HOME);
         } catch (IndexOutOfBoundsException e) {
             title.setText("Invalid Ingredient Format");
@@ -262,6 +262,9 @@ public class Controller implements Initializable {
     private void deleteRecipe() {
         try {
             RecipeList.deleteRecipe(recipePath);
+            RecipeList.getInstance().updateRecipes();
+
+            //RecipeList.deleteRecipe(recipePath);
             mkNextScreen(HOME);
         } catch (IOException e) {
             title.setText(e.getMessage());

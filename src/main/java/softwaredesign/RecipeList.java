@@ -10,38 +10,26 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 
-
-public abstract class RecipeList {
+public class RecipeList {
 
     public static final String RECIPE_PATH = "./recipes";
+    private Map<String,Recipe> recipes;
+
+    private static RecipeList instance;
 
     private RecipeList() {
-        throw new IllegalStateException("Utility class");
+        updateRecipes();
     }
 
-
-    private static Recipe jsonToRecipe(File file) {
-        Recipe recipe = null;
-        if (file.isFile()) {
-            try {
-                Gson gson = new Gson();
-                Scanner myReader = new Scanner(file);       //standard file reader stuff
-                StringBuilder data = new StringBuilder();
-                while (myReader.hasNextLine()) {
-                    String line = myReader.nextLine();
-                    data.append(line.strip());
-                }
-                recipe = gson.fromJson(data.toString(),Recipe.class);
-                myReader.close();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+    public static RecipeList getInstance() {
+        if (instance == null) {
+            instance = new RecipeList();
         }
-        return recipe;
+        return instance;
     }
 
-    public static Map<String,Recipe> getRecipes() {
-        HashMap<String,Recipe> recipes = new HashMap<>();
+    public void updateRecipes() {
+        HashMap<String,Recipe> recipesMap = new HashMap<>();
 
         File folder = new File(RECIPE_PATH);
         File[] listOfFiles = folder.listFiles();
@@ -61,12 +49,36 @@ public abstract class RecipeList {
             recipe.fillEmptyFields();
             recipe.writeToFile(file.toString());
 
-            recipes.put(file.toString(),recipe);
+            recipesMap.put(file.toString(),recipe);
         }
+        this.recipes = recipesMap;
+    }
+
+    private Recipe jsonToRecipe(File file) {
+        Recipe recipe = null;
+        if (file.isFile()) {
+            try {
+                Gson gson = new Gson();
+                Scanner myReader = new Scanner(file);       //standard file reader stuff
+                StringBuilder data = new StringBuilder();
+                while (myReader.hasNextLine()) {
+                    String line = myReader.nextLine();
+                    data.append(line.strip());
+                }
+                recipe = gson.fromJson(data.toString(),Recipe.class);
+                myReader.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        return recipe;
+    }
+
+    public Map<String,Recipe> getRecipes() {
         return recipes;
     }
 
-    public static List<String> getRecipeNames(Map<String,Recipe> recipes) {
+    public List<String> getRecipeNameList() {
         ArrayList<String> names = new ArrayList<>();
         for (Recipe recipe : recipes.values()) {
             names.add(recipe.name);
@@ -75,7 +87,7 @@ public abstract class RecipeList {
         return names;
     }
 
-    public static String getFilenameFromRecipeName(Map<String,Recipe> recipes, String name) {
+    public String getFilename(String name) {
         String res = null;
         for (Map.Entry<String,Recipe> entry : recipes.entrySet()) {
             res = entry.getKey();
@@ -85,7 +97,6 @@ public abstract class RecipeList {
         return res;
     }
 
-    //This method removes all irrelevant information (whitespace, extra delimiters) from input string
     private static List<String> tokenize(String input, String regex){
         String[] tokens = input.strip().split(regex);
         ArrayList<String> res = new ArrayList<>();
@@ -95,7 +106,6 @@ public abstract class RecipeList {
         return res;
     }
 
-    //input validation
     private static void errorEmptyStringAt(String type) throws NullPointerException {
         throw new NullPointerException("Please input " + type);
     }
@@ -108,7 +118,6 @@ public abstract class RecipeList {
         }
         return Long.parseLong(input);
     }
-
 
     public static void saveRecipe(String path, String inputName, String inputDesc, String inputTime, String inputTags, String inputIngr, String inputInst) throws NullPointerException, IndexOutOfBoundsException, NumberFormatException {
 
