@@ -51,7 +51,11 @@ public abstract class RecipeList {
 
         assert listOfFiles != null;
         for (File file : listOfFiles) {
-            recipes.put(file.toString(),jsonToRecipe(file));
+            Recipe recipe = jsonToRecipe(file);
+            if (recipe != null && !recipe.emptyFields()) {
+                recipes.put(file.toString(),recipe);
+            }
+
         }
 
         return recipes;
@@ -101,17 +105,18 @@ public abstract class RecipeList {
     }
 
 
-    public static Recipe createRecipe(String nameStr, String descStr, String ingStr, String insStr, String timeStr, String tagStr) throws NullPointerException, IndexOutOfBoundsException, NumberFormatException {
+    public static Recipe createRecipe(String inputName, String inputDesc, String inputIngr, String inputInst, String inputTime, String inputTags) throws NullPointerException, IndexOutOfBoundsException, NumberFormatException {
 
-        if (nameStr.isBlank()) errorEmptyStringAt("Name");
-        String name = nameStr.strip();
+        String name = inputName.strip();
+        if (name.isBlank()) errorEmptyStringAt("Name");
 
-        if (descStr.isBlank()) errorEmptyStringAt("Description");
-        String desc = descStr.strip();
+        String desc = inputDesc.strip();
+        if (desc.isBlank()) errorEmptyStringAt("Description");
 
         //Convert ingredients input to ingredients arraylist
-        if (ingStr.isBlank()) errorEmptyStringAt("Ingredients");
-        List<String> ingTokens = tokenize(ingStr, "\n");
+        String ingredientsStr = inputIngr.strip();
+        if (ingredientsStr.isBlank()) errorEmptyStringAt("Ingredients");
+        List<String> ingTokens = tokenize(ingredientsStr, "\n");
         ArrayList<Ingredient> ingredients = new ArrayList<>();
         for (String token : ingTokens) {
             List<String> properties = tokenize(token, ",");
@@ -128,18 +133,21 @@ public abstract class RecipeList {
         }
 
         // Convert instructions input to instructions arraylist
-        if (insStr.isBlank()) errorEmptyStringAt("Instructions");
-        List<String> insTokens = tokenize(insStr,"\n");
+        String instructionsStr = inputInst.strip();
+        if (instructionsStr.isBlank()) errorEmptyStringAt("Instructions");
+        List<String> insTokens = tokenize(instructionsStr,"\n");
         LinkedList<Instruction> instructions = new LinkedList<>();
         for (String token: insTokens) {
             instructions.add(new Instruction(token, ""));
         }
-        
-        if (timeStr.isBlank()) errorEmptyStringAt("Time");
-        Long time = tryParse(timeStr.strip(),"Time");
 
-        if (tagStr.isBlank()) errorEmptyStringAt("Tags");
-        List<String> tags = tokenize(tagStr,",");
+        String timeStr = inputTime.strip();
+        if (timeStr.isBlank()) errorEmptyStringAt("Time");
+        Long time = tryParse(timeStr,"Time");
+
+        String tagsStr = inputTags.strip();
+        if (tagsStr.isBlank()) errorEmptyStringAt("Tags");
+        List<String> tags = tokenize(tagsStr,",");
 
         return new Recipe(name,desc,ingredients,instructions,time,tags);
     }
@@ -153,8 +161,7 @@ public abstract class RecipeList {
             location = new File(path);  //overwrite old recipe if editing
         }
         Gson gson = new Gson();
-        try  {
-            FileWriter writer = new FileWriter(location);
+        try (FileWriter writer = new FileWriter(location)) {
             gson.toJson(recipe, writer);
         } catch (IOException e) {
             e.printStackTrace();

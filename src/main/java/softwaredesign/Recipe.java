@@ -1,5 +1,6 @@
 package softwaredesign;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,6 +24,16 @@ public class Recipe {
         this.instructions = instructions;
         this.time = time;
         this.tags = tags;
+    }
+
+    public boolean emptyFields() {
+        return (this.name == null || this.description == null || this.ingredients == null
+                || this.instructions == null || this.time == null || this.tags == null);
+    }
+
+    public void updateInstructions(String path, List<Instruction> newInstructions) {
+        this.instructions = newInstructions;
+        RecipeList.writeToFile(path,this);
     }
 
     @Override

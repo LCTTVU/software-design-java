@@ -135,8 +135,8 @@ public class Controller implements Initializable {
                 (this code was corrected by intellij)
                  */
                 recipeListView.getSelectionModel().selectedItemProperty().addListener((observableValue, s, t1) -> {
-                    String clickedOnName = recipeListView.getSelectionModel().getSelectedItem();
-                    recipePath = RecipeList.getFilenameFromRecipeName(recipes,clickedOnName);
+                    String listItem = recipeListView.getSelectionModel().getSelectedItem();
+                    recipePath = RecipeList.getFilenameFromRecipeName(recipes,listItem);
                     mkNextScreen(VIEW_RECIPE);
                 });
                 break;
@@ -246,12 +246,12 @@ public class Controller implements Initializable {
 
     //this function is used for both creating and editing (editing overwrites the existing recipe)
     private void createRecipe() {
-        String name = nameField.getText().strip();
-        String desc = descField.getText().strip();
-        String ingStr = ingArea.getText().strip();
-        String insStr = insArea.getText().strip();
-        String time = timeField.getText().strip();
-        String tagStr = tagField.getText().strip();
+        String name = nameField.getText();
+        String desc = descField.getText();
+        String ingStr = ingArea.getText();
+        String insStr = insArea.getText();
+        String time = timeField.getText();
+        String tagStr = tagField.getText();
         try {
             Recipe newRecipe = RecipeList.createRecipe(name,desc,ingStr,insStr,time,tagStr);
             RecipeList.writeToFile(recipePath,newRecipe);
@@ -279,35 +279,38 @@ public class Controller implements Initializable {
     private void updateNote() {
         String currNote = noteArea.getText().strip();
         for (Instruction instruction : instructionList) {
-            String currText = instruction.text;
-            if (Objects.equals(currText, instructionLabel.getText())) {
+            if (Objects.equals(instruction.text, instructionLabel.getText())) {
                 instruction.note = currNote;
             }
         }
-        noteArea.clear();
     }
 
     //Executing recipe functions
     private void nextInstruction() {
+        updateNote();
+        noteArea.clear();
         if (instructionIterator.hasNext()) {
-            updateNote();
+
             Instruction next = instructionIterator.next();
             instructionLabel.setText(next.text);
             noteArea.setText(next.note);
-            if (!instructionIterator.hasNext()) nextButton.setText("Finish"); //final step
         }
         else {
+            recipe.updateInstructions(recipePath,instructionList);
             mkNextScreen(VIEW_RECIPE);
         }
     }
 
     private void prevInstruction() {
+        updateNote();
+        noteArea.clear();
         if (instructionIterator.hasPrevious()) {
             Instruction prev = instructionIterator.previous();
             instructionLabel.setText(prev.text);
             noteArea.setText(prev.note);
         }
         else {
+            recipe.updateInstructions(recipePath,instructionList);
             mkNextScreen(VIEW_RECIPE);
         }
     }
