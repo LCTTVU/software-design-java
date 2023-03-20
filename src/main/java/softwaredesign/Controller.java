@@ -100,8 +100,8 @@ public class Controller implements Initializable {
     protected Button nextButton;
     @FXML
     protected Button prevButton;
-    protected List<Instruction> instructionList;
-    protected ListIterator<Instruction> instructionIterator;
+    protected List<Instruction> newInstructions;
+    protected int index;
 
     //common functions
     public Controller(String screen, String resource,String path) {
@@ -182,9 +182,9 @@ public class Controller implements Initializable {
 
             case EXECUTE_RECIPE:
                 title.setText(recipe.name);
-                instructionList = recipe.instructions;
-                instructionIterator = instructionList.listIterator();
-                Instruction first = instructionIterator.next();
+                newInstructions = recipe.instructions;
+                index = 0;
+                Instruction first = newInstructions.get(index);
                 instructionLabel.setText(first.text);
                 noteArea.setText(first.note);
                 nextButton.setOnAction(event -> nextInstruction());
@@ -275,26 +275,31 @@ public class Controller implements Initializable {
         }
     }
 
+    //Executing recipe functions
     private void updateNote() {
-        String currNote = noteArea.getText().strip();
-        for (Instruction instruction : instructionList) {
-            if (Objects.equals(instruction.text, instructionLabel.getText())) {
-                instruction.note = currNote;
-            }
-        }
+        newInstructions.get(index).note = noteArea.getText().strip();
     }
 
-    //Executing recipe functions
+    private int nrInstructions() {
+        return newInstructions.size();
+    }
+
+    private boolean isLast() {
+        return index == nrInstructions() - 1;
+    }
+
     private void nextInstruction() {
         updateNote();
         noteArea.clear();
-        if (instructionIterator.hasNext()) {
-            Instruction next = instructionIterator.next();
+        index++;
+        if (index < nrInstructions()) {
+            Instruction next = newInstructions.get(index);
             instructionLabel.setText(next.text);
             noteArea.setText(next.note);
+            if (isLast()) nextButton.setText("Finish");
         }
         else {
-            recipe.updateInstructions(recipePath,instructionList);
+            recipe.updateInstructions(recipePath, newInstructions);
             mkNextScreen(VIEW_RECIPE);
         }
     }
@@ -302,13 +307,15 @@ public class Controller implements Initializable {
     private void prevInstruction() {
         updateNote();
         noteArea.clear();
-        if (instructionIterator.hasPrevious()) {
-            Instruction prev = instructionIterator.previous();
+        index--;
+        if (index >= 0) {
+            Instruction prev = newInstructions.get(index);
             instructionLabel.setText(prev.text);
             noteArea.setText(prev.note);
+            if (!isLast()) nextButton.setText("Next");
         }
         else {
-            recipe.updateInstructions(recipePath,instructionList);
+            recipe.updateInstructions(recipePath, newInstructions);
             mkNextScreen(VIEW_RECIPE);
         }
     }
