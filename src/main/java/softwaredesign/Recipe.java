@@ -1,7 +1,5 @@
 package softwaredesign;
 
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 public class Recipe {
@@ -26,7 +24,7 @@ public class Recipe {
         this.tags = tags;
     }
 
-    public boolean emptyFields() {
+    public boolean hasEmptyFields() {
         return (this.name == null || this.description == null || this.ingredients == null
                 || this.instructions == null || this.time == null || this.tags == null);
     }

@@ -150,12 +150,12 @@ public class Controller implements Initializable {
 
             case CREATE_RECIPE:
                 title.setText(CREATE_RECIPE);
-                doneButton.setOnAction(event -> createRecipe());
+                doneButton.setOnAction(event -> saveRecipe());
                 break;
 
             case EDIT_RECIPE:
                 title.setText(EDIT_RECIPE);
-                doneButton.setOnAction(event -> createRecipe());
+                doneButton.setOnAction(event -> saveRecipe());
                 //populate text fields with recipe information for the user to edit
                 nameField.setText(recipe.name);
 
@@ -245,7 +245,7 @@ public class Controller implements Initializable {
     }
 
     //this function is used for both creating and editing (editing overwrites the existing recipe)
-    private void createRecipe() {
+    private void saveRecipe() {
         String name = nameField.getText();
         String desc = descField.getText();
         String ingStr = ingArea.getText();
@@ -253,8 +253,7 @@ public class Controller implements Initializable {
         String time = timeField.getText();
         String tagStr = tagField.getText();
         try {
-            Recipe newRecipe = RecipeList.createRecipe(name,desc,ingStr,insStr,time,tagStr);
-            RecipeList.writeToFile(recipePath,newRecipe);
+            RecipeList.saveRecipe(recipePath,name,desc,ingStr,insStr,time,tagStr);
             HomeController homeController = new HomeController();
             homeController.showStage();
             stage.close();
@@ -290,7 +289,6 @@ public class Controller implements Initializable {
         updateNote();
         noteArea.clear();
         if (instructionIterator.hasNext()) {
-
             Instruction next = instructionIterator.next();
             instructionLabel.setText(next.text);
             noteArea.setText(next.note);

@@ -52,7 +52,7 @@ public abstract class RecipeList {
         assert listOfFiles != null;
         for (File file : listOfFiles) {
             Recipe recipe = jsonToRecipe(file);
-            if (recipe != null && !recipe.emptyFields()) {
+            if (recipe != null && !recipe.hasEmptyFields()) {
                 recipes.put(file.toString(),recipe);
             }
 
@@ -105,7 +105,7 @@ public abstract class RecipeList {
     }
 
 
-    public static Recipe createRecipe(String inputName, String inputDesc, String inputIngr, String inputInst, String inputTime, String inputTags) throws NullPointerException, IndexOutOfBoundsException, NumberFormatException {
+    public static void saveRecipe(String path, String inputName, String inputDesc, String inputIngr, String inputInst, String inputTime, String inputTags) throws NullPointerException, IndexOutOfBoundsException, NumberFormatException {
 
         String name = inputName.strip();
         if (name.isBlank()) errorEmptyStringAt("Name");
@@ -149,7 +149,7 @@ public abstract class RecipeList {
         if (tagsStr.isBlank()) errorEmptyStringAt("Tags");
         List<String> tags = tokenize(tagsStr,",");
 
-        return new Recipe(name,desc,ingredients,instructions,time,tags);
+        writeToFile(path, new Recipe(name,desc,ingredients,instructions,time,tags));
     }
 
     public static void writeToFile(String path, Recipe recipe) {
