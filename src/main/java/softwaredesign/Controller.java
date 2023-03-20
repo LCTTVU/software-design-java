@@ -19,8 +19,8 @@ class HomeController extends Controller {
 }
 
 class ViewController extends Controller {
-    public ViewController(String name) {
-        super(VIEW_RECIPE,"ScreenView.fxml",name);
+    public ViewController(String recipePath) {
+        super(VIEW_RECIPE,"ScreenView.fxml",recipePath);
     }
 }
 
@@ -31,14 +31,14 @@ class CreateController extends Controller {
 }
 
 class EditController extends Controller {
-    public EditController(String name) {
-        super(EDIT_RECIPE,"ScreenCreateAndEdit.fxml",name);
+    public EditController(String recipePath) {
+        super(EDIT_RECIPE,"ScreenCreateAndEdit.fxml",recipePath);
     }
 }
 
 class ExecuteController extends Controller {
-    public ExecuteController(String name) {
-        super(EXECUTE_RECIPE,"ScreenExecute.fxml",name);
+    public ExecuteController(String recipePath) {
+        super(EXECUTE_RECIPE,"ScreenExecute.fxml",recipePath);
     }
 }
 
