@@ -1,6 +1,5 @@
 package softwaredesign;
 
-
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -8,7 +7,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
 
@@ -36,7 +36,6 @@ public abstract class RecipeList {
                 recipe = gson.fromJson(data.toString(),Recipe.class);
                 myReader.close();
             } catch (FileNotFoundException e) {
-
                 e.printStackTrace();
             }
         }
@@ -55,9 +54,7 @@ public abstract class RecipeList {
             if (recipe != null && !recipe.hasEmptyFields()) {
                 recipes.put(file.toString(),recipe);
             }
-
         }
-
         return recipes;
     }
 
@@ -78,9 +75,8 @@ public abstract class RecipeList {
         }
         return res;
     }
-    /*
-    This function removes all irrelevant information (whitespace, extra delimiters) from input string
-     */
+
+    //This method removes all irrelevant information (whitespace, extra delimiters) from input string
     private static List<String> tokenize(String input, String regex){
         String[] tokens = input.strip().split(regex);
         ArrayList<String> res = new ArrayList<>();
@@ -107,46 +103,45 @@ public abstract class RecipeList {
 
     public static void saveRecipe(String path, String inputName, String inputDesc, String inputIngr, String inputInst, String inputTime, String inputTags) throws NullPointerException, IndexOutOfBoundsException, NumberFormatException {
 
-        String name = inputName.strip();
-        if (name.isBlank()) errorEmptyStringAt("Name");
+        String name =           inputName.strip();
+        String desc =           inputDesc.strip();
+        String ingredientStr =  inputIngr.strip();
+        String instructionStr = inputInst.strip();
+        String timeStr =        inputTime.strip();
+        String tagsStr =        inputTags.strip();
 
-        String desc = inputDesc.strip();
-        if (desc.isBlank()) errorEmptyStringAt("Description");
+        if (name.isBlank())             errorEmptyStringAt("Name");
+        if (desc.isBlank())             errorEmptyStringAt("Description");
+        if (ingredientStr.isBlank())    errorEmptyStringAt("Ingredients");
+        if (instructionStr.isBlank())   errorEmptyStringAt("Instructions");
+        if (timeStr.isBlank())          errorEmptyStringAt("Time");
+        if (tagsStr.isBlank())          errorEmptyStringAt("Tags");
 
         //Convert ingredients input to ingredients arraylist
-        String ingredientsStr = inputIngr.strip();
-        if (ingredientsStr.isBlank()) errorEmptyStringAt("Ingredients");
-        List<String> ingTokens = tokenize(ingredientsStr, "\n");
+        List<String> ingTokens = tokenize(ingredientStr, "\n");
         ArrayList<Ingredient> ingredients = new ArrayList<>();
         for (String token : ingTokens) {
             List<String> properties = tokenize(token, ",");
-
             String ingName = properties.get(0);
-
-            Long ingQuantity = tryParse(properties.get(1),"Ingredient quantity");  //this line will throw IndexOutOfBoundsException if the user does not specify the quantity
+            //this line will throw IndexOutOfBoundsException if the user does not specify the quantity
+            Long ingQuantity = tryParse(properties.get(1),"Ingredient quantity");
 
             String ingUnit;
-            if (properties.size() < 3) ingUnit = "No unit";
-            else ingUnit = properties.get(2);
+            if (properties.size() < 3)  ingUnit = "No unit";
+            else                        ingUnit = properties.get(2);
 
             ingredients.add(new Ingredient(ingName,ingQuantity,ingUnit));
         }
 
         // Convert instructions input to instructions arraylist
-        String instructionsStr = inputInst.strip();
-        if (instructionsStr.isBlank()) errorEmptyStringAt("Instructions");
-        List<String> insTokens = tokenize(instructionsStr,"\n");
+        List<String> insTokens = tokenize(instructionStr,"\n");
         LinkedList<Instruction> instructions = new LinkedList<>();
         for (String token: insTokens) {
             instructions.add(new Instruction(token, ""));
         }
 
-        String timeStr = inputTime.strip();
-        if (timeStr.isBlank()) errorEmptyStringAt("Time");
         Long time = tryParse(timeStr,"Time");
 
-        String tagsStr = inputTags.strip();
-        if (tagsStr.isBlank()) errorEmptyStringAt("Tags");
         List<String> tags = tokenize(tagsStr,",");
 
         writeToFile(path, new Recipe(name,desc,ingredients,instructions,time,tags));
@@ -168,8 +163,7 @@ public abstract class RecipeList {
         }
     }
 
-    public static void deleteRecipe(String name) throws IOException {
-        File file = new File(name);
-        if (!file.delete()) throw new IOException("Unable to delete");
+    public static void deleteRecipe(String recipePath) throws IOException {
+        Files.delete(Path.of(recipePath));
     }
 }

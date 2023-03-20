@@ -211,7 +211,7 @@ public class Controller implements Initializable {
             default:
                 throw new IllegalArgumentException("Invalid Screen at prevScreen");
         }
-        prevController.showStage();
+        prevController.stage.show();
         stage.close();
     }
 
@@ -234,14 +234,10 @@ public class Controller implements Initializable {
                 nextController = new ExecuteController(recipePath);
                 break;
             default:
-                throw new IllegalArgumentException("Invalid Screen at prevScreen");
+                throw new IllegalArgumentException("Invalid Screen at nextScreen");
         }
-        nextController.showStage();
+        nextController.stage.show();
         stage.close();
-    }
-
-    public void showStage() {
-        stage.show();
     }
 
     //this function is used for both creating and editing (editing overwrites the existing recipe)
@@ -254,9 +250,7 @@ public class Controller implements Initializable {
         String tagStr = tagField.getText();
         try {
             RecipeList.saveRecipe(recipePath,name,desc,ingStr,insStr,time,tagStr);
-            HomeController homeController = new HomeController();
-            homeController.showStage();
-            stage.close();
+            mkNextScreen(HOME);
         } catch (IndexOutOfBoundsException e) {
             title.setText("Invalid Ingredient Format");
         } catch (Exception e) {
@@ -267,9 +261,7 @@ public class Controller implements Initializable {
     private void deleteRecipe() {
         try {
             RecipeList.deleteRecipe(recipePath);
-            HomeController homeController = new HomeController();
-            homeController.showStage();
-            stage.close();
+            mkNextScreen(HOME);
         } catch (IOException e) {
             title.setText(e.getMessage());
         }
