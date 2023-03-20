@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 
 import java.nio.file.Files;
@@ -15,7 +14,6 @@ import java.util.*;
 public abstract class RecipeList {
 
     private static final String RECIPE_PATH = "./recipes";
-    private static final String RECIPE_FILE_FORMAT = ".json";
 
     private RecipeList() {
         throw new IllegalStateException("Utility class");
@@ -50,10 +48,10 @@ public abstract class RecipeList {
 
         assert listOfFiles != null;
 
-        int unnamedCount = 1; //this is to create a generic name for any recipe.json that does not have "name" attribute
+        int unnamedCount = 1; //this is to create a generic name for any recipe json that does not have "name" attribute
         for (File file : listOfFiles) {
             Recipe recipe = jsonToRecipe(file);
-            if (recipe == null) continue; //skip if not found
+            if (recipe == null) continue; //skip
 
             if (recipe.isUnnamed()) {
                 recipe.name = "Unnamed Recipe " + unnamedCount;

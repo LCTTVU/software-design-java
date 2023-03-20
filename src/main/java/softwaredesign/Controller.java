@@ -129,16 +129,17 @@ public class Controller implements Initializable {
             case HOME:
                 createRecipeButton.setOnAction(event -> mkNextScreen(CREATE_RECIPE));
                 recipeListView.getItems().addAll(RecipeList.getRecipeNames(recipes));
-
                 /*
                 Add individual event listeners for viewing recipe to each row of recipeList
                 (this code was corrected by intellij)
                  */
-                recipeListView.getSelectionModel().selectedItemProperty().addListener((observableValue, arg1, arg2) -> {
-                    String listItem = recipeListView.getSelectionModel().getSelectedItem();
-                    recipePath = RecipeList.getFilenameFromRecipeName(recipes,listItem);
-                    mkNextScreen(VIEW_RECIPE);
-                });
+                recipeListView.getSelectionModel().selectedItemProperty().addListener(
+                    (observableValue, arg1, arg2) -> {
+                        String listItem = recipeListView.getSelectionModel().getSelectedItem();
+                        recipePath = RecipeList.getFilenameFromRecipeName(recipes,listItem);
+                        mkNextScreen(VIEW_RECIPE);
+                    }
+                );
                 break;
 
             case VIEW_RECIPE:
