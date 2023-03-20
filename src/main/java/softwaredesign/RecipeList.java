@@ -151,7 +151,7 @@ public class RecipeList {
 
             String ingUnit;
             if (unitSpecified(properties)) ingUnit = properties.get(2);
-            else ingUnit = "No Unit";
+            else ingUnit = "";
 
             ingredients.add(new Ingredient(ingName,ingQuantity,ingUnit));
         }

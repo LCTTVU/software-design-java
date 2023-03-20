@@ -1,5 +1,7 @@
 package softwaredesign;
 
+import java.util.Objects;
+
 public class Ingredient {
     String name;
     Long quantity;
@@ -11,6 +13,11 @@ public class Ingredient {
     }
     @Override
     public String toString() {
-        return this.name + "," + this.quantity.toString() + "," + this.unit + "\n";
+        System.out.println(this.unit);
+        String res = this.name + "," + this.quantity.toString();
+        if (!Objects.equals(this.unit,"") && !Objects.equals(this.unit,"No Unit")) {
+            res += "," + this.unit + "\n";
+        }
+        return res;
     }
 }
