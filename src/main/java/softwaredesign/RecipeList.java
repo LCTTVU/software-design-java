@@ -26,7 +26,7 @@ public class RecipeList {
         return instance;
     }
 
-    public void updateRecipes() {
+    private void updateRecipes() {
         HashMap<File,Recipe> recipesMap = new HashMap<>();
 
         File folder = new File(RECIPE_PATH);
@@ -47,7 +47,7 @@ public class RecipeList {
             recipe.fillEmptyFields();
             recipe.writeToFile(file);
 
-            recipesMap.put(file,recipe);
+            recipes.put(file,recipe);
         }
         this.recipes = recipesMap;
     }
@@ -116,9 +116,7 @@ public class RecipeList {
         return input.size() > 2;
     }
 
-    /*
-    This method removes all irrelevant information (whitespace, extra delimiters, empty tokens) from input string
-    */
+    //This method removes all irrelevant information (whitespace, extra delimiters, empty tokens) from input string
     private static List<String> tokenize(String input, String regex){
         String[] tokens = input.strip().split(regex);
         ArrayList<String> res = new ArrayList<>();

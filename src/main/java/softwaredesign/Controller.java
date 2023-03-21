@@ -72,17 +72,17 @@ public class Controller implements Initializable {
     @FXML
     protected Button doneButton;
     @FXML
-    protected TextField nameField;
+    protected TextField nameTextField;
     @FXML
-    protected TextField descField;
+    protected TextField descTextField;
     @FXML
-    protected TextField timeField;
+    protected TextField timeTextField;
     @FXML
-    protected TextField tagField;
+    protected TextField tagsTextField;
     @FXML
-    protected TextArea ingArea;
+    protected TextArea ingrTextArea;
     @FXML
-    protected TextArea insArea;
+    protected TextArea instTextArea;
     //View screen components
     @FXML
     protected Label descText;
@@ -110,9 +110,8 @@ public class Controller implements Initializable {
     @FXML
     protected Button prevButton;
     protected List<Instruction> newInstructions;
-    protected int index;
+    protected int currInstructionIndex;
 
-    //common functions
     public Controller(String screen, String resource,File path) {
         screenName = screen;
         recipePath = path;
@@ -134,18 +133,7 @@ public class Controller implements Initializable {
         switch (screenName) {
             case HOME:
                 createRecipeButton.setOnAction(event -> mkNextScreen(CREATE_RECIPE));
-                recipeListView.getItems().addAll(RecipeList.getInstance().getRecipeNameList());
-                /*
-                Add individual event listeners for viewing recipe to each row of recipeList
-                (this code was corrected by intellij)
-                 */
-                recipeListView.getSelectionModel().selectedItemProperty().addListener(
-                    (observableValue, arg1, arg2) -> {
-                        String listItem = recipeListView.getSelectionModel().getSelectedItem();
-                        recipePath = RecipeList.getInstance().getFilename(listItem);
-                        mkNextScreen(VIEW_RECIPE);
-                    }
-                );
+                fillRecipesHome();
                 break;
 
             case VIEW_RECIPE:
@@ -153,7 +141,7 @@ public class Controller implements Initializable {
                 editButton.setOnAction(event -> mkNextScreen(EDIT_RECIPE));
                 executeButton.setOnAction(event -> mkNextScreen(EXECUTE_RECIPE));
                 deleteButton.setOnAction(event -> deleteRecipe());
-                fillViewRecipeDetails();
+                fillRecipeDetailsView();
                 break;
 
             case CREATE_RECIPE:
@@ -165,38 +153,18 @@ public class Controller implements Initializable {
                 title.setText(EDIT_RECIPE);
                 doneButton.setOnAction(event -> saveRecipe());
                 //populate text fields with recipe information for the user to edit
-                nameField.setText(recipe.name);
-
-                descField.setText(recipe.description);
-
-                StringBuilder ingTxt = new StringBuilder();
-                for (Ingredient ingredient : recipe.ingredients) {
-                    ingTxt.append(ingredient.toString());
-                }
-                ingArea.setText(ingTxt.toString());
-
-                StringBuilder insTxt = new StringBuilder();
-                for (Instruction instruction : recipe.instructions) {
-                    insTxt.append(instruction.toString());
-                }
-                insArea.setText(insTxt.toString());
-
-                timeField.setText(recipe.time.toString());
-                String tagTxt = recipe.tags.toString();
-
-                tagTxt = tagTxt.substring(1,tagTxt.length() - 1);
-                tagField.setText(tagTxt);
+                fillRecipeDetailsEdit();
                 break;
 
             case EXECUTE_RECIPE:
                 title.setText(recipe.name);
-                newInstructions = recipe.instructions;
-                index = 0;
-                Instruction first = newInstructions.get(index);
-                instructionLabel.setText(first.text);
-                noteArea.setText(first.note);
                 nextButton.setOnAction(event -> nextInstruction());
                 prevButton.setOnAction(event -> prevInstruction());
+
+                newInstructions = recipe.instructions;
+                //show first instruction right away
+                currInstructionIndex = 0;
+                displayInstruction(currInstructionIndex);
                 break;
 
             default:
@@ -204,7 +172,22 @@ public class Controller implements Initializable {
         }
     }
 
-    private void fillViewRecipeDetails() {
+    private void fillRecipesHome() {
+        recipeListView.getItems().addAll(RecipeList.getInstance().getRecipeNameList());
+                /*
+                Add individual event listeners for viewing recipe to each row of recipeList
+                (this code was corrected by intellij)
+                 */
+        recipeListView.getSelectionModel().selectedItemProperty().addListener(
+            (observableValue, arg1, arg2) -> {
+                String listItem = recipeListView.getSelectionModel().getSelectedItem();
+                recipePath = RecipeList.getInstance().getFilename(listItem);
+                mkNextScreen(VIEW_RECIPE);
+            }
+        );
+    }
+
+    private void fillRecipeDetailsView() {
         descText.setText(recipe.description);
         timeText.setText(recipe.time + " minutes");
 
@@ -231,6 +214,30 @@ public class Controller implements Initializable {
         instText.setWrapText(true);
 
 
+    }
+
+    private void fillRecipeDetailsEdit() {
+        nameTextField.setText(recipe.name);
+
+        descTextField.setText(recipe.description);
+
+        StringBuilder ingTxt = new StringBuilder();
+        for (Ingredient ingredient : recipe.ingredients) {
+            ingTxt.append(ingredient.toString());
+        }
+        ingrTextArea.setText(ingTxt.toString());
+
+        StringBuilder insTxt = new StringBuilder();
+        for (Instruction instruction : recipe.instructions) {
+            insTxt.append(instruction.toString());
+        }
+        instTextArea.setText(insTxt.toString());
+
+        timeTextField.setText(recipe.time.toString());
+        String tagTxt = recipe.tags.toString();
+
+        tagTxt = tagTxt.substring(1,tagTxt.length() - 1);
+        tagsTextField.setText(tagTxt);
     }
 
     private void mkPrevScreen() {
@@ -277,14 +284,14 @@ public class Controller implements Initializable {
         stage.close();
     }
 
-    //this function is used for both creating and editing (editing overwrites the existing recipe)
+    //this method is used for both creating and editing (editing overwrites the existing recipe)
     private void saveRecipe() {
-        String name = nameField.getText();
-        String desc = descField.getText();
-        String time = timeField.getText();
-        String tagStr = tagField.getText();
-        String ingStr = ingArea.getText();
-        String insStr = insArea.getText();
+        String name = nameTextField.getText();
+        String desc = descTextField.getText();
+        String time = timeTextField.getText();
+        String tagStr = tagsTextField.getText();
+        String ingStr = ingrTextArea.getText();
+        String insStr = instTextArea.getText();
         try {
             RecipeList.saveRecipe(recipePath,name,desc,time,tagStr,ingStr,insStr);
             if (Objects.equals(screenName,CREATE_RECIPE)) mkNextScreen(HOME); //home screen if creating
@@ -305,50 +312,50 @@ public class Controller implements Initializable {
         }
     }
 
-    //Execute recipe functions
-    private void updateNote() {
-        newInstructions.get(index).note = noteArea.getText().strip();
+    //Execute recipe methods
+    private void saveAndClearNote() {
+        newInstructions.get(currInstructionIndex).note = noteArea.getText().strip();
+        noteArea.clear();
     }
 
-    private int nrInstructions() {
-        return newInstructions.size();
+    private boolean inBounds(int i) {
+        return (i < newInstructions.size() && i >= 0);
     }
 
     private boolean isLast() {
-        return index == nrInstructions() - 1;
+        return currInstructionIndex == newInstructions.size() - 1;
+    }
+
+    private void displayInstruction(int i) {
+        Instruction instruction = newInstructions.get(i);
+        instructionLabel.setText(instruction.text);
+        instructionLabel.setWrapText(true);
+        noteArea.setText(instruction.note);
+    }
+
+    private void updateInstructions() {
+        recipe.updateInstructions(newInstructions);
+        recipe.writeToFile(recipePath);
+        mkNextScreen(VIEW_RECIPE);
     }
 
     private void nextInstruction() {
-        updateNote();
-        noteArea.clear();
-        index++;
-        if (index < nrInstructions()) {
-            Instruction next = newInstructions.get(index);
-            instructionLabel.setText(next.text);
-            noteArea.setText(next.note);
+        saveAndClearNote();
+        currInstructionIndex++;
+        if (inBounds(currInstructionIndex)) {
+            displayInstruction(currInstructionIndex);
             if (isLast()) nextButton.setText("Finish");
         }
-        else {
-            recipe.updateInstructions(newInstructions);
-            recipe.writeToFile(recipePath);
-            mkNextScreen(VIEW_RECIPE);
-        }
+        else updateInstructions();
     }
 
     private void prevInstruction() {
-        updateNote();
-        noteArea.clear();
-        index--;
-        if (index >= 0) {
-            Instruction prev = newInstructions.get(index);
-            instructionLabel.setText(prev.text);
-            noteArea.setText(prev.note);
+        saveAndClearNote();
+        currInstructionIndex--;
+        if (inBounds(currInstructionIndex)) {
+            displayInstruction(currInstructionIndex);
             if (!isLast()) nextButton.setText("Next");
         }
-        else {
-            recipe.updateInstructions(newInstructions);
-            recipe.writeToFile(recipePath);
-            mkNextScreen(VIEW_RECIPE);
-        }
+        else updateInstructions();
     }
 }

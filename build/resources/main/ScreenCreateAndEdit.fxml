@@ -40,17 +40,17 @@
             <Label id="insLabel" styleClass="recipeLabel" stylesheets="@application.css" text="Instructions"
                    GridPane.rowIndex="5"/>
 
-            <TextField fx:id="nameField" styleClass="recipeField" stylesheets="@application.css"
+            <TextField fx:id="nameTextField" styleClass="recipeField" stylesheets="@application.css"
                        GridPane.columnIndex="1"/>
-            <TextField fx:id="descField" styleClass="recipeField" stylesheets="@application.css"
+            <TextField fx:id="descTextField" styleClass="recipeField" stylesheets="@application.css"
                        GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-            <TextField fx:id="timeField" styleClass="recipeField" stylesheets="@application.css"
+            <TextField fx:id="timeTextField" styleClass="recipeField" stylesheets="@application.css"
                        GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-            <TextField fx:id="tagField" styleClass="recipeField" stylesheets="@application.css"
+            <TextField fx:id="tagsTextField" styleClass="recipeField" stylesheets="@application.css"
                        GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-            <TextArea fx:id="ingArea" styleClass="recipeArea" stylesheets="@application.css"
+            <TextArea fx:id="ingrTextArea" styleClass="recipeArea" stylesheets="@application.css"
                       GridPane.columnIndex="1" GridPane.rowIndex="4"/>
-            <TextArea fx:id="insArea" styleClass="recipeArea" stylesheets="@application.css"
+            <TextArea fx:id="instTextArea" styleClass="recipeArea" stylesheets="@application.css"
                       GridPane.columnIndex="1" GridPane.rowIndex="5"/>
 
     </GridPane>

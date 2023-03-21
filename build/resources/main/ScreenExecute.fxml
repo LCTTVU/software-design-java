@@ -19,12 +19,12 @@
             <ColumnConstraints prefWidth="1020.0" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints prefHeight="200" />
+            <RowConstraints prefHeight="340.0"/>
         </rowConstraints>
         <Label styleClass="recipeLabel" stylesheets="@application.css" text="Instruction" />
         <Label styleClass="recipeLabel" stylesheets="@application.css" text="Note" GridPane.rowIndex="1" />
-        <Label fx:id="instructionLabel" styleClass="recipeLabel" stylesheets="@application.css" text="Instruction Text" GridPane.columnIndex="1" />
+        <Label maxWidth="Infinity" maxHeight="Infinity" fx:id="instructionLabel" styleClass="recipeLabel" stylesheets="@application.css" text="Instruction Text" GridPane.columnIndex="1" />
         <TextArea fx:id="noteArea" prefHeight="200.0" prefWidth="200.0" styleClass="recipeArea" stylesheets="@application.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
     </GridPane>
 </AnchorPane>
