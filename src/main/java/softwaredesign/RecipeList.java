@@ -47,7 +47,7 @@ public class RecipeList {
             recipe.fillEmptyFields();
             recipe.writeToFile(file);
 
-            recipes.put(file,recipe);
+            recipesMap.put(file,recipe);
         }
         this.recipes = recipesMap;
     }
