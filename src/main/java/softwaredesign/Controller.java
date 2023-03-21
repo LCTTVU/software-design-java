@@ -315,7 +315,7 @@ public class Controller implements Initializable {
 
     //Execute recipe methods
     private void saveAndClearAnnotation() {
-        newInstructions.get(currInstructionIndex).annotation = annotationArea.getText().strip();
+        newInstructions.get(currInstructionIndex).annotation = annotationArea.getText();
         annotationArea.clear();
     }
 

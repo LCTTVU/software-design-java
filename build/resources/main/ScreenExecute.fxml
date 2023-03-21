@@ -24,7 +24,7 @@
         </rowConstraints>
         <Label styleClass="recipeLabel" stylesheets="@application.css" text="Instruction" />
         <Label styleClass="recipeLabel" stylesheets="@application.css" text="Note" GridPane.rowIndex="1" />
-        <Label maxWidth="Infinity" maxHeight="Infinity" fx:id="instructionLabel" styleClass="recipeLabel" stylesheets="@application.css" text="Instruction Text" GridPane.columnIndex="1" />
-        <TextArea fx:id="noteArea" prefHeight="200.0" prefWidth="200.0" styleClass="recipeArea" stylesheets="@application.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Label fx:id="instructionLabel" maxWidth="Infinity" maxHeight="Infinity" styleClass="recipeLabel" stylesheets="@application.css" text="Instruction Text" GridPane.columnIndex="1" />
+        <TextArea fx:id="annotationArea" prefHeight="200.0" prefWidth="200.0" styleClass="recipeArea" stylesheets="@application.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
     </GridPane>
 </AnchorPane>
