@@ -14,14 +14,14 @@
     -fx-font-size: 20;
 }
 
-.crLabel, .list-cell {
+.recipeLabel, .list-cell {
     -fx-font-size: 24;
     -fx-pref-height: 50;
     -fx-pref-width: 200;
 }
 
-.crField, .crArea {
-    -fx-border-color: gray;
+.recipeField, .recipeArea {
+
     -fx-font-size: 20;
 }
 

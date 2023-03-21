@@ -85,11 +85,15 @@ public class Controller implements Initializable {
     protected TextArea insArea;
     //View screen components
     @FXML
-    protected Label descLabel;
+    protected Label descText;
     @FXML
-    protected Label timeLabel;
+    protected Label timeText;
     @FXML
-    protected Label tagsLabel;
+    protected Label tagsText;
+    @FXML
+    protected Label ingrText;
+    @FXML
+    protected Label instText;
     @FXML
     protected Button editButton;
     @FXML
@@ -146,11 +150,10 @@ public class Controller implements Initializable {
 
             case VIEW_RECIPE:
                 title.setText(recipe.name);
-                descLabel.setText(recipe.description);
-                timeLabel.setText(recipe.time + " minutes");
                 editButton.setOnAction(event -> mkNextScreen(EDIT_RECIPE));
                 executeButton.setOnAction(event -> mkNextScreen(EXECUTE_RECIPE));
                 deleteButton.setOnAction(event -> deleteRecipe());
+                fillViewRecipeDetails();
                 break;
 
             case CREATE_RECIPE:
@@ -199,6 +202,35 @@ public class Controller implements Initializable {
             default:
                 throw new IllegalArgumentException("Invalid Screen at init");
         }
+    }
+
+    private void fillViewRecipeDetails() {
+        descText.setText(recipe.description);
+        timeText.setText(recipe.time + " minutes");
+
+        String tagsStr = recipe.tags.toString();
+        tagsStr = tagsStr.substring(1,tagsStr.length() - 1);
+        tagsText.setText(tagsStr);
+        tagsText.setWrapText(true);
+
+        StringBuilder ingTxt = new StringBuilder();
+        for (Ingredient ingredient : recipe.ingredients) {
+            ingTxt.append("- ").append(ingredient.toString());
+        }
+        ingrText.setText(ingTxt.toString());
+        ingrText.setWrapText(true);
+
+        StringBuilder insTxt = new StringBuilder();
+        int step = 1;
+        for (Instruction instruction : recipe.instructions) {
+            String i = "Step " + step + ": " + instruction.text + "\nNote: " + instruction.note + "\n";
+            insTxt.append(i);
+            step++;
+        }
+        instText.setText(insTxt.toString());
+        instText.setWrapText(true);
+
+
     }
 
     private void mkPrevScreen() {
