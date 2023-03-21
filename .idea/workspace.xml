@@ -5,17 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="84561f49-6063-4dba-bd5f-c0a8ae9dcb0c" name="Changes" comment="delete ingredientlist">
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/b/1bb84ea650d7ffb3fbc5d5d5dbf40291bbca50ba" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/1/b/1bb84ea650d7ffb3fbc5d5d5dbf40291bbca50ba" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes/completelyemptyrecipe.json" beforeDir="false" afterPath="$PROJECT_DIR$/recipes/completelyemptyrecipe.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes/test recipe 4.json" beforeDir="false" afterPath="$PROJECT_DIR$/recipes/test recipe 4.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/softwaredesign/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/softwaredesign/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/softwaredesign/RecipeList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/softwaredesign/RecipeList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ScreenCreateAndEdit.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ScreenCreateAndEdit.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ScreenExecute.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ScreenExecute.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/softwaredesign/Instruction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/softwaredesign/Instruction.java" afterDir="false" />
     </list>
     <list id="61935d31-5490-444e-9b7b-f7e20ea8e76a" name="Changes by shivangikachole" comment="" />
     <option name="SHOW_DIALOG" value="false" />

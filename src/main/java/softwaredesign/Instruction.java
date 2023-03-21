@@ -2,11 +2,11 @@ package softwaredesign;
 
 public class Instruction {
     String text;
-    String note;
+    String annotation;
 
-    Instruction(String text, String note) {
+    Instruction(String text, String annotation) {
         this.text = text;
-        this.note = note;
+        this.annotation = annotation;
     }
 
 

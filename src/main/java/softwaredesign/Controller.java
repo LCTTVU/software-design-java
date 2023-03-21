@@ -104,11 +104,12 @@ public class Controller implements Initializable {
     @FXML
     protected Label instructionLabel;
     @FXML
-    protected TextArea noteArea;
+    protected TextArea annotationArea;
     @FXML
     protected Button nextButton;
     @FXML
     protected Button prevButton;
+    //keep a copy of the recipe's instructions to update annotations by the user after execution
     protected List<Instruction> newInstructions;
     protected int currInstructionIndex;
 
@@ -206,7 +207,7 @@ public class Controller implements Initializable {
         StringBuilder insTxt = new StringBuilder();
         int step = 1;
         for (Instruction instruction : recipe.instructions) {
-            String i = "Step " + step + ": " + instruction.text + "\nNote: " + instruction.note + "\n";
+            String i = "Step " + step + ": " + instruction.text + "\nNote: " + instruction.annotation + "\n";
             insTxt.append(i);
             step++;
         }
@@ -313,9 +314,9 @@ public class Controller implements Initializable {
     }
 
     //Execute recipe methods
-    private void saveAndClearNote() {
-        newInstructions.get(currInstructionIndex).note = noteArea.getText().strip();
-        noteArea.clear();
+    private void saveAndClearAnnotation() {
+        newInstructions.get(currInstructionIndex).annotation = annotationArea.getText().strip();
+        annotationArea.clear();
     }
 
     private boolean inBounds(int i) {
@@ -330,7 +331,7 @@ public class Controller implements Initializable {
         Instruction instruction = newInstructions.get(i);
         instructionLabel.setText(instruction.text);
         instructionLabel.setWrapText(true);
-        noteArea.setText(instruction.note);
+        annotationArea.setText(instruction.annotation);
     }
 
     private void updateInstructions() {
@@ -340,7 +341,7 @@ public class Controller implements Initializable {
     }
 
     private void nextInstruction() {
-        saveAndClearNote();
+        saveAndClearAnnotation();
         currInstructionIndex++;
         if (inBounds(currInstructionIndex)) {
             displayInstruction(currInstructionIndex);
@@ -350,7 +351,7 @@ public class Controller implements Initializable {
     }
 
     private void prevInstruction() {
-        saveAndClearNote();
+        saveAndClearAnnotation();
         currInstructionIndex--;
         if (inBounds(currInstructionIndex)) {
             displayInstruction(currInstructionIndex);
