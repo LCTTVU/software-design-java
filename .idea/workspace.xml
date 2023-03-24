@@ -5,7 +5,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="84561f49-6063-4dba-bd5f-c0a8ae9dcb0c" name="Changes" comment="delete ingredientlist">
+      <change beforePath="$PROJECT_DIR$/.gradle/6.8.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.8.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.8.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.8.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.8.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.8.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/d/0d4ff2449309213c58505e274ea44f092f30d919" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/7/27abbe2decee8aba6e6e5df1d37c9dc54eb8f0db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/b/dbc97a2661655b18706b5dd7e374c8e5a236a3b2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/0/d/0d4ff2449309213c58505e274ea44f092f30d919" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/2/7/27abbe2decee8aba6e6e5df1d37c9dc54eb8f0db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/d/b/dbc97a2661655b18706b5dd7e374c8e5a236a3b2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/CreateController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/CreateController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/EditController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/EditController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/ExecuteController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/ExecuteController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/HomeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/HomeController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/ViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/softwaredesign/ViewController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes/fd.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes/filler2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes/gggggggg.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes/test recipe 7777777777.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/softwaredesign/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/softwaredesign/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/softwaredesign/Instruction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/softwaredesign/Instruction.java" afterDir="false" />
     </list>
     <list id="61935d31-5490-444e-9b7b-f7e20ea8e76a" name="Changes by shivangikachole" comment="" />
     <option name="SHOW_DIALOG" value="false" />

@@ -12,6 +12,9 @@ public class Instruction {
 
     @Override
     public String toString() {
-        return this.text + "\n";
+        String note;
+        if (this.annotation == null) note = "";
+        else note = this.annotation;
+        return this.text + "\nNote: " + note + "\n";
     }
 }
