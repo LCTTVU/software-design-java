@@ -126,7 +126,8 @@ public class RecipeList {
         return res;
     }
 
-    public static void saveRecipe(File path, String inputName, String inputDesc, String inputTime, String inputTags, String inputIngr, String inputInst) throws NullPointerException, IndexOutOfBoundsException, NumberFormatException {
+    public static void saveRecipe(File path, String inputName, String inputDesc, String inputTime, String inputTags, String inputIngr, String inputInst)
+            throws NullPointerException, IndexOutOfBoundsException, NumberFormatException {
 
         String name =           inputCheck(inputName);
         String desc =           inputCheck(inputDesc);
