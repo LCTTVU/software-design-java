@@ -21,12 +21,12 @@ class HomeController extends Controller {
     protected ListView<String> recipeListView;
 
     public HomeController() {
-        super(HOME,"ScreenHome.fxml",null);
+        super("ScreenHome.fxml",null);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        backButton.setOnAction(event -> mkPrevScreen());
+        backButton.setOnAction(event -> mkPrevScreen(HOME));
         createRecipeButton.setOnAction(event -> mkNextScreen(CREATE_RECIPE));
         fillRecipeList();
     }
@@ -67,12 +67,12 @@ class ViewController extends Controller {
     protected Button deleteButton;
 
     public ViewController(File recipePath) {
-        super(VIEW_RECIPE,"ScreenView.fxml",recipePath);
+        super("ScreenView.fxml",recipePath);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        backButton.setOnAction(event -> mkPrevScreen());
+        backButton.setOnAction(event -> mkPrevScreen(HOME));
         title.setText(recipe.name);
         editButton.setOnAction(event -> mkNextScreen(EDIT_RECIPE));
         executeButton.setOnAction(event -> mkNextScreen(EXECUTE_RECIPE));
@@ -99,7 +99,7 @@ class ViewController extends Controller {
         StringBuilder insTxt = new StringBuilder();
         int step = 1;
         for (Instruction instruction : recipe.instructions) {
-            String i = "Step " + step + ": " + instruction.toString();
+            String i = "- Step " + step + ": " + instruction.toString();
             insTxt.append(i);
             step++;
         }
@@ -119,6 +119,8 @@ class ViewController extends Controller {
 
 class CreateController extends Controller {
 
+    protected String nextScreen = HOME;
+
     @FXML
     protected Button doneButton;
     @FXML
@@ -136,16 +138,17 @@ class CreateController extends Controller {
 
 
     public CreateController() {
-        super(CREATE_RECIPE,"ScreenCreateAndEdit.fxml",null);
+        super("ScreenCreateAndEdit.fxml",null);
     }
 
+    //constructor for edit recipe
     public CreateController(File recipePath) {
-        super(EDIT_RECIPE,"ScreenCreateAndEdit.fxml",recipePath);
+        super("ScreenCreateAndEdit.fxml",recipePath);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        backButton.setOnAction(event -> mkPrevScreen());
+        backButton.setOnAction(event -> mkPrevScreen(HOME));
         title.setText(CREATE_RECIPE);
         doneButton.setOnAction(event -> saveRecipe());
     }
@@ -159,8 +162,7 @@ class CreateController extends Controller {
         String insStr = instTextArea.getText();
         try {
             RecipeList.saveRecipe(recipePath,name,desc,time,tagStr,ingStr,insStr);
-            if (Objects.equals(screenName,CREATE_RECIPE)) mkNextScreen(HOME); //home screen if creating
-            else mkNextScreen(VIEW_RECIPE); //back to view screen if editing
+            mkNextScreen(nextScreen);
         } catch (IndexOutOfBoundsException e) {
             title.setText("Invalid Ingredient Format");
         } catch (Exception e) {
@@ -171,13 +173,15 @@ class CreateController extends Controller {
 }
 
 class EditController extends CreateController {
+
     public EditController(File recipePath) {
         super(recipePath);
+        this.nextScreen = VIEW_RECIPE;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        backButton.setOnAction(event -> mkPrevScreen());
+        backButton.setOnAction(event -> mkPrevScreen(VIEW_RECIPE));
         title.setText(EDIT_RECIPE);
         doneButton.setOnAction(event -> saveRecipe());
         //populate text fields with recipe information for the user to edit
@@ -221,13 +225,16 @@ class ExecuteController extends Controller {
     @FXML
     protected Button prevButton;
 
+    private List<Instruction> newInstructions;
+    private int currInstructionIndex;
+
     public ExecuteController(File recipePath) {
-        super(EXECUTE_RECIPE,"ScreenExecute.fxml",recipePath);
+        super("ScreenExecute.fxml",recipePath);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        backButton.setOnAction(event -> mkPrevScreen());
+        backButton.setOnAction(event -> mkPrevScreen(VIEW_RECIPE));
         title.setText(recipe.name);
         nextButton.setOnAction(event -> nextInstruction());
         prevButton.setOnAction(event -> prevInstruction());
@@ -237,9 +244,6 @@ class ExecuteController extends Controller {
         currInstructionIndex = 0;
         displayInstruction(currInstructionIndex);
     }
-
-    private List<Instruction> newInstructions;
-    private int currInstructionIndex;
 
     private void saveAnnotation() {
         newInstructions.get(currInstructionIndex).annotation = annotationArea.getText();
@@ -302,7 +306,6 @@ abstract class Controller implements Initializable {
     protected Recipe recipe;
 
     protected final Stage stage;
-    protected String screenName;
 
     //Common components
     @FXML
@@ -310,8 +313,7 @@ abstract class Controller implements Initializable {
     @FXML
     protected Button backButton;
 
-    protected Controller(String screen, String resource,File path) {
-        this.screenName = screen;
+    protected Controller(String resource,File path) {
         this.recipePath = path;
         this.recipe = RecipeList.getInstance().getRecipes().get(path);
         this.stage = new Stage();
@@ -319,7 +321,6 @@ abstract class Controller implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(resource));
             loader.setController(this);
             stage.setScene(new Scene(loader.load()));
-            stage.setTitle(screen);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -330,9 +331,9 @@ abstract class Controller implements Initializable {
         throw new IllegalStateException("Cannot init abstract Controller class");
     }
 
-    protected void mkPrevScreen() {
+    protected void mkPrevScreen(String prev) {
         Controller prevController;
-        switch (screenName) {
+        switch (prev) {
             case HOME:
             case VIEW_RECIPE:
             case CREATE_RECIPE:

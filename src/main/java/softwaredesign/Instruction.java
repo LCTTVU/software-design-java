@@ -13,6 +13,6 @@ public class Instruction {
     @Override
     public String toString() {
         String note = (this.annotation == null) ? ("") : (this.annotation);
-        return this.text + "\nNote: " + note + "\n";
+        return this.text + "\n  + Note: " + note + "\n";
     }
 }
