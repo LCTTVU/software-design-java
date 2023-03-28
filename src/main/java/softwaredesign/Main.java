@@ -1,21 +1,16 @@
 package softwaredesign;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
-public class Main {
-
-    public static Frame currFrame;
-
+public class Main extends Application {
     public static void main (String[] args) {
-        System.out.println("Welcome to Software Design");
+        launch(args);
+    }
 
-        //currFrame = GUI.getInstance().currFrame;
-        RecipeList recipeList = RecipeList.getInstance();
-        ArrayList<Recipe> recipes = recipeList.getRecipes();
-        for (Recipe recipe : recipes) {
-            System.out.println(recipe);
-        }
+    @Override
+    public void start(Stage stage) {
+        new HomeController();
     }
 
 }
