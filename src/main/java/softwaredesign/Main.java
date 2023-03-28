@@ -10,8 +10,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-        HomeController homeController = new HomeController();
-        homeController.stage.show();
+        new HomeController();
     }
 
 }

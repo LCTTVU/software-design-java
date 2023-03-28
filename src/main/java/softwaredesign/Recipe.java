@@ -44,7 +44,7 @@ public class Recipe {
         if (this.instructions == null) this.instructions = Collections.singletonList(new Instruction("No instructions",""));
     }
 
-    public void updateInstructionsAndNote(List<Instruction> newInstructions) {
+    public void updateAnnotation(List<Instruction> newInstructions) {
         this.instructions = newInstructions;
     }
 
@@ -58,10 +58,5 @@ public class Recipe {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public String toString() {
-        return this.name + "," + this.description + "," + this.ingredients + "," + this.instructions + "," + this.time + "," + this.tags;
     }
 }

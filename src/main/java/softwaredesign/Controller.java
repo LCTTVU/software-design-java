@@ -21,13 +21,13 @@ class HomeController extends Controller {
     private ListView<String> recipeListView;
 
     public HomeController() {
-        super("ScreenHome.fxml",null);
+        super(HOME,null);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        backButton.setOnAction(event -> mkPrevScreen(HOME));
-        createRecipeButton.setOnAction(event -> mkNextScreen(CREATE));
+        backButton.setOnAction(event -> controllerFactory(HOME));
+        createRecipeButton.setOnAction(event -> controllerFactory(CREATE));
         fillRecipeList();
     }
 
@@ -41,7 +41,7 @@ class HomeController extends Controller {
                 (observableValue, arg1, arg2) -> {
                     String listItem = recipeListView.getSelectionModel().getSelectedItem();
                     recipePath = RecipeList.getInstance().getFilename(listItem);
-                    mkNextScreen(VIEW);
+                    controllerFactory(VIEW);
                 }
         );
     }
@@ -67,15 +67,15 @@ class ViewController extends Controller {
     private Button deleteButton;
 
     public ViewController(File recipePath) {
-        super("ScreenView.fxml",recipePath);
+        super(VIEW,recipePath);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        backButton.setOnAction(event -> mkPrevScreen(HOME));
+        backButton.setOnAction(event -> controllerFactory(HOME));
         title.setText(recipe.name);
-        editButton.setOnAction(event -> mkNextScreen(EDIT));
-        executeButton.setOnAction(event -> mkNextScreen(EXECUTE));
+        editButton.setOnAction(event -> controllerFactory(EDIT));
+        executeButton.setOnAction(event -> controllerFactory(EXECUTE));
         deleteButton.setOnAction(event -> deleteRecipe());
         fillRecipeDetails();
     }
@@ -110,7 +110,7 @@ class ViewController extends Controller {
     private void deleteRecipe() {
         try {
             RecipeList.deleteRecipe(recipePath);
-            mkNextScreen(HOME);
+            controllerFactory(HOME);
         } catch (IOException e) {
             title.setText(e.getMessage());
         }
@@ -138,17 +138,17 @@ class CreateController extends Controller {
 
 
     public CreateController() {
-        super("ScreenCreateAndEdit.fxml",null);
+        super(CREATE,null);
     }
 
     //constructor for edit recipe
     public CreateController(File recipePath) {
-        super("ScreenCreateAndEdit.fxml",recipePath);
+        super(EDIT,recipePath);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        backButton.setOnAction(event -> mkPrevScreen(HOME));
+        backButton.setOnAction(event -> controllerFactory(HOME));
         title.setText(CREATE);
         doneButton.setOnAction(event -> saveRecipe());
     }
@@ -162,7 +162,7 @@ class CreateController extends Controller {
         String insStr = instTextArea.getText();
         try {
             RecipeList.saveRecipe(recipePath,name,desc,time,tagStr,ingStr,insStr);
-            mkNextScreen(nextScreen);
+            controllerFactory(nextScreen);
         } catch (IndexOutOfBoundsException e) {
             title.setText("Invalid Ingredient Format");
         } catch (Exception e) {
@@ -181,7 +181,7 @@ class EditController extends CreateController {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        backButton.setOnAction(event -> mkPrevScreen(VIEW));
+        backButton.setOnAction(event -> controllerFactory(VIEW));
         title.setText(EDIT);
         doneButton.setOnAction(event -> saveRecipe());
         //populate text fields with recipe information for the user to edit
@@ -229,12 +229,12 @@ class ExecuteController extends Controller {
     private int currInstructionIndex;
 
     public ExecuteController(File recipePath) {
-        super("ScreenExecute.fxml",recipePath);
+        super(EXECUTE,recipePath);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        backButton.setOnAction(event -> mkPrevScreen(VIEW));
+        backButton.setOnAction(event -> controllerFactory(VIEW));
         title.setText(recipe.name);
         nextButton.setOnAction(event -> nextInstruction());
         prevButton.setOnAction(event -> prevInstruction());
@@ -265,9 +265,8 @@ class ExecuteController extends Controller {
     }
 
     private void updateInstructions() {
-        recipe.updateInstructionsAndNote(newInstructions);
+        recipe.updateAnnotation(newInstructions);
         recipe.writeToFile(recipePath);
-        mkNextScreen(VIEW);
     }
 
     private void nextInstruction() {
@@ -278,7 +277,10 @@ class ExecuteController extends Controller {
             displayInstruction(currInstructionIndex);
             if (isLast()) nextButton.setText("Finish");
         }
-        else updateInstructions();
+        else {
+            updateInstructions();
+            controllerFactory(VIEW);
+        }
     }
 
     private void prevInstruction() {
@@ -289,7 +291,10 @@ class ExecuteController extends Controller {
             displayInstruction(currInstructionIndex);
             if (!isLast()) nextButton.setText("Next");
         }
-        else updateInstructions();
+        else {
+            updateInstructions();
+            controllerFactory(VIEW);
+        }
     }
 }
 
@@ -313,17 +318,12 @@ abstract class Controller implements Initializable {
     @FXML
     protected Button backButton;
 
-    protected Controller(String resource,File path) {
+    protected Controller(String name,File path) {
         this.recipePath = path;
         this.recipe = RecipeList.getInstance().getRecipes().get(path);
         this.stage = new Stage();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(resource));
-            loader.setController(this);
-            stage.setScene(new Scene(loader.load()));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        this.stage.setScene(sceneFactory(name));
+        this.stage.show();
     }
 
     @Override
@@ -331,47 +331,58 @@ abstract class Controller implements Initializable {
         throw new IllegalStateException("Cannot init abstract Controller class");
     }
 
-    protected void mkPrevScreen(String prev) {
-        Controller prevController;
-        switch (prev) {
-            case HOME:
-            case VIEW:
-            case CREATE:
-                prevController = new HomeController();  //3 of these screens have home as a common prev
-                break;
-            case EDIT:
-            case EXECUTE:
-                prevController = new ViewController(recipePath); //same reason as above
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid Screen at prevScreen");
-        }
-        prevController.stage.show();
-        stage.close();
+    private FXMLLoader getResource(String name) {
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(name));
+        loader.setController(this);
+        return loader;
     }
 
-    protected void mkNextScreen(String next) {
-        Controller nextController;
-        switch (next) {
+    private Scene sceneFactory(String name) {
+        Scene scene = null;
+        try {
+            switch (name) {
+                case HOME:
+                    scene = new Scene(getResource("ScreenHome.fxml").load());
+                    break;
+                case VIEW:
+                    scene = new Scene(getResource("ScreenView.fxml").load());
+                    break;
+                case CREATE:
+                case EDIT:
+                    scene = new Scene(getResource("ScreenCreateAndEdit.fxml").load());
+                    break;
+                case EXECUTE:
+                    scene = new Scene(getResource("ScreenExecute.fxml").load());
+                    break;
+                default:
+                    throw new IllegalArgumentException("Invalid Screen at nextScreen");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return scene;
+    }
+
+    public void controllerFactory(String name) {
+        switch (name) {
             case HOME:
-                nextController = new HomeController();
+                new HomeController();
                 break;
             case VIEW:
-                nextController = new ViewController(recipePath);
+                new ViewController(recipePath);
                 break;
             case CREATE:
-                nextController = new CreateController();
+                new CreateController();
                 break;
             case EDIT:
-                nextController = new EditController(recipePath);
+                new EditController(recipePath);
                 break;
             case EXECUTE:
-                nextController = new ExecuteController(recipePath);
+                new ExecuteController(recipePath);
                 break;
             default:
-                throw new IllegalArgumentException("Invalid Screen at nextScreen");
+                throw new IllegalArgumentException("Invalid Screen at screenFactory");
         }
-        nextController.stage.show();
-        stage.close();
+        this.stage.close();
     }
 }
