@@ -36,7 +36,7 @@ public class Recipe {
         return this.name == null;
     }
 
-    public void fillEmptyFields() {
+    public void fillMissingAttributes() {
         if (this.description == null) this.description = "No Description";
         if (this.time == null) this.time = 0L;
         if (this.tags == null) this.tags = Collections.singletonList("");
