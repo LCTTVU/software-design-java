@@ -249,16 +249,16 @@ class ExecuteController extends Controller {
         newInstructions.get(currInstructionIndex).annotation = annotationArea.getText();
     }
 
-    private boolean inBounds(int i) {
-        return (i < newInstructions.size() && i >= 0);
+    private boolean inBounds(int index) {
+        return (index < newInstructions.size() && index >= 0);
     }
 
     private boolean isLast() {
         return currInstructionIndex == newInstructions.size() - 1;
     }
 
-    private void displayInstruction(int i) {
-        Instruction instruction = newInstructions.get(i);
+    private void displayInstruction(int index) {
+        Instruction instruction = newInstructions.get(index);
         instructionLabel.setText(instruction.text);
         instructionLabel.setWrapText(true);
         annotationArea.setText(instruction.annotation);
