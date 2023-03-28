@@ -265,7 +265,7 @@ class ExecuteController extends Controller {
     }
 
     private void updateInstructions() {
-        recipe.updateInstructionsAndNote(newInstructions);
+        recipe.updateAnnotation(newInstructions);
         recipe.writeToFile(recipePath);
         mkNextScreen(VIEW);
     }

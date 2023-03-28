@@ -44,7 +44,7 @@ public class Recipe {
         if (this.instructions == null) this.instructions = Collections.singletonList(new Instruction("No instructions",""));
     }
 
-    public void updateInstructionsAndNote(List<Instruction> newInstructions) {
+    public void updateAnnotation(List<Instruction> newInstructions) {
         this.instructions = newInstructions;
     }
 
