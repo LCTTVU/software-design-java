@@ -59,9 +59,4 @@ public class Recipe {
             e.printStackTrace();
         }
     }
-
-    @Override
-    public String toString() {
-        return this.name + "," + this.description + "," + this.ingredients + "," + this.instructions + "," + this.time + "," + this.tags;
-    }
 }
