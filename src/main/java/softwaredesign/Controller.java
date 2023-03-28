@@ -27,7 +27,7 @@ class HomeController extends Controller {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         backButton.setOnAction(event -> mkPrevScreen(HOME));
-        createRecipeButton.setOnAction(event -> mkNextScreen(CREATE_RECIPE));
+        createRecipeButton.setOnAction(event -> mkNextScreen(CREATE));
         fillRecipeList();
     }
 
@@ -41,7 +41,7 @@ class HomeController extends Controller {
                 (observableValue, arg1, arg2) -> {
                     String listItem = recipeListView.getSelectionModel().getSelectedItem();
                     recipePath = RecipeList.getInstance().getFilename(listItem);
-                    mkNextScreen(VIEW_RECIPE);
+                    mkNextScreen(VIEW);
                 }
         );
     }
@@ -74,8 +74,8 @@ class ViewController extends Controller {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         backButton.setOnAction(event -> mkPrevScreen(HOME));
         title.setText(recipe.name);
-        editButton.setOnAction(event -> mkNextScreen(EDIT_RECIPE));
-        executeButton.setOnAction(event -> mkNextScreen(EXECUTE_RECIPE));
+        editButton.setOnAction(event -> mkNextScreen(EDIT));
+        executeButton.setOnAction(event -> mkNextScreen(EXECUTE));
         deleteButton.setOnAction(event -> deleteRecipe());
         fillRecipeDetails();
     }
@@ -149,7 +149,7 @@ class CreateController extends Controller {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         backButton.setOnAction(event -> mkPrevScreen(HOME));
-        title.setText(CREATE_RECIPE);
+        title.setText(CREATE);
         doneButton.setOnAction(event -> saveRecipe());
     }
 
@@ -176,13 +176,13 @@ class EditController extends CreateController {
 
     public EditController(File recipePath) {
         super(recipePath);
-        this.nextScreen = VIEW_RECIPE;
+        this.nextScreen = VIEW;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        backButton.setOnAction(event -> mkPrevScreen(VIEW_RECIPE));
-        title.setText(EDIT_RECIPE);
+        backButton.setOnAction(event -> mkPrevScreen(VIEW));
+        title.setText(EDIT);
         doneButton.setOnAction(event -> saveRecipe());
         //populate text fields with recipe information for the user to edit
         fillRecipeDetails();
@@ -234,7 +234,7 @@ class ExecuteController extends Controller {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        backButton.setOnAction(event -> mkPrevScreen(VIEW_RECIPE));
+        backButton.setOnAction(event -> mkPrevScreen(VIEW));
         title.setText(recipe.name);
         nextButton.setOnAction(event -> nextInstruction());
         prevButton.setOnAction(event -> prevInstruction());
@@ -267,7 +267,7 @@ class ExecuteController extends Controller {
     private void updateInstructions() {
         recipe.updateInstructionsAndNote(newInstructions);
         recipe.writeToFile(recipePath);
-        mkNextScreen(VIEW_RECIPE);
+        mkNextScreen(VIEW);
     }
 
     private void nextInstruction() {
@@ -297,10 +297,10 @@ class ExecuteController extends Controller {
 abstract class Controller implements Initializable {
 
     protected static final String HOME = "Home";
-    protected static final String VIEW_RECIPE = "View Recipe";
-    protected static final String CREATE_RECIPE = "Create Recipe";
-    protected static final String EDIT_RECIPE = "Edit Recipe";
-    protected static final String EXECUTE_RECIPE = "Execute Recipe";
+    protected static final String VIEW = "View Recipe";
+    protected static final String CREATE = "Create Recipe";
+    protected static final String EDIT = "Edit Recipe";
+    protected static final String EXECUTE = "Execute Recipe";
 
     protected File recipePath;
     protected Recipe recipe;
@@ -335,12 +335,12 @@ abstract class Controller implements Initializable {
         Controller prevController;
         switch (prev) {
             case HOME:
-            case VIEW_RECIPE:
-            case CREATE_RECIPE:
+            case VIEW:
+            case CREATE:
                 prevController = new HomeController();  //3 of these screens have home as a common prev
                 break;
-            case EDIT_RECIPE:
-            case EXECUTE_RECIPE:
+            case EDIT:
+            case EXECUTE:
                 prevController = new ViewController(recipePath); //same reason as above
                 break;
             default:
@@ -356,16 +356,16 @@ abstract class Controller implements Initializable {
             case HOME:
                 nextController = new HomeController();
                 break;
-            case VIEW_RECIPE:
+            case VIEW:
                 nextController = new ViewController(recipePath);
                 break;
-            case CREATE_RECIPE:
+            case CREATE:
                 nextController = new CreateController();
                 break;
-            case EDIT_RECIPE:
+            case EDIT:
                 nextController = new EditController(recipePath);
                 break;
-            case EXECUTE_RECIPE:
+            case EXECUTE:
                 nextController = new ExecuteController(recipePath);
                 break;
             default:
