@@ -16,9 +16,9 @@ import java.util.*;
 class HomeController extends Controller {
 
     @FXML
-    protected Button createRecipeButton;
+    private Button createRecipeButton;
     @FXML
-    protected ListView<String> recipeListView;
+    private ListView<String> recipeListView;
 
     public HomeController() {
         super("ScreenHome.fxml",null);
@@ -50,21 +50,21 @@ class HomeController extends Controller {
 class ViewController extends Controller {
 
     @FXML
-    protected Label descText;
+    private Label descText;
     @FXML
-    protected Label timeText;
+    private Label timeText;
     @FXML
-    protected Label tagsText;
+    private Label tagsText;
     @FXML
-    protected Label ingrText;
+    private Label ingrText;
     @FXML
-    protected Label instText;
+    private Label instText;
     @FXML
-    protected Button editButton;
+    private Button editButton;
     @FXML
-    protected Button executeButton;
+    private Button executeButton;
     @FXML
-    protected Button deleteButton;
+    private Button deleteButton;
 
     public ViewController(File recipePath) {
         super("ScreenView.fxml",recipePath);
@@ -217,13 +217,13 @@ class EditController extends CreateController {
 class ExecuteController extends Controller {
 
     @FXML
-    protected Label instructionLabel;
+    private Label instructionLabel;
     @FXML
-    protected TextArea annotationArea;
+    private TextArea annotationArea;
     @FXML
-    protected Button nextButton;
+    private Button nextButton;
     @FXML
-    protected Button prevButton;
+    private Button prevButton;
 
     private List<Instruction> newInstructions;
     private int currInstructionIndex;
