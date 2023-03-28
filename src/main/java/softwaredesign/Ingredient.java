@@ -13,7 +13,7 @@ public class Ingredient {
     }
     @Override
     public String toString() {
-        String r = (Objects.equals(this.unit,"")) ? ("") : ("," + this.unit);
-        return this.name + "," + this.quantity + r + "\n";
+        String u = (Objects.equals(this.unit,"")) ? ("") : ("," + this.unit);
+        return this.name + "," + this.quantity + u + "\n";
     }
 }

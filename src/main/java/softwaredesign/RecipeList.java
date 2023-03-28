@@ -44,7 +44,7 @@ public class RecipeList {
                 unnamedCount++;
             }
             //fill any empty attributes and write back to json file
-            recipe.fillEmptyFields();
+            recipe.fillMissingAttributes();
             recipe.writeToFile(file);
 
             recipesMap.put(file,recipe);
