@@ -38,7 +38,7 @@ public class Recipe {
     }
 
     public void fillMissingAttributes() {
-        if (this.description == null) this.description = "No Description";
+        if (this.description.isBlank()) this.description = "No Description";
         if (this.time == null) this.time = 0L;
         if (this.tags == null) this.tags = Collections.singletonList("");
         if (this.ingredients == null) this.ingredients = Collections.singletonList(new Ingredient("No ingredients",0L,""));
