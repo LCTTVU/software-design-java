@@ -6,6 +6,7 @@ softwaredesign/Controller.java
  softwaredesign.EditController
  softwaredesign.ExecuteController
  softwaredesign.HomeController
+ softwaredesign.IngredientCheckController
  softwaredesign.ViewController
 softwaredesign/RecipeList.java
  softwaredesign.RecipeList

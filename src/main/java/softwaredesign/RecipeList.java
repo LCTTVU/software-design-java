@@ -40,7 +40,7 @@ public class RecipeList {
             if (recipe == null) continue; //skip
 
             if (recipe.isUnnamed()) {
-                recipe.name = "Unnamed Recipe " + unnamedCount;
+                recipe.setName("Unnamed Recipe " + unnamedCount);
                 unnamedCount++;
             }
             //fill any empty attributes and write back to json file
@@ -80,7 +80,7 @@ public class RecipeList {
     public List<String> getRecipeNameList() {
         ArrayList<String> names = new ArrayList<>();
         for (Recipe recipe : recipes.values()) {
-            names.add(recipe.name);
+            names.add(recipe.getName());
         }
         Collections.sort(names);
         return names;
@@ -90,7 +90,7 @@ public class RecipeList {
         File res = null;
         for (Map.Entry<File,Recipe> entry : recipes.entrySet()) {
             res = entry.getKey();
-            String recipeName = entry.getValue().name;
+            String recipeName = entry.getValue().getName();
             if (Objects.equals(recipeName,name)) break;
         }
         return res;

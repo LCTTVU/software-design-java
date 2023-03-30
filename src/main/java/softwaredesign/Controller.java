@@ -73,24 +73,24 @@ class ViewController extends Controller {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         backButton.setOnAction(event -> controllerFactory(HOME));
-        title.setText(recipe.name);
+        title.setText(recipe.getName());
         editButton.setOnAction(event -> controllerFactory(EDIT));
-        executeButton.setOnAction(event -> controllerFactory(EXECUTE));
+        executeButton.setOnAction(event -> controllerFactory(CHECK));
         deleteButton.setOnAction(event -> deleteRecipe());
         fillRecipeDetails();
     }
 
     private void fillRecipeDetails() {
-        descText.setText(recipe.description);
-        timeText.setText(recipe.time + " minutes");
+        descText.setText(recipe.getDescription());
+        timeText.setText(recipe.getTime() + " minutes");
 
-        String tagsStr = recipe.tags.toString();
+        String tagsStr = recipe.getTags().toString();
         tagsStr = tagsStr.substring(1,tagsStr.length() - 1);
         tagsText.setText(tagsStr);
         tagsText.setWrapText(true);
 
         StringBuilder ingTxt = new StringBuilder();
-        for (Ingredient ingredient : recipe.ingredients) {
+        for (Ingredient ingredient : recipe.getIngredients()) {
             ingTxt.append("- ").append(ingredient.toString());
         }
         ingrText.setText(ingTxt.toString());
@@ -98,7 +98,7 @@ class ViewController extends Controller {
 
         StringBuilder insTxt = new StringBuilder();
         int step = 1;
-        for (Instruction instruction : recipe.instructions) {
+        for (Instruction instruction : recipe.getInstructions()) {
             String i = "- Step " + step + ": " + instruction.toString();
             insTxt.append(i);
             step++;
@@ -165,8 +165,10 @@ class CreateController extends Controller {
             controllerFactory(nextScreen);
         } catch (IndexOutOfBoundsException e) {
             title.setText("Invalid Ingredient Format");
+            e.printStackTrace();
         } catch (Exception e) {
             title.setText(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -189,25 +191,25 @@ class EditController extends CreateController {
     }
 
     private void fillRecipeDetails() {
-        nameTextField.setText(recipe.name);
+        nameTextField.setText(recipe.getName());
 
-        descTextField.setText(recipe.description);
+        descTextField.setText(recipe.getDescription());
 
         StringBuilder ingTxt = new StringBuilder();
-        for (Ingredient ingredient : recipe.ingredients) {
+        for (Ingredient ingredient : recipe.getIngredients()) {
             ingTxt.append(ingredient.toString());
         }
         ingrTextArea.setText(ingTxt.toString());
 
         StringBuilder insTxt = new StringBuilder();
-        for (Instruction instruction : recipe.instructions) {
-            String i = instruction.text + "\n";
+        for (Instruction instruction : recipe.getInstructions()) {
+            String i = instruction.getText() + "\n";
             insTxt.append(i);
         }
         instTextArea.setText(insTxt.toString());
 
-        timeTextField.setText(recipe.time.toString());
-        String tagTxt = recipe.tags.toString();
+        timeTextField.setText(recipe.getTime().toString());
+        String tagTxt = recipe.getTags().toString();
 
         tagTxt = tagTxt.substring(1,tagTxt.length() - 1);
         tagsTextField.setText(tagTxt);
@@ -235,18 +237,18 @@ class ExecuteController extends Controller {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         backButton.setOnAction(event -> controllerFactory(VIEW));
-        title.setText(recipe.name);
+        title.setText(recipe.getName());
         nextButton.setOnAction(event -> nextInstruction());
         prevButton.setOnAction(event -> prevInstruction());
 
-        newInstructions = recipe.instructions;
+        newInstructions = recipe.getInstructions();
         //show first instruction right away
         currInstructionIndex = 0;
         displayInstruction(currInstructionIndex);
     }
 
     private void saveAnnotation() {
-        newInstructions.get(currInstructionIndex).annotation = annotationArea.getText();
+        newInstructions.get(currInstructionIndex).setAnnotation(annotationArea.getText());
     }
 
     private boolean inBounds(int index) {
@@ -259,13 +261,13 @@ class ExecuteController extends Controller {
 
     private void displayInstruction(int index) {
         Instruction instruction = newInstructions.get(index);
-        instructionLabel.setText(instruction.text);
+        instructionLabel.setText(instruction.getText());
         instructionLabel.setWrapText(true);
-        annotationArea.setText(instruction.annotation);
+        annotationArea.setText(instruction.getAnnotation());
     }
 
     private void updateInstructions() {
-        recipe.updateAnnotation(newInstructions);
+        recipe.updateAnnotations(newInstructions);
         recipe.writeToFile(recipePath);
     }
 
@@ -293,10 +295,41 @@ class ExecuteController extends Controller {
         }
         else {
             updateInstructions();
-            controllerFactory(VIEW);
+            controllerFactory(CHECK);
         }
     }
 }
+
+
+class IngredientCheckController extends Controller {
+
+    @FXML
+    private ListView<String> ingredientsListView;
+
+    public IngredientCheckController(File recipePath) {
+        super(CHECK,recipePath);
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        backButton.setOnAction(event -> controllerFactory(VIEW));
+        title.setText(recipe.getName() + " ingredients");
+
+        ingredientsListView.getItems().addAll(recipe.getIngredientsString());
+        ingredientsListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        ingredientsListView.getSelectionModel().selectedItemProperty().addListener(
+                (observableValue, arg1, arg2) -> {
+                    List<String> selectedItems = ingredientsListView.getSelectionModel().getSelectedItems();
+                    if (selectedItems.size() == recipe.getIngredients().size()) {
+                        controllerFactory(EXECUTE);
+                    }
+                }
+        );
+    }
+
+}
+
 
 
 abstract class Controller implements Initializable {
@@ -305,6 +338,7 @@ abstract class Controller implements Initializable {
     protected static final String VIEW = "View Recipe";
     protected static final String CREATE = "Create Recipe";
     protected static final String EDIT = "Edit Recipe";
+    protected static final String CHECK = "Ingredient Check";
     protected static final String EXECUTE = "Execute Recipe";
 
     protected File recipePath;
@@ -351,6 +385,9 @@ abstract class Controller implements Initializable {
                 case EDIT:
                     scene = new Scene(loadResource("ScreenCreateAndEdit.fxml").load());
                     break;
+                case CHECK:
+                    scene = new Scene(loadResource("IngredientCheck.fxml").load());
+                    break;
                 case EXECUTE:
                     scene = new Scene(loadResource("ScreenExecute.fxml").load());
                     break;
@@ -376,6 +413,9 @@ abstract class Controller implements Initializable {
                 break;
             case EDIT:
                 new EditController(recipePath);
+                break;
+            case CHECK:
+                new IngredientCheckController(recipePath);
                 break;
             case EXECUTE:
                 new ExecuteController(recipePath);

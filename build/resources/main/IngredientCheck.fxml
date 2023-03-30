@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+    <Label fx:id="title" styleClass="title" stylesheets="@application.css" text="Recipe Name" />
+    <Label layoutY="60" styleClass="h2title" stylesheets="@application.css" text="Execution begins after all ingredients are checked" />
+    <Label layoutY="100" styleClass="h3title" stylesheets="@application.css" text="CTRL + click to check ingredients" />
+    <Button fx:id="backButton" layoutX="30" layoutY="20" styleClass="backButton" stylesheets="@application.css" text="Back" />
+    <ListView fx:id="ingredientsListView" layoutY="160.0" prefHeight="560.0" prefWidth="1280.0" stylesheets="@application.css" />
+
+</AnchorPane>
