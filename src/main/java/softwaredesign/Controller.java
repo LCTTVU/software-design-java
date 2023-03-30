@@ -331,7 +331,7 @@ abstract class Controller implements Initializable {
         throw new IllegalStateException("Cannot init abstract Controller class");
     }
 
-    private FXMLLoader getResource(String name) {
+    private FXMLLoader loadResource(String name) {
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(name));
         loader.setController(this);
         return loader;
@@ -342,17 +342,17 @@ abstract class Controller implements Initializable {
         try {
             switch (name) {
                 case HOME:
-                    scene = new Scene(getResource("ScreenHome.fxml").load());
+                    scene = new Scene(loadResource("ScreenHome.fxml").load());
                     break;
                 case VIEW:
-                    scene = new Scene(getResource("ScreenView.fxml").load());
+                    scene = new Scene(loadResource("ScreenView.fxml").load());
                     break;
                 case CREATE:
                 case EDIT:
-                    scene = new Scene(getResource("ScreenCreateAndEdit.fxml").load());
+                    scene = new Scene(loadResource("ScreenCreateAndEdit.fxml").load());
                     break;
                 case EXECUTE:
-                    scene = new Scene(getResource("ScreenExecute.fxml").load());
+                    scene = new Scene(loadResource("ScreenExecute.fxml").load());
                     break;
                 default:
                     throw new IllegalArgumentException("Invalid Screen at nextScreen");

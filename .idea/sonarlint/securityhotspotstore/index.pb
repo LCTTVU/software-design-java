@@ -1,9 +1,5 @@
 
-H
-recipes/filler23333.json,d\3\d3f9eb5b7714093d1f3109abb5a7c301109b1a06
-Z
-*recipes/filler23333 - Copy (2) - Copy.json,8\7\87853c88b59e9c8399c2ae4f52cc6e681dd98a3b
-Y
-)recipes/completelyemptyrecipe - Copy.json,9\c\9cedb74f9bf083d1f54d0ace0d94d8274d06dc28
-R
-"recipes/completelyemptyrecipe.json,1\b\1bb84ea650d7ffb3fbc5d5d5dbf40291bbca50ba
+\
+,src/main/java/softwaredesign/Ingredient.java,d\b\dbc97a2661655b18706b5dd7e374c8e5a236a3b2
+]
+-src/main/java/softwaredesign/Instruction.java,2\7\27abbe2decee8aba6e6e5df1d37c9dc54eb8f0db

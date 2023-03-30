@@ -19,11 +19,11 @@ public class Recipe {
     private static final String RECIPE_FILE_FORMAT = ".json";
 
     public Recipe(String name,
-           String description,
-           List<Ingredient> ingredients,
-           List<Instruction> instructions,
-           Long time,
-           List<String> tags) {
+                  String description,
+                  List<Ingredient> ingredients,
+                  List<Instruction> instructions,
+                  Long time,
+                  List<String> tags) {
         this.name = name;
         this.description = description;
         this.time = time;
