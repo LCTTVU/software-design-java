@@ -11,6 +11,11 @@ import java.util.*;
 public class RecipeList {
 
     public static final String RECIPE_PATH = "./recipes";
+    /*
+    A Map is used here to not only keep track of Recipe objects, but also their json file name.
+    This is to make sure that regardless of how a Recipe object is modified, the changes are written to the same json file
+    This is to make sure that the json file stays the same
+     */
     private Map<File,Recipe> recipes;
 
     private static RecipeList instance;
@@ -40,7 +45,7 @@ public class RecipeList {
             if (recipe == null) continue; //skip
 
             if (recipe.isUnnamed()) {
-                recipe.name = "Unnamed Recipe " + unnamedCount;
+                recipe.setName("Unnamed Recipe " + unnamedCount);
                 unnamedCount++;
             }
             //fill any empty attributes and write back to json file
@@ -80,7 +85,7 @@ public class RecipeList {
     public List<String> getRecipeNameList() {
         ArrayList<String> names = new ArrayList<>();
         for (Recipe recipe : recipes.values()) {
-            names.add(recipe.name);
+            names.add(recipe.getName());
         }
         Collections.sort(names);
         return names;
@@ -90,7 +95,7 @@ public class RecipeList {
         File res = null;
         for (Map.Entry<File,Recipe> entry : recipes.entrySet()) {
             res = entry.getKey();
-            String recipeName = entry.getValue().name;
+            String recipeName = entry.getValue().getName();
             if (Objects.equals(recipeName,name)) break;
         }
         return res;

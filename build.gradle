@@ -7,19 +7,20 @@ plugins {
 group 'org.example'
 version '1.0-SNAPSHOT'
 
+javafx {
+    version = "19"
+    modules = [ 'javafx.controls', 'javafx.base', 'javafx.fxml' ]
+}
+
+mainClassName = 'softwaredesign.Launcher'
+
 sourceCompatibility = 11
 
 repositories {
     mavenCentral()
 }
 
-javafx {
-    sdk = "javafx-sdk-19.0.2.1"
-    modules = [ 'javafx.controls', 'javafx.base', 'javafx.fxml']
-}
-
 dependencies {
     testImplementation group: 'junit', name: 'junit', version: '4.13.1'
     implementation 'com.google.code.gson:gson:2.10.1'
-    implementation 'org.openjfx:javafx-graphics:19.0.2.1:mac'
 }

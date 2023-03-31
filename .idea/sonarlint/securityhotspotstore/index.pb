@@ -1,9 +1,20 @@
 
-H
-recipes/filler23333.json,d\3\d3f9eb5b7714093d1f3109abb5a7c301109b1a06
-Z
-*recipes/filler23333 - Copy (2) - Copy.json,8\7\87853c88b59e9c8399c2ae4f52cc6e681dd98a3b
-Y
-)recipes/completelyemptyrecipe - Copy.json,9\c\9cedb74f9bf083d1f54d0ace0d94d8274d06dc28
-R
-"recipes/completelyemptyrecipe.json,1\b\1bb84ea650d7ffb3fbc5d5d5dbf40291bbca50ba
+?
+settings.gradle,0\5\05efc8b1657769a27696d478ded1e95f38737233
+F
+software-design-vu.iml,c\a\ca2f61549c44877a9c27663c5e3ea852b76b7f65
+7
+gradlew,5\b\5bbfa66edb4db3c7c33c5181f43510990d3307f9
+<
+build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
+;
+gradlew.bat,2\a\2a45a911a8f1836b0b6c5b758962572012d8f8c3
+9
+	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+E
+recipes/aaaaaaaa.json,1\b\1bea806d42afe87dc5197b4ff10bdd0f33e1c244
+V
+&src/main/java/softwaredesign/Main.java,0\0\00d56e2f0935f238b335e591eedadb56057f78c5
+:
+
+.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
