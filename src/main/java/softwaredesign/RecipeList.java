@@ -11,6 +11,11 @@ import java.util.*;
 public class RecipeList {
 
     public static final String RECIPE_PATH = "./recipes";
+    /*
+    A Map is used here to not only keep track of Recipe objects, but also their json file name.
+    This is to make sure that regardless of how a Recipe object is modified, the changes are written to the same json file
+    This is to make sure that the json file stays the same
+     */
     private Map<File,Recipe> recipes;
 
     private static RecipeList instance;
