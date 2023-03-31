@@ -10,12 +10,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="84f39376-96f2-47d0-957f-417936d3418e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/0/f07866736216be0ee2aba49e392191aeae700a35" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/f/0/f07866736216be0ee2aba49e392191aeae700a35" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/software_design_vu_2020_jar/software-design-vu-2020.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/software_design_vu_2020_jar/software-design-vu-2020.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes/12345678 - Copy (6).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/softwaredesign/RecipeList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/softwaredesign/RecipeList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes/12345678.json" beforeDir="false" afterPath="$PROJECT_DIR$/recipes/12345678.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/softwaredesign/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/softwaredesign/Launcher.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +30,23 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="software-design-vu-2020" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -61,10 +79,11 @@
     &quot;project.structure.side.proportion&quot;: &quot;0.3091954&quot;
   }
 }</component>
-  <component name="RunManager" selected="JAR Application.software-design-vu-2020.jar">
-    <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.Launcher">
+    <configuration name="Launcher" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="softwaredesign.Launcher" />
       <module name="software-design-vu-2020.main" />
+      <option name="VM_PARAMETERS" value="--module-path lib/javafx-sdk-19/lib --add-modules=javafx.controls,javafx.fxml,javafx.base,javafx.graphics" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="softwaredesign.*" />
@@ -77,12 +96,16 @@
     </configuration>
     <configuration name="software-design-vu-2020.jar" type="JarApplication" temporary="true">
       <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/software_design_vu_2020_jar/software-design-vu-2020.jar" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Application.Launcher" />
+      <item itemvalue="JAR Application.software-design-vu-2020.jar" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="JAR Application.software-design-vu-2020.jar" />
-        <item itemvalue="Application.Launcher" />
       </list>
     </recent_temporary>
   </component>
